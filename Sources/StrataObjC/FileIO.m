@@ -1,5 +1,6 @@
 #import "StrataObjC.h"
 #include <sys/file.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
@@ -11,6 +12,8 @@ int32_t STLock(const char *path) {
     return fd;
 }
 int32_t STOpen(const char *path) { return open(path, O_CREAT | O_RDWR | O_APPEND | O_NOFOLLOW, 0600); }
+int32_t STOpenRead(const char *path) { return open(path, O_RDONLY | O_NOFOLLOW); }
+int64_t STSize(int32_t fd) { struct stat s; return fstat(fd, &s) == 0 && S_ISREG(s.st_mode) ? s.st_size : -1; }
 int32_t STWrite(int32_t fd, const void *bytes, size_t length) {
     const unsigned char *p = bytes;
     while (length) {
@@ -32,6 +35,12 @@ int32_t STRead(int32_t fd, void *bytes, size_t length, int64_t offset) {
     return 0;
 }
 int32_t STSync(int32_t fd) { return fsync(fd) == 0 ? 0 : errno; }
+int32_t STFullSync(int32_t fd) { return fcntl(fd, F_FULLFSYNC) == 0 ? 0 : errno; }
+int32_t STSyncDirectory(const char *path) {
+    int fd = open(path, O_RDONLY | O_DIRECTORY | O_NOFOLLOW);
+    if (fd < 0) return errno;
+    int result = STSync(fd); close(fd); return result;
+}
 int32_t STTruncate(int32_t fd, int64_t length) { return ftruncate(fd, length) == 0 ? 0 : errno; }
 int32_t STRename(const char *source, const char *destination) { return rename(source, destination) == 0 ? 0 : errno; }
 void STClose(int32_t fd) { if (fd >= 0) close(fd); }

@@ -1,25 +1,17 @@
-# 磁盘格式 v1
+# 磁盘格式 v2
 
-所有整数采用小端；读取按字节组合，不对任意地址作未对齐整数读取。
-文件头为 8 字节 ASCII `STRATA01`。之后是连续批次：
+全部整数采用小端。文件头 24 字节：STRATA02（8）、baseSequence（8）、前 16 字节的 CRC32（4）、保留零（4）。
 
-| 字段 | 字节数 | 说明 |
-|---|---:|---|
-| magic | 4 | BCH1 |
-| payloadLength | 4 | 最大 16 MiB |
-| sequence | 8 | 从 1 连续递增 |
-| CRC32 | 4 | sequence + operationCount + payload 的 IEEE CRC32 |
-| operationCount | 4 | 1–4096 |
-| payload | 可变 | 连续操作 |
-| commit | 4 | CMIT |
+批次头 28 字节：BCH2（4）、payloadLength（4）、sequence（8）、operationCount（4）、bodyCRC（4）、前 24 字节的 headerCRC（4）。
+先校验固定头，再解释长度。payload 最大 16 MiB，操作数最多 4096。
 
-操作格式：type 1 字节（1=put，2=delete），keyLength 4 字节，valueLength 4 字节，
-UTF-8 key，原始 value。delete 的 valueLength 必须为 0；put 的空值与 delete 不同。
-同一批次重复 key 按顺序覆盖。校验使用已知向量 123456789 → cbf43926。
+操作：type（1）、keyLength（4）、valueLength（4）、revision（8）、expiration 的 Double 位模式（8）、UTF-8 key、value。
+type=1 普通 put，129 带到期时间的 put，2 delete。无到期时间时位模式必须为 0。
+revision 在压缩后保持，sequence 是日志提交高水位，二者不混用。
 
-解析先检查长度与上限，再访问数据，避免非法长度产生巨大分配。
-批次全部验证完成后才更新索引。提交标记、CRC、序号、UTF-8、操作数量任一不合法都报错。
-尾部不足一个完整帧时认定为未提交尾部；这无法区分短随机尾部与真实中断，协议明确接受该取舍。
+提交尾 16 字节：CMT2（4）、sequence（8）、前 12 字节 CRC32（4）。
+全部校验通过后才应用一个批次。完整头损坏必须报错；验证过的头对应内容缺失，才可按策略视为未完成尾部。
+极短尾部仍无法在所有情况下区分随机损坏与未完成写入；strict 模式拒绝它，recoverIncompleteTail 模式接受截断。
 
-压缩产生完整新文件，序号重新从 1 开始；sequence 不是跨压缩的业务版本号。
-文件查看器的 inspect 会正常打开存储，因此可能执行尾部恢复；分析原始证据前先复制目录。
+v1 只提供严格读取与显式迁移。原文件会备份，新文件写入并校验、同步后原子替换，再同步目录。
+无法验证的 v1 尾部不会自动修复。每次迁移使用独立临时文件和备份，不覆盖上一份证据。

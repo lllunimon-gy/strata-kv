@@ -1,28 +1,16 @@
 import Foundation
 import StrataObjC
 
-struct Location { let offset: Int64; let length: Int }
-public struct FrameSummary: Codable {
-    public let sequence: UInt64
-    public let offset: Int
-    public let payloadBytes: Int
-    public let operations: Int
-}
-struct Recovery {
-    var index: [String: Location] = [:]
-    var frames: [FrameSummary] = []
-    var validEnd = 8
-    var sequence: UInt64 = 0
-}
 struct EncodedFrame {
     let header: Data
     let payload: Data
     let trailer: Data
-    let changes: [(key: String, relativeOffset: Int?, length: Int)]
+    let changes: [(key: String, offset: Int?, length: Int, revision: UInt64, expiration: Double?)]
     var count: Int { header.count + payload.count + trailer.count }
 }
 enum JournalCodec {
-    static let magic = Data("STRATA01".utf8)
+    static let headerSize = 24
+    static let frameHeaderSize = 28
     static let maximumPayload = 16 * 1024 * 1024
     static let maximumValue = 8 * 1024 * 1024
     static let maximumOperations = 4096
@@ -32,72 +20,115 @@ enum JournalCodec {
     static func number(_ data: Data, at offset: Int, width: Int) -> UInt64 {
         (0..<width).reduce(UInt64(0)) { $0 | (UInt64(data[offset + $1]) << ($1 * 8)) }
     }
-    static func checksum(_ data: Data) -> UInt32 { data.withUnsafeBytes { STCRC32($0.baseAddress, $0.count) } }
+    static func checksum(_ data: Data) -> UInt32 {
+        data.withUnsafeBytes { STCRC32($0.baseAddress, $0.count) }
+    }
+    static func fileHeader(baseSequence: UInt64 = 0) -> Data {
+        let base = Data("STRATA02".utf8) + integer(baseSequence, width: 8)
+        return base + integer(UInt64(checksum(base)), width: 4) + Data(repeating: 0, count: 4)
+    }
     static func encode(_ operations: [Mutation], sequence: UInt64) throws -> EncodedFrame {
-        guard !operations.isEmpty, operations.count <= maximumOperations else { throw StoreError.invalidBatch }
+        guard sequence > 0, !operations.isEmpty, operations.count <= maximumOperations else { throw StoreError.invalidBatch }
         var payload = Data()
-        var changes: [(key: String, relativeOffset: Int?, length: Int)] = []
+        var changes: [(key: String, offset: Int?, length: Int, revision: UInt64, expiration: Double?)] = []
         for operation in operations {
             let key = Data(operation.key.utf8)
             guard !key.isEmpty, key.count <= 1024 else { throw StoreError.invalidKey }
             let value = operation.value
+            let revision = operation.revision ?? sequence
+            guard revision > 0, revision <= sequence else { throw StoreError.invalidBatch }
+            if let expiration = operation.expiration {
+                guard expiration.isFinite, value != nil else { throw StoreError.invalidExpiration }
+            }
             guard (value?.count ?? 0) <= maximumValue else { throw StoreError.valueTooLarge }
-            guard payload.count + 9 + key.count + (value?.count ?? 0) <= maximumPayload else { throw StoreError.invalidBatch }
-            payload.append(value == nil ? 2 : 1)
+            guard payload.count + 25 + key.count + (value?.count ?? 0) <= maximumPayload else { throw StoreError.invalidBatch }
+            payload.append(value == nil ? 2 : operation.expiration == nil ? 1 : 129)
             payload.append(integer(UInt64(key.count), width: 4))
             payload.append(integer(UInt64(value?.count ?? 0), width: 4))
+            payload.append(integer(revision, width: 8))
+            payload.append(integer(operation.expiration?.bitPattern ?? 0, width: 8))
             payload.append(key)
-            changes.append((operation.key, value == nil ? nil : payload.count, value?.count ?? 0))
+            changes.append((operation.key, value == nil ? nil : payload.count, value?.count ?? 0, revision, operation.expiration))
             if let value { payload.append(value) }
         }
-        let seq = integer(sequence, width: 8), count = integer(UInt64(operations.count), width: 4)
-        let crc = checksum(seq + count + payload)
-        let header = Data("BCH1".utf8) + integer(UInt64(payload.count), width: 4) + seq + integer(UInt64(crc), width: 4) + count
-        return EncodedFrame(header: header, payload: payload, trailer: Data("CMIT".utf8), changes: changes)
+        let head = Data("BCH2".utf8) + integer(UInt64(payload.count), width: 4)
+            + integer(sequence, width: 8) + integer(UInt64(operations.count), width: 4)
+            + integer(UInt64(checksum(payload)), width: 4)
+        let commit = Data("CMT2".utf8) + integer(sequence, width: 8)
+        return EncodedFrame(header: head + integer(UInt64(checksum(head)), width: 4), payload: payload,
+                            trailer: commit + integer(UInt64(checksum(commit)), width: 4), changes: changes)
     }
-    static func replay(_ data: Data) throws -> Recovery {
-        guard data.count >= 8, data.prefix(8) == magic else { throw StoreError.invalidHeader }
+    /// One bounded payload allocation at a time; summaries are delivered only when requested.
+    static func scan(_ file: FileRef, onFrame: ((FrameSummary) -> Void)? = nil) throws -> Recovery {
+        let size = try file.size
+        guard size >= 8 else { throw StoreError.invalidHeader }
+        let magic = try file.read(at: 0, count: 8)
+        if magic == Data("STRATA01".utf8) { return try LegacyReader.scan(file, onFrame: onFrame) }
+        guard magic == Data("STRATA02".utf8), size >= 24 else { throw StoreError.invalidHeader }
+        let fileHeader = try file.read(at: 0, count: 24)
+        guard checksum(fileHeader.subdata(in: 0..<16)) == UInt32(number(fileHeader, at: 16, width: 4)),
+              fileHeader.suffix(4) == Data(repeating: 0, count: 4) else { throw StoreError.invalidHeader }
         var recovery = Recovery()
-        var cursor = 8
-        while cursor < data.count {
-            guard data.count - cursor >= 24 else { break } // incomplete trailing header
-            guard data.subdata(in: cursor..<cursor+4) == Data("BCH1".utf8) else { throw StoreError.corruption(offset: cursor) }
-            let length = Int(number(data, at: cursor+4, width: 4))
-            let sequence = number(data, at: cursor+8, width: 8)
-            let crc = UInt32(number(data, at: cursor+16, width: 4))
-            let count = Int(number(data, at: cursor+20, width: 4))
-            guard length <= maximumPayload, count > 0, count <= maximumOperations, sequence == recovery.sequence + 1 else {
+        recovery.sequence = number(fileHeader, at: 8, width: 8)
+        recovery.maximumRead = 24
+        var cursor: Int64 = 24
+        while cursor < size {
+            guard size - cursor >= 28 else { break }
+            let header = try file.read(at: cursor, count: 28)
+            // Validate the fixed header BEFORE using its untrusted length.
+            guard header.prefix(4) == Data("BCH2".utf8),
+                  checksum(header.subdata(in: 0..<24)) == UInt32(number(header, at: 24, width: 4)) else {
                 throw StoreError.corruption(offset: cursor)
             }
-            let end = cursor + 24 + length + 4
-            guard end <= data.count else { break } // incomplete batch; no changes are visible
-            guard data.subdata(in: end-4..<end) == Data("CMIT".utf8) else { throw StoreError.corruption(offset: cursor) }
-            let payload = data.subdata(in: cursor+24..<end-4)
-            guard checksum(integer(sequence, width: 8) + integer(UInt64(count), width: 4) + payload) == crc else {
+            let length = Int(number(header, at: 4, width: 4))
+            let sequence = number(header, at: 8, width: 8)
+            let count = Int(number(header, at: 16, width: 4))
+            let crc = UInt32(number(header, at: 20, width: 4))
+            guard length <= maximumPayload, count > 0, count <= maximumOperations,
+                  recovery.sequence < UInt64.max, sequence == recovery.sequence + 1 else {
+                throw StoreError.corruption(offset: cursor)
+            }
+            let end = cursor + 28 + Int64(length) + 16
+            guard end <= size else { break }
+            let body = try file.read(at: cursor + 28, count: length)
+            let trailer = try file.read(at: end - 16, count: 16)
+            recovery.maximumRead = max(recovery.maximumRead, max(length, 28))
+            guard checksum(body) == crc, trailer.prefix(4) == Data("CMT2".utf8),
+                  number(trailer, at: 4, width: 8) == sequence,
+                  checksum(trailer.subdata(in: 0..<12)) == UInt32(number(trailer, at: 12, width: 4)) else {
                 throw StoreError.corruption(offset: cursor)
             }
             var local = 0
             var changes: [(String, Location?)] = []
             for _ in 0..<count {
-                guard payload.count - local >= 9 else { throw StoreError.corruption(offset: cursor + 24 + local) }
-                let type = payload[local]
-                let keyLength = Int(number(payload, at: local+1, width: 4))
-                let valueLength = Int(number(payload, at: local+5, width: 4))
-                local += 9
-                guard keyLength > 0, keyLength <= 1024, valueLength <= maximumValue,
-                      (type == 1 || type == 2), (type != 2 || valueLength == 0),
-                      local + keyLength + valueLength <= payload.count,
-                      let key = String(data: payload.subdata(in: local..<local+keyLength), encoding: .utf8) else {
-                    throw StoreError.corruption(offset: cursor + 24 + local)
+                guard body.count - local >= 25 else { throw StoreError.corruption(offset: cursor) }
+                let type = body[local]
+                let keyLength = Int(number(body, at: local + 1, width: 4))
+                let valueLength = Int(number(body, at: local + 5, width: 4))
+                let revision = number(body, at: local + 9, width: 8)
+                let expirationBits = number(body, at: local + 17, width: 8)
+                let expiration = type == 129 ? Double(bitPattern: expirationBits) : nil
+                local += 25
+                guard [UInt8(1), 2, 129].contains(type), keyLength > 0, keyLength <= 1024,
+                      valueLength <= maximumValue, revision > 0, revision <= sequence,
+                      (type != 2 || valueLength == 0), (type == 129 || expirationBits == 0),
+                      (expiration?.isFinite ?? true), local + keyLength + valueLength <= body.count,
+                      let key = String(data: body.subdata(in: local..<local+keyLength), encoding: .utf8) else {
+                    throw StoreError.corruption(offset: cursor + 28 + Int64(local))
                 }
                 local += keyLength
-                let location = type == 1 ? Location(offset: Int64(cursor + 24 + local), length: valueLength) : nil
-                changes.append((key, location)); local += valueLength
+                let location = type == 2 ? nil : Location(offset: cursor + 28 + Int64(local), length: valueLength,
+                                                          revision: revision, expiration: expiration)
+                changes.append((key, location))
+                local += valueLength
             }
-            guard local == payload.count else { throw StoreError.corruption(offset: cursor) }
+            guard local == body.count else { throw StoreError.corruption(offset: cursor) }
             for (key, location) in changes { recovery.index[key] = location }
-            recovery.frames.append(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count))
-            recovery.sequence = sequence; recovery.validEnd = end; cursor = end
+            onFrame?(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count))
+            recovery.sequence = sequence
+            recovery.validEnd = end
+            recovery.frameCount += 1
+            cursor = end
         }
         return recovery
     }
