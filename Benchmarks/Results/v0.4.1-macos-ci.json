@@ -1,7 +1,7 @@
 {
   "note": "Release build. Shared CI host; reads/reopens use warm OS cache. Batch latency is per batch, not per key. Peak RSS is for the whole process.",
   "operatingSystem": "Version 26.6.2 (Build 25G83)",
-  "processPeakResidentBytes": 10338304,
+  "processPeakResidentBytes": 10387456,
   "processors": 3,
   "samples": [
     {
@@ -9,9 +9,9 @@
       "calls": 200,
       "durability": "synchronized",
       "name": "single-sync-write",
-      "p50Microseconds": 87.45833332568509,
-      "p95Microseconds": 306.8750000068121,
-      "p99Microseconds": 1049.041666675521,
+      "p50Microseconds": 263.87500000168984,
+      "p95Microseconds": 1245.791666661944,
+      "p99Microseconds": 2627.041666670493,
       "statistics": {
         "frameCount": 200,
         "keys": 200,
@@ -23,7 +23,7 @@
         "sequence": 200,
         "syncCount": 201
       },
-      "totalSeconds": 0.027828958333230958,
+      "totalSeconds": 0.08977704166676403,
       "valueBytes": 256
     },
     {
@@ -31,9 +31,9 @@
       "calls": 200,
       "durability": "synchronized",
       "name": "batch-sync-write",
-      "p50Microseconds": 150.1250000046639,
-      "p95Microseconds": 409.33333332304755,
-      "p99Microseconds": 1450.958333350627,
+      "p50Microseconds": 196.16666668298421,
+      "p95Microseconds": 1029.0416666691726,
+      "p99Microseconds": 1694.2083333333358,
       "statistics": {
         "frameCount": 200,
         "keys": 2000,
@@ -45,7 +45,7 @@
         "sequence": 200,
         "syncCount": 201
       },
-      "totalSeconds": 0.04340695833329278,
+      "totalSeconds": 0.06670675000026449,
       "valueBytes": 256
     },
     {
@@ -55,7 +55,7 @@
       "name": "random-read-warm-cache",
       "p50Microseconds": 0.9583333167029195,
       "p95Microseconds": 1.2083333444934397,
-      "p99Microseconds": 3.333333353339185,
+      "p99Microseconds": 1.4166666630899272,
       "statistics": {
         "frameCount": 200,
         "keys": 2000,
@@ -67,7 +67,7 @@
         "sequence": 200,
         "syncCount": 201
       },
-      "totalSeconds": 0.0021360833330277273,
+      "totalSeconds": 0.001996291665818717,
       "valueBytes": 256
     },
     {
@@ -75,9 +75,9 @@
       "calls": 2000,
       "durability": "buffered",
       "name": "same-key-overwrite",
-      "p50Microseconds": 7.083333343871345,
-      "p95Microseconds": 25.375000006988557,
-      "p99Microseconds": 60.16666665686898,
+      "p50Microseconds": 6.958333329976085,
+      "p95Microseconds": 12.999999995599865,
+      "p99Microseconds": 27.375000001939043,
       "statistics": {
         "frameCount": 2000,
         "keys": 1,
@@ -89,7 +89,7 @@
         "sequence": 2000,
         "syncCount": 1
       },
-      "totalSeconds": 0.023210250000602173,
+      "totalSeconds": 0.020168166667730247,
       "valueBytes": 256
     },
     {
@@ -97,9 +97,9 @@
       "calls": 10,
       "durability": "synchronized",
       "name": "reopen-warm-cache",
-      "p50Microseconds": 7987.666666650739,
-      "p95Microseconds": 9354.374999986703,
-      "p99Microseconds": 9354.374999986703,
+      "p50Microseconds": 9950.000000003456,
+      "p95Microseconds": 10897.333333332426,
+      "p99Microseconds": 10897.333333332426,
       "statistics": {
         "frameCount": 2000,
         "keys": 1,
@@ -111,7 +111,7 @@
         "sequence": 2000,
         "syncCount": 0
       },
-      "totalSeconds": 0.086651374999974,
+      "totalSeconds": 0.09754141666664395,
       "valueBytes": 256
     },
     {
@@ -119,9 +119,9 @@
       "calls": 1,
       "durability": "synchronized",
       "name": "compact-overwritten-log",
-      "p50Microseconds": 1791.8333333284409,
-      "p95Microseconds": 1791.8333333284409,
-      "p99Microseconds": 1791.8333333284409,
+      "p50Microseconds": 2857.5000000046202,
+      "p95Microseconds": 2857.5000000046202,
+      "p99Microseconds": 2857.5000000046202,
       "statistics": {
         "frameCount": 1,
         "keys": 1,
@@ -133,7 +133,7 @@
         "sequence": 2000,
         "syncCount": 3
       },
-      "totalSeconds": 0.0017918333333284409,
+      "totalSeconds": 0.0028575000000046202,
       "valueBytes": 256
     },
     {
@@ -141,9 +141,9 @@
       "calls": 200,
       "durability": "synchronized",
       "name": "sync-write-4096-bytes",
-      "p50Microseconds": 124.6666666645524,
-      "p95Microseconds": 221.166666648287,
-      "p99Microseconds": 319.0416666711826,
+      "p50Microseconds": 141.583333345352,
+      "p95Microseconds": 299.8333333152914,
+      "p99Microseconds": 440.4999999962911,
       "statistics": {
         "frameCount": 200,
         "keys": 200,
@@ -155,7 +155,7 @@
         "sequence": 200,
         "syncCount": 201
       },
-      "totalSeconds": 0.02704829166663103,
+      "totalSeconds": 0.03326541666689309,
       "valueBytes": 4096
     },
     {
@@ -163,9 +163,9 @@
       "calls": 200,
       "durability": "synchronized",
       "name": "sync-write-65536-bytes",
-      "p50Microseconds": 363.1666666592537,
-      "p95Microseconds": 815.5416666681958,
-      "p99Microseconds": 1877.5833333393166,
+      "p50Microseconds": 414.95833332305665,
+      "p95Microseconds": 750.7916666611436,
+      "p99Microseconds": 1593.7916666644014,
       "statistics": {
         "frameCount": 200,
         "keys": 200,
@@ -177,7 +177,7 @@
         "sequence": 200,
         "syncCount": 204
       },
-      "totalSeconds": 0.0889038333332337,
+      "totalSeconds": 0.09468641666697408,
       "valueBytes": 65536
     },
     {
@@ -185,9 +185,9 @@
       "calls": 200,
       "durability": "synchronized",
       "name": "automatic-group-sync-write",
-      "p50Microseconds": 202.54166668109974,
-      "p95Microseconds": 458.79166668783,
-      "p99Microseconds": 1366.0416666709807,
+      "p50Microseconds": 175.12499999838838,
+      "p95Microseconds": 420.9166666555575,
+      "p99Microseconds": 689.5833333260271,
       "statistics": {
         "frameCount": 200,
         "keys": 2000,
@@ -199,7 +199,7 @@
         "sequence": 200,
         "syncCount": 201
       },
-      "totalSeconds": 0.05195345833331544,
+      "totalSeconds": 0.04192741666665256,
       "valueBytes": 256
     }
   ],
@@ -210,11 +210,11 @@
       "configuration": "WAL; synchronous=FULL; fullfsync=OFF; wal_autocheckpoint=0; WITHOUT ROWID; prepared statement. Bytes include db/WAL/SHM before close/checkpoint.",
       "databaseAndWALBytes": 1742576,
       "name": "sqlite-sync-write-batch-1",
-      "p50Microseconds": 173.3750000028067,
-      "p95Microseconds": 728.5000000081254,
-      "p99Microseconds": 14316.083333341112,
+      "p50Microseconds": 161.83333332264738,
+      "p95Microseconds": 404.4166666687943,
+      "p99Microseconds": 882.7500000165855,
       "sqliteVersion": "3.51.0",
-      "totalSeconds": 0.12926791666654935,
+      "totalSeconds": 0.04310062500005074,
       "valueBytes": 256
     },
     {
@@ -223,15 +223,15 @@
       "configuration": "WAL; synchronous=FULL; fullfsync=OFF; wal_autocheckpoint=0; WITHOUT ROWID; prepared statement. Bytes include db/WAL/SHM before close/checkpoint.",
       "databaseAndWALBytes": 5104496,
       "name": "sqlite-sync-write-batch-10",
-      "p50Microseconds": 253.12500000040927,
-      "p95Microseconds": 712.6250000055734,
-      "p99Microseconds": 1883.041666644658,
+      "p50Microseconds": 247.04166665401317,
+      "p95Microseconds": 786.2083333520786,
+      "p99Microseconds": 1211.0000000120635,
       "sqliteVersion": "3.51.0",
-      "totalSeconds": 0.10148583333329952,
+      "totalSeconds": 0.06364883333350235,
       "valueBytes": 256
     }
   ],
   "version": "0.4.1",
-  "commit": "85a62085deeb18cb052586439d12c191c58a0119",
-  "ci_url": "https://github.com/lllunimon-gy/strata-kv/actions/runs/38920446300"
+  "commit": "4ad47954d3d8c6b9fff8f7fcd822b7f7582cfa0d",
+  "ci_url": "https://github.com/lllunimon-gy/strata-kv/actions/runs/38921488308"
 }

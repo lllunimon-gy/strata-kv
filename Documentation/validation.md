@@ -15,4 +15,11 @@ CI 只是当前构建与运行的证据。没有在每个支持的最低系统�
 Thread Sanitizer 不能证明没有所有可能的竞争；进程退出实验不能替代电源丢失。
 性能数字均来自原始输出，保存于 Benchmarks/Results；方法与限制见 Benchmarks/README.md。
 
-最终代码验证：[CI 运行](https://github.com/lllunimon-gy/strata-kv/actions/runs/38915457127)。后续文档/原始结果归档不改变该次验证的源码。
+v0.4 代码验证：[CI 运行](https://github.com/lllunimon-gy/strata-kv/actions/runs/38915457127)。后续文档/原始结果归档不改变该次验证的源码。
+
+## v0.4.1 性能复查
+
+最终实现 `4ad47954d3d8c6b9fff8f7fcd822b7f7582cfa0d`：[CI](https://github.com/lllunimon-gy/strata-kv/actions/runs/38921488308)。52 项单元/边界测试、12 个进程中断场景、iOS Simulator 示例编译及 15 项引擎 Thread Sanitizer 测试通过。
+库和 CLI 源码与第一轮已测候选 13d32d7 相同；读取拆分试验未采用，增加的时钟语义测试保留。
+两轮完整同机交替测量、未改善项、保留/回退决定见 [性能回退复查](../Benchmarks/regression-analysis.md)。
+常规 CI 保留标准基准；六轮历史版本对照通过手动 Run workflow 执行，避免文档改动重复触发昂贵实验。
