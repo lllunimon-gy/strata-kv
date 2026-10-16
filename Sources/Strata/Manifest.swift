@@ -26,7 +26,7 @@ struct Manifest: Codable {
             return manifest
         } catch { throw StoreError.invalidManifest }
     }
-    func publish(_ root: URL) throws {
+    func publish(_ root: URL, durability: Durability = .synchronized) throws {
         guard !files.isEmpty, files.count <= 8192, files.allSatisfy(Self.validName),
               Set(files).count == files.count else { throw StoreError.invalidManifest }
         let encoder = JSONEncoder()
@@ -37,7 +37,7 @@ struct Manifest: Codable {
         let temporary = root.appendingPathComponent("manifest-\(UUID().uuidString).tmp")
         let output = try FileRef(temporary, writable: true)
         try output.append(data)
-        try output.sync()
+        try output.sync(durability == .fullSync ? .fullSync : .synchronized)
         try replaceFile(temporary, root.appendingPathComponent(Self.filename))
     }
 }

@@ -36,7 +36,7 @@ public final class KVStore: @unchecked Sendable {
         if existing == nil, !FileManager.default.fileExists(atPath: initial.path) {
             let created = try FileRef(initial, writable: true)
             try created.append(JournalCodec.fileHeader())
-            try created.sync()
+            try created.sync(durability == .fullSync ? .fullSync : .synchronized)
             try syncDirectory(root)
             syncs += 1
         }
@@ -47,11 +47,11 @@ public final class KVStore: @unchecked Sendable {
         if loaded.tail > 0 {
             guard recovery == .recoverIncompleteTail else { throw StoreError.incompleteTail(bytes: loaded.tail) }
             try file.truncate(to: loaded.state.validEnd)
-            try file.sync()
+            try file.sync(durability == .fullSync ? .fullSync : .synchronized)
             syncs += 1
         }
         let manifest = existing ?? Manifest(generation: 0, files: ["store.log"])
-        if existing == nil { try manifest.publish(root) }
+        if existing == nil { try manifest.publish(root, durability: durability) }
         self.directory = root
         self.file = file
         self.files = loaded.files.dropLast() + [file]
@@ -163,12 +163,12 @@ public final class KVStore: @unchecked Sendable {
         let name = "segment-\(UUID().uuidString).log"
         let next = try FileRef(directory.appendingPathComponent(name), writable: true)
         try next.append(JournalCodec.fileHeader(baseSequence: sequence))
-        try next.sync()
+        try next.sync(durability == .fullSync ? .fullSync : .synchronized)
         try syncDirectory(directory)
         try fault?(.rotationReady)
         guard manifest.generation < UInt64.max else { throw StoreError.invalidManifest }
         let replacement = Manifest(generation: manifest.generation + 1, files: manifest.files + [name])
-        try replacement.publish(directory)
+        try replacement.publish(directory, durability: durability)
         try fault?(.rotationPublished)
         locked {
             manifest = replacement

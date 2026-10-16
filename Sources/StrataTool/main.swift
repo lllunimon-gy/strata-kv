@@ -10,7 +10,7 @@ func json<T: Encodable>(_ value: T) throws {
 func main() throws {
     let args = Array(CommandLine.arguments.dropFirst())
     guard args.count >= 2 else {
-        print("usage: strata-tool <inspect|verify|repair|migrate|benchmark|seed|check|crash|compact-crash> <directory> [stage]")
+        print("usage: strata-tool <inspect|verify|repair|migrate|vacuum|benchmark|seed|check|crash|compact-crash|rotate-crash|compact-delta-crash> <directory> [stage]")
         exit(2)
     }
     let command = args[0], directory = URL(fileURLWithPath: args[1])
@@ -29,7 +29,7 @@ func main() throws {
     case "seed", "check", "crash", "compact-crash", "rotate-crash", "compact-delta-crash", "vacuum": break
     default: print("unknown command"); exit(2)
     }
-    if command == "crash" || command == "compact-crash" { guard stage != nil else { exit(2) } }
+    if command.hasSuffix("crash") { guard stage != nil else { exit(2) } }
     let store = try KVStore(directory: directory, segmentBytes: command == "rotate-crash" ? 128 : 4 * 1024 * 1024,
                             fault: { if $0 == stage { _exit(86) } })
     defer { store.close() }

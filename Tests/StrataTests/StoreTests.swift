@@ -162,4 +162,19 @@ final class StoreTests: XCTestCase {
         for n in 0..<100 { XCTAssertEqual(try reopened.get("key-\(n)"), Data("value-\(n)".utf8)) }
     }
     func testCRCReferenceVector() { XCTAssertEqual(JournalCodec.checksum(Data("123456789".utf8)), 0xcbf43926) }
+    func testTableCRCMatchesBitwiseReferenceAcrossLengths() {
+        var seed: UInt64 = 123
+        for length in [0, 1, 7, 31, 255, 256, 1024, 65536] {
+            let bytes = (0..<length).map { _ -> UInt8 in
+                seed = seed &* 6364136223846793005 &+ 1
+                return UInt8(truncatingIfNeeded: seed >> 32)
+            }
+            var reference = UInt32.max
+            for byte in bytes {
+                reference ^= UInt32(byte)
+                for _ in 0..<8 { reference = (reference >> 1) ^ (reference & 1 == 1 ? 0xedb88320 : 0) }
+            }
+            XCTAssertEqual(JournalCodec.checksum(Data(bytes)), reference ^ UInt32.max)
+        }
+    }
 }

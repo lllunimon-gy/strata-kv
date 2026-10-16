@@ -32,6 +32,7 @@ public struct FrameSummary: Codable {
     public let offset: Int64
     public let payloadBytes: Int
     public let operations: Int
+    public var segment: String? = nil
 }
 public struct StoreStatistics: Codable {
     public let keys: Int

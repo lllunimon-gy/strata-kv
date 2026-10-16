@@ -79,7 +79,7 @@ extension KVStore {
                 let replacement = Manifest(generation: manifest.generation + 1,
                                            files: [name] + deltas.map { $0.url.lastPathComponent })
                 publishing = true
-                try replacement.publish(directory)
+                try replacement.publish(directory, durability: durability)
                 try fault?(.compactionReplaced)
                 let checkpointBytes = try output.size
                 locked {

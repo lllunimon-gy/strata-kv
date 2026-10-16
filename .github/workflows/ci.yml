@@ -32,6 +32,8 @@ jobs:
           python3 Scripts/crash_matrix.py
       - name: Reproducible release benchmark
         run: swift run -c release strata-tool benchmark "$RUNNER_TEMP/strata-benchmark" > benchmark.json
+      - name: Thread Sanitizer on engine concurrency
+        run: swift test --scratch-path .build/tsan --sanitize=thread --filter EngineTests
       - uses: actions/upload-artifact@v4
         with:
           name: benchmark-${{ github.sha }}

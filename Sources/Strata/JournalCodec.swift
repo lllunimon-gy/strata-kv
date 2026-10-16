@@ -135,7 +135,7 @@ enum JournalCodec {
                 recovery.index[key] = location
                 if location == nil { recovery.deleted.insert(key) } else { recovery.deleted.remove(key) }
             }
-            onFrame?(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count))
+            onFrame?(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count, segment: file.url.lastPathComponent))
             recovery.sequence = sequence
             recovery.validEnd = end
             recovery.frameCount += 1

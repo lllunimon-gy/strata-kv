@@ -50,7 +50,7 @@ enum LegacyReader {
             result.sequence = sequence
             result.frameCount += 1
             result.maximumRead = max(result.maximumRead, max(length, 24))
-            onFrame?(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count))
+            onFrame?(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count, segment: file.url.lastPathComponent))
             cursor = end
         }
         return result
