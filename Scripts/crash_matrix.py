@@ -18,6 +18,20 @@ for stage, expected in stages.items():
         result = subprocess.run([str(tool), 'check', directory], check=True, capture_output=True, text=True)
         assert json.loads(result.stdout) == {'a': expected, 'b': expected}, (stage, result.stdout)
         print(stage + ': PASS')
+
+for command, stages, expected in [
+    ('rotate-crash', ['rotationReady', 'rotationPublished'], {'a': 'old', 'b': 'old'}),
+    ('compact-delta-crash', ['compactionReady', 'compactionReplaced'], {'a': 'new', 'c': 'new'}),
+]:
+    for stage in stages:
+        with tempfile.TemporaryDirectory(prefix='strata-segments-') as directory:
+            subprocess.run([str(tool), 'seed', directory], check=True, capture_output=True)
+            result = subprocess.run([str(tool), command, directory, stage], capture_output=True)
+            assert result.returncode == 86, (command, stage, result.stderr)
+            result = subprocess.run([str(tool), 'check', directory], check=True, capture_output=True, text=True)
+            assert json.loads(result.stdout) == expected, (command, stage, result.stdout)
+            subprocess.run([str(tool), 'verify', directory], check=True, capture_output=True)
+            print(command + '/' + stage + ': PASS')
 print('Process termination matrix passed; this is not a power-loss test.')
 
 # Legacy migration must survive process exit on either side of publication.

@@ -21,6 +21,7 @@ struct BenchmarkReport: Codable {
     let processPeakResidentBytes: Int64
     let note: String
     let samples: [Sample]
+    let sqlite: [SQLiteSample]
 }
 func runBenchmarks(directory: URL) throws -> BenchmarkReport {
     guard !FileManager.default.fileExists(atPath: directory.path) else { throw StoreError.destinationExists }
@@ -75,9 +76,35 @@ func runBenchmarks(directory: URL) throws -> BenchmarkReport {
                           p99Microseconds: sorted[8]*1_000_000, totalSeconds: sorted.reduce(0,+), statistics: try recovered.statistics()))
     try sample("compact-overwritten-log", calls: 1, bytes: 256, batch: 1, mode: .synchronized, store: recovered) { _ in try recovered.compact() }
     recovered.close()
+    for bytes in [4096, 65536] {
+        let store = try KVStore(directory: directory.appendingPathComponent("size-\(bytes)"))
+        try sample("sync-write-\(bytes)-bytes", calls: 200, bytes: bytes, batch: 1, mode: .synchronized, store: store) { n in
+            try store.put("k\(n)", value: Data(repeating: 97, count: bytes))
+        }
+        store.close()
+    }
+    let grouped = try KVStore(directory: directory.appendingPathComponent("grouped"))
+    let writer = try GroupedWriter(store: grouped, maximumDelay: 0.01, maximumGroupRequests: 10)
+    try sample("automatic-group-sync-write", calls: 200, bytes: 256, batch: 10, mode: .synchronized, store: grouped) { n in
+        let group = DispatchGroup()
+        let errorLock = NSLock()
+        var failure: Error?
+        for offset in 0..<10 {
+            group.enter()
+            writer.submit([.put("k\(n*10+offset)", Data(repeating: 97, count: 256))]) { result in
+                if case .failure(let error) = result { errorLock.lock(); failure = error; errorLock.unlock() }
+                group.leave()
+            }
+        }
+        group.wait()
+        if let failure { throw failure }
+    }
+    grouped.close()
+    let sqlite = try [sqliteBenchmark(directory: directory.appendingPathComponent("sqlite-single"), calls: 200, batchSize: 1),
+                      sqliteBenchmark(directory: directory.appendingPathComponent("sqlite-batch"), calls: 200, batchSize: 10)]
     var usage = rusage()
     _ = getrusage(RUSAGE_SELF, &usage)
     return BenchmarkReport(version: "0.4", operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString,
                            processors: ProcessInfo.processInfo.processorCount, processPeakResidentBytes: Int64(usage.ru_maxrss),
-                           note: "Release build. Shared CI host; reads/reopens use warm OS cache. Batch latency is per batch, not per key. Peak RSS is for the whole process.", samples: results)
+                           note: "Release build. Shared CI host; reads/reopens use warm OS cache. Batch latency is per batch, not per key. Peak RSS is for the whole process.", samples: results, sqlite: sqlite)
 }

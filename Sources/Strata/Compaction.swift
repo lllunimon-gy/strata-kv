@@ -17,7 +17,9 @@ private final class CancellationFlag: @unchecked Sendable {
     }
 }
 extension KVStore {
-    public func compact() throws { _ = try performCompaction(checkCancellation: {}, progress: { _ in }) }
+    public func compact(progress: (CompactionProgress) -> Void = { _ in }) throws {
+        _ = try performCompaction(checkCancellation: {}, progress: progress)
+    }
     /// Cancellation before publication keeps the old manifest plus delta log usable.
     /// A cancellation racing publication may still return a successfully published result.
     public func compactInBackground(progress: @escaping (CompactionProgress) -> Void = { _ in }) async throws -> CompactionReport {

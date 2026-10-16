@@ -9,7 +9,8 @@ let package = Package(
 
         .target(name: "StrataObjC", publicHeadersPath: "include"),
         .target(name: "Strata", dependencies: ["StrataObjC"]),
-        .executableTarget(name: "StrataTool", dependencies: ["Strata"]),
+        .systemLibrary(name: "CSQLite", pkgConfig: "sqlite3"),
+        .executableTarget(name: "StrataTool", dependencies: ["Strata", "CSQLite"]),
         .testTarget(name: "StrataTests", dependencies: ["Strata"])
     ]
 )
