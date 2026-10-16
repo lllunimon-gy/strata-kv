@@ -36,13 +36,13 @@ extension KVStore {
                            progress: (CompactionProgress) -> Void) throws -> CompactionReport {
         try checkCancellation()
         writerLock.lock()
-        let captured: (FileRef, [String: Location], UInt64, [FileRef], DirectoryLease)
+        let captured: (FileRef, [String: Location], UInt64, [FileRef], DirectoryLease, Int, Int64)
         do {
             guard !compacting else { throw StoreError.compactionInProgress }
             captured = try locked {
                 let source = try openFile()
                 let time = try timeLocked()
-                return (source, state.index.filter { visible($0.value, at: time) }, state.sequence, files, lease!)
+                return (source, state.index.filter { visible($0.value, at: time) }, state.sequence, files, lease!, state.frameCount, logBytes)
             }
             do { try rotateLocked() } catch { locked { poisoned = true }; throw error }
             compacting = true
@@ -79,8 +79,7 @@ extension KVStore {
                 publishing = true
                 try replacement.publish(directory)
                 try fault?(.compactionReplaced)
-                let deltaFrames = try deltas.reduce(0) { try $0 + JournalCodec.scan($1).frameCount }
-                let bytes = try output.size + deltas.reduce(Int64(0)) { try $0 + $1.size }
+                let checkpointBytes = try output.size
                 locked {
                     // Replace only locations still pointing into the captured files. Concurrent
                     // updates and tombstones in delta logs win, including expired/reinserted keys.
@@ -91,8 +90,8 @@ extension KVStore {
                     }
                     files = [output] + deltas
                     manifest = replacement
-                    state.frameCount = checkpoint.frameCount + deltaFrames
-                    logBytes = bytes
+                    state.frameCount = checkpoint.frameCount + state.frameCount - captured.5
+                    logBytes = checkpointBytes + logBytes - captured.6
                     syncCount += 1
                 }
                 var failures: [String] = []

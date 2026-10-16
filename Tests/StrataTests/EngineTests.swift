@@ -151,7 +151,8 @@ final class EngineTests: XCTestCase {
             _ = try await store.compactInBackground { progress in
                 if case .captured = progress {
                     store.close()
-                    XCTAssertThrowsError(try KVStore(directory: self.root))
+                    do { _ = try KVStore(directory: self.root); XCTFail("lease released too early") }
+                    catch { XCTAssertEqual(error as? StoreError, .directoryInUse) }
                 }
             }
             XCTFail("closed store cannot publish")

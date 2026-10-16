@@ -42,7 +42,8 @@ public final class GroupedWriter: @unchecked Sendable {
             submit(operations) { continuation.resume(with: $0) }
         }
     }
-    /// Callback runs on the commit queue. Keep it short; never synchronously wait for this writer.
+    /// Accepted callbacks run on the commit queue; admission failures return on the caller thread.
+    /// Keep callbacks short; never synchronously wait for this writer.
     /// Invalid requests fail independently. Once admitted, cancellation does not retract a write.
     public func submit(_ operations: [Mutation], completion: @escaping (Result<Void, Error>) -> Void) {
         let bytes: Int
