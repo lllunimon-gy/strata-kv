@@ -89,3 +89,5 @@ store.close()
 4. [实验手册](Documentation/experiments.md)：复现中断、取消、快照保留和备份恢复。
 5. [性能说明](Benchmarks/README.md)：看原始结果、同步次数和比较条件。
 6. [验证范围](Documentation/validation.md) · [迭代记录](Documentation/roadmap.md) · [变更记录](CHANGELOG.md)。
+
+v0.4.1 的改动和同机六轮结果见 [性能回退复查](Benchmarks/regression-analysis.md)。原始数据包含未改善项，历史基线仍保留。

@@ -2,9 +2,9 @@
   "revisions": {
     "v0.2": "ae680dcec12fe06c1e7bf006460da91b7cd4de32",
     "v0.4": "27f09dd6c547e5c0d855422886bd20e77f27f4b0",
-    "candidate": "13d32d779e7884676c54a5efa9901929786a4e29"
+    "candidate": "85a62085deeb18cb052586439d12c191c58a0119"
   },
-  "probeSHA256": "3f48792441ba991307ffdf6e220d662d6d5fb2e223babbf023f04c97a3a719fa",
+  "probeSHA256": "f8c2ff128d0f6656a78b54aa2dac0051746e3032c216425a13e16f77be80d4ce",
   "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
   "swift": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
   "hardware": "hw.model: VirtualMac2,1\nhw.ncpu: 3\nhw.memsize: 7516192768",
@@ -50,2090 +50,2186 @@
       "measurements": [
         {
           "name": "synchronized-write-batch-1",
-          "p50Microseconds": 106.5,
-          "p95Microseconds": 246.709,
-          "p99Microseconds": 432.208,
+          "p50Microseconds": 161.542,
+          "p95Microseconds": 1617.25,
+          "p99Microseconds": 5732.916,
           "samples": 1000,
-          "totalSeconds": 0.129358491
+          "totalSeconds": 0.456988983
         },
         {
           "name": "synchronized-write-batch-10",
-          "p50Microseconds": 241.25,
-          "p95Microseconds": 1982.625,
-          "p99Microseconds": 5281.292,
+          "p50Microseconds": 304.667,
+          "p95Microseconds": 2906.75,
+          "p99Microseconds": 6836.291,
           "samples": 1000,
-          "totalSeconds": 0.679606501
+          "totalSeconds": 0.773665334
         },
         {
           "name": "buffered-write-batch-1",
-          "p50Microseconds": 15.292,
-          "p95Microseconds": 54.458,
-          "p99Microseconds": 153.75,
+          "p50Microseconds": 14.334,
+          "p95Microseconds": 52.209,
+          "p99Microseconds": 152.917,
           "samples": 3000,
-          "totalSeconds": 0.07900205
+          "totalSeconds": 0.074456753
         },
         {
           "name": "buffered-write-batch-10",
-          "p50Microseconds": 58.916,
-          "p95Microseconds": 167.792,
-          "p99Microseconds": 580.084,
+          "p50Microseconds": 57.458,
+          "p95Microseconds": 177.375,
+          "p99Microseconds": 513.917,
           "samples": 3000,
-          "totalSeconds": 0.287560824
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.875,
-          "p95Microseconds": 1.959,
-          "p99Microseconds": 2.416,
-          "samples": 10000,
-          "totalSeconds": 0.010781095
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 24498.458,
-          "p95Microseconds": 42604.709,
-          "p99Microseconds": 42604.709,
-          "samples": 15,
-          "totalSeconds": 0.39493925
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 954.375,
-          "p95Microseconds": 1323.875,
-          "p99Microseconds": 1323.875,
-          "samples": 10,
-          "totalSeconds": 0.010292081
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 103543.166,
-          "p95Microseconds": 103543.166,
-          "p99Microseconds": 103543.166,
-          "samples": 1,
-          "totalSeconds": 0.103543166
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 49.208,
-          "p95Microseconds": 120.292,
-          "p99Microseconds": 181.75,
-          "samples": 1000,
-          "totalSeconds": 0.063301746
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 7.583,
-          "p95Microseconds": 29.125,
-          "p99Microseconds": 46.125,
-          "samples": 1000,
-          "totalSeconds": 0.010153353
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.458,
-          "p95Microseconds": 8.375,
-          "p99Microseconds": 14.083,
-          "samples": 1000,
-          "totalSeconds": 0.003557359
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 96.875,
-          "p95Microseconds": 312.708,
-          "p99Microseconds": 1318.666,
-          "samples": 1000,
-          "totalSeconds": 0.150940049
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 4.083,
-          "p95Microseconds": 16.25,
-          "p99Microseconds": 42.709,
-          "samples": 1000,
-          "totalSeconds": 0.006647826
-        }
-      ]
-    },
-    {
-      "round": 0,
-      "position": 1,
-      "revision": "v0.4",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 116.167,
-          "p95Microseconds": 1635.959,
-          "p99Microseconds": 4331.042,
-          "samples": 1000,
-          "totalSeconds": 0.362595285
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 142.792,
-          "p95Microseconds": 505,
-          "p99Microseconds": 2056.708,
-          "samples": 1000,
-          "totalSeconds": 0.231595078
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 9.875,
-          "p95Microseconds": 29.417,
-          "p99Microseconds": 100.125,
-          "samples": 3000,
-          "totalSeconds": 0.051371722
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 29.208,
-          "p95Microseconds": 94.375,
-          "p99Microseconds": 427.875,
-          "samples": 3000,
-          "totalSeconds": 0.16625884
+          "totalSeconds": 0.275177868
         },
         {
           "name": "warm-read-256B",
           "p50Microseconds": 0.917,
-          "p95Microseconds": 1.208,
-          "p99Microseconds": 1.459,
-          "samples": 10000,
-          "totalSeconds": 0.010415264
+          "p95Microseconds": 2.125,
+          "p99Microseconds": 5.25,
+          "samples": 100000,
+          "totalSeconds": 0.168865944
         },
         {
           "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 17832.208,
-          "p95Microseconds": 24078,
-          "p99Microseconds": 24078,
+          "p50Microseconds": 21909.375,
+          "p95Microseconds": 31424.584,
+          "p99Microseconds": 31424.584,
           "samples": 15,
-          "totalSeconds": 0.275176042
+          "totalSeconds": 0.371189542
         },
         {
           "name": "compact-1000-overwrites",
-          "p50Microseconds": 1830.625,
-          "p95Microseconds": 5927.875,
-          "p99Microseconds": 5927.875,
+          "p50Microseconds": 884.25,
+          "p95Microseconds": 1342.75,
+          "p99Microseconds": 1342.75,
           "samples": 10,
-          "totalSeconds": 0.031507082
+          "totalSeconds": 0.01108354
         },
         {
           "name": "compact-10000-live-keys",
-          "p50Microseconds": 101704,
-          "p95Microseconds": 101704,
-          "p99Microseconds": 101704,
+          "p50Microseconds": 87530.417,
+          "p95Microseconds": 87530.417,
+          "p99Microseconds": 87530.417,
           "samples": 1,
-          "totalSeconds": 0.101704
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 37.708,
-          "p95Microseconds": 126.375,
-          "p99Microseconds": 430.583,
-          "samples": 1000,
-          "totalSeconds": 0.063270399
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 10.292,
-          "p95Microseconds": 42.125,
-          "p99Microseconds": 100.917,
-          "samples": 1000,
-          "totalSeconds": 0.017188186
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.875,
-          "p95Microseconds": 10.417,
-          "p99Microseconds": 36.709,
-          "samples": 1000,
-          "totalSeconds": 0.006074481
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 139.584,
-          "p95Microseconds": 2496.5,
-          "p99Microseconds": 5438.833,
-          "samples": 1000,
-          "totalSeconds": 0.547119328
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 6.333,
-          "p95Microseconds": 31.167,
-          "p99Microseconds": 75.375,
-          "samples": 1000,
-          "totalSeconds": 0.012661512
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 291.291,
-          "p95Microseconds": 3001.875,
-          "p99Microseconds": 12228.542,
-          "samples": 1000,
-          "totalSeconds": 0.846058255
-        }
-      ]
-    },
-    {
-      "round": 0,
-      "position": 2,
-      "revision": "candidate",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 113.041,
-          "p95Microseconds": 1501.083,
-          "p99Microseconds": 5730.041,
-          "samples": 1000,
-          "totalSeconds": 0.356573501
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 140.208,
-          "p95Microseconds": 519.125,
-          "p99Microseconds": 2204.541,
-          "samples": 1000,
-          "totalSeconds": 0.25316031
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 6.875,
-          "p95Microseconds": 27.917,
-          "p99Microseconds": 55.666,
-          "samples": 3000,
-          "totalSeconds": 0.039231094
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 25.541,
-          "p95Microseconds": 66.125,
-          "p99Microseconds": 117.666,
-          "samples": 3000,
-          "totalSeconds": 0.116367749
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.958,
-          "p95Microseconds": 1.5,
-          "p99Microseconds": 2.5,
-          "samples": 10000,
-          "totalSeconds": 0.011126919
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 16210,
-          "p95Microseconds": 20262.958,
-          "p99Microseconds": 20262.958,
-          "samples": 15,
-          "totalSeconds": 0.245045333
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 2311.083,
-          "p95Microseconds": 2921.625,
-          "p99Microseconds": 2921.625,
-          "samples": 10,
-          "totalSeconds": 0.03756275
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 42553.709,
-          "p95Microseconds": 42553.709,
-          "p99Microseconds": 42553.709,
-          "samples": 1,
-          "totalSeconds": 0.042553709
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 28.583,
-          "p95Microseconds": 83.292,
-          "p99Microseconds": 133.625,
-          "samples": 1000,
-          "totalSeconds": 0.051958491
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 6.5,
-          "p95Microseconds": 23,
-          "p99Microseconds": 37.875,
-          "samples": 1000,
-          "totalSeconds": 0.009093375
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.417,
-          "p95Microseconds": 7.583,
-          "p99Microseconds": 12.667,
-          "samples": 1000,
-          "totalSeconds": 0.003543766
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 96.042,
-          "p95Microseconds": 208.625,
-          "p99Microseconds": 656.917,
-          "samples": 1000,
-          "totalSeconds": 0.150399001
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 4.208,
-          "p95Microseconds": 15.625,
-          "p99Microseconds": 32.208,
-          "samples": 1000,
-          "totalSeconds": 0.007818495
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 166.083,
-          "p95Microseconds": 360.416,
-          "p99Microseconds": 940.959,
-          "samples": 1000,
-          "totalSeconds": 0.237035137
-        }
-      ]
-    },
-    {
-      "round": 1,
-      "position": 0,
-      "revision": "candidate",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 111.916,
-          "p95Microseconds": 258.834,
-          "p99Microseconds": 539.333,
-          "samples": 1000,
-          "totalSeconds": 0.159863699
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 128.375,
-          "p95Microseconds": 473.709,
-          "p99Microseconds": 2435.709,
-          "samples": 1000,
-          "totalSeconds": 0.239577308
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 9.125,
-          "p95Microseconds": 41.792,
-          "p99Microseconds": 74.166,
-          "samples": 3000,
-          "totalSeconds": 0.050711342
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 25.667,
-          "p95Microseconds": 68.292,
-          "p99Microseconds": 139.291,
-          "samples": 3000,
-          "totalSeconds": 0.123402295
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 1.167,
-          "p95Microseconds": 2.542,
-          "p99Microseconds": 5.625,
-          "samples": 10000,
-          "totalSeconds": 0.016495633
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 14077.458,
-          "p95Microseconds": 21821.625,
-          "p99Microseconds": 21821.625,
-          "samples": 15,
-          "totalSeconds": 0.221958125
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 2039.542,
-          "p95Microseconds": 8769.25,
-          "p99Microseconds": 8769.25,
-          "samples": 10,
-          "totalSeconds": 0.03858204
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 58051,
-          "p95Microseconds": 58051,
-          "p99Microseconds": 58051,
-          "samples": 1,
-          "totalSeconds": 0.058051
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 34.958,
-          "p95Microseconds": 115.958,
-          "p99Microseconds": 191.042,
-          "samples": 1000,
-          "totalSeconds": 0.053863109
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 8.833,
-          "p95Microseconds": 40.084,
-          "p99Microseconds": 76.875,
-          "samples": 1000,
-          "totalSeconds": 0.018210025
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.584,
-          "p95Microseconds": 9.125,
-          "p99Microseconds": 22.916,
-          "samples": 1000,
-          "totalSeconds": 0.006756475
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 121.167,
-          "p95Microseconds": 1414.459,
-          "p99Microseconds": 4961.917,
-          "samples": 1000,
-          "totalSeconds": 0.354911492
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 4.958,
-          "p95Microseconds": 21.125,
-          "p99Microseconds": 52.042,
-          "samples": 1000,
-          "totalSeconds": 0.009427589
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 254.708,
-          "p95Microseconds": 721.875,
-          "p99Microseconds": 2791.584,
-          "samples": 1000,
-          "totalSeconds": 0.349876496
-        }
-      ]
-    },
-    {
-      "round": 1,
-      "position": 1,
-      "revision": "v0.4",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 129.792,
-          "p95Microseconds": 770.459,
-          "p99Microseconds": 3876.375,
-          "samples": 1000,
-          "totalSeconds": 0.275411157
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 182.666,
-          "p95Microseconds": 1192.958,
-          "p99Microseconds": 4942.875,
-          "samples": 1000,
-          "totalSeconds": 0.382833194
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 10.5,
-          "p95Microseconds": 46.875,
-          "p99Microseconds": 112.375,
-          "samples": 3000,
-          "totalSeconds": 0.056448165
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 30.709,
-          "p95Microseconds": 90.25,
-          "p99Microseconds": 313.875,
-          "samples": 3000,
-          "totalSeconds": 0.182837204
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 1.041,
-          "p95Microseconds": 1.333,
-          "p99Microseconds": 2.25,
-          "samples": 10000,
-          "totalSeconds": 0.011255857
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 19137.166,
-          "p95Microseconds": 22606.625,
-          "p99Microseconds": 22606.625,
-          "samples": 15,
-          "totalSeconds": 0.274962042
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 5134.583,
-          "p95Microseconds": 12893.375,
-          "p99Microseconds": 12893.375,
-          "samples": 10,
-          "totalSeconds": 0.078945457
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 72647.084,
-          "p95Microseconds": 72647.084,
-          "p99Microseconds": 72647.084,
-          "samples": 1,
-          "totalSeconds": 0.072647084
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 36.25,
-          "p95Microseconds": 120.917,
-          "p99Microseconds": 249.792,
-          "samples": 1000,
-          "totalSeconds": 0.054621027
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 8.125,
-          "p95Microseconds": 34.75,
-          "p99Microseconds": 73.917,
-          "samples": 1000,
-          "totalSeconds": 0.013056851
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.833,
-          "p95Microseconds": 10.792,
-          "p99Microseconds": 26.333,
-          "samples": 1000,
-          "totalSeconds": 0.007317565
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 142,
-          "p95Microseconds": 1119.792,
-          "p99Microseconds": 3654.416,
-          "samples": 1000,
-          "totalSeconds": 0.301575547
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 5.5,
-          "p95Microseconds": 23.417,
-          "p99Microseconds": 81.917,
-          "samples": 1000,
-          "totalSeconds": 0.010119807
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 332.667,
-          "p95Microseconds": 625.708,
-          "p99Microseconds": 2496.625,
-          "samples": 1000,
-          "totalSeconds": 0.430967875
-        }
-      ]
-    },
-    {
-      "round": 1,
-      "position": 2,
-      "revision": "v0.2",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 140.917,
-          "p95Microseconds": 474.375,
-          "p99Microseconds": 2418.875,
-          "samples": 1000,
-          "totalSeconds": 0.22066837
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 194.5,
-          "p95Microseconds": 539.083,
-          "p99Microseconds": 1534.208,
-          "samples": 1000,
-          "totalSeconds": 0.262976023
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 13.875,
-          "p95Microseconds": 45.5,
-          "p99Microseconds": 101.209,
-          "samples": 3000,
-          "totalSeconds": 0.067369628
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 52.125,
-          "p95Microseconds": 123.042,
-          "p99Microseconds": 174.625,
-          "samples": 3000,
-          "totalSeconds": 0.216232035
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.917,
-          "p95Microseconds": 2.166,
-          "p99Microseconds": 2.459,
-          "samples": 10000,
-          "totalSeconds": 0.01285376
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 22459.583,
-          "p95Microseconds": 33868.166,
-          "p99Microseconds": 33868.166,
-          "samples": 15,
-          "totalSeconds": 0.373103831
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 1109.375,
-          "p95Microseconds": 2343.334,
-          "p99Microseconds": 2343.334,
-          "samples": 10,
-          "totalSeconds": 0.011937877
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 88745.917,
-          "p95Microseconds": 88745.917,
-          "p99Microseconds": 88745.917,
-          "samples": 1,
-          "totalSeconds": 0.088745917
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 53.5,
-          "p95Microseconds": 155.75,
-          "p99Microseconds": 374.291,
-          "samples": 1000,
-          "totalSeconds": 0.077979626
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 8.875,
-          "p95Microseconds": 39.792,
-          "p99Microseconds": 72.25,
-          "samples": 1000,
-          "totalSeconds": 0.01689623
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.708,
-          "p95Microseconds": 11.042,
-          "p99Microseconds": 28,
-          "samples": 1000,
-          "totalSeconds": 0.006190337
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 109.083,
-          "p95Microseconds": 407.834,
-          "p99Microseconds": 1512.458,
-          "samples": 1000,
-          "totalSeconds": 0.174391957
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 4.583,
-          "p95Microseconds": 18.292,
-          "p99Microseconds": 34.083,
-          "samples": 1000,
-          "totalSeconds": 0.008583
-        }
-      ]
-    },
-    {
-      "round": 2,
-      "position": 0,
-      "revision": "v0.4",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 113.208,
-          "p95Microseconds": 612.25,
-          "p99Microseconds": 2871.291,
-          "samples": 1000,
-          "totalSeconds": 0.23022275
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 145,
-          "p95Microseconds": 318.625,
-          "p99Microseconds": 620.666,
-          "samples": 1000,
-          "totalSeconds": 0.179943864
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 10.375,
-          "p95Microseconds": 31.833,
-          "p99Microseconds": 70.5,
-          "samples": 3000,
-          "totalSeconds": 0.048017246
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 28.916,
-          "p95Microseconds": 74.209,
-          "p99Microseconds": 134.458,
-          "samples": 3000,
-          "totalSeconds": 0.128375597
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.958,
-          "p95Microseconds": 2.291,
-          "p99Microseconds": 2.708,
-          "samples": 10000,
-          "totalSeconds": 0.015378243
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 14163.292,
-          "p95Microseconds": 22069.25,
-          "p99Microseconds": 22069.25,
-          "samples": 15,
-          "totalSeconds": 0.230500749
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 3042.25,
-          "p95Microseconds": 10643.875,
-          "p99Microseconds": 10643.875,
-          "samples": 10,
-          "totalSeconds": 0.051098169
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 77885.5,
-          "p95Microseconds": 77885.5,
-          "p99Microseconds": 77885.5,
-          "samples": 1,
-          "totalSeconds": 0.0778855
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 31.833,
-          "p95Microseconds": 103.917,
-          "p99Microseconds": 317.25,
-          "samples": 1000,
-          "totalSeconds": 0.057003835
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 8.083,
-          "p95Microseconds": 28.125,
-          "p99Microseconds": 43.958,
-          "samples": 1000,
-          "totalSeconds": 0.011756559
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.625,
-          "p95Microseconds": 7.625,
-          "p99Microseconds": 16.542,
-          "samples": 1000,
-          "totalSeconds": 0.018938995
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 118.667,
-          "p95Microseconds": 819.042,
-          "p99Microseconds": 4616.042,
-          "samples": 1000,
-          "totalSeconds": 0.363076335
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 4.708,
-          "p95Microseconds": 20.666,
-          "p99Microseconds": 39.75,
-          "samples": 1000,
-          "totalSeconds": 0.018133292
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 396.375,
-          "p95Microseconds": 1633.333,
-          "p99Microseconds": 5336.042,
-          "samples": 1000,
-          "totalSeconds": 0.594880655
-        }
-      ]
-    },
-    {
-      "round": 2,
-      "position": 1,
-      "revision": "candidate",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 97.917,
-          "p95Microseconds": 237.458,
-          "p99Microseconds": 647.666,
-          "samples": 1000,
-          "totalSeconds": 0.148416655
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 121.416,
-          "p95Microseconds": 245.417,
-          "p99Microseconds": 368,
-          "samples": 1000,
-          "totalSeconds": 0.143106983
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 6.5,
-          "p95Microseconds": 19.833,
-          "p99Microseconds": 30.166,
-          "samples": 3000,
-          "totalSeconds": 0.026655558
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 26.167,
-          "p95Microseconds": 83.25,
-          "p99Microseconds": 152.875,
-          "samples": 3000,
-          "totalSeconds": 0.138662872
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 1,
-          "p95Microseconds": 1.417,
-          "p99Microseconds": 2.708,
-          "samples": 10000,
-          "totalSeconds": 0.012651816
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 13985.875,
-          "p95Microseconds": 33641.25,
-          "p99Microseconds": 33641.25,
-          "samples": 15,
-          "totalSeconds": 0.268188335
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 2011.583,
-          "p95Microseconds": 2680.083,
-          "p99Microseconds": 2680.083,
-          "samples": 10,
-          "totalSeconds": 0.021066291
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 57683.334,
-          "p95Microseconds": 57683.334,
-          "p99Microseconds": 57683.334,
-          "samples": 1,
-          "totalSeconds": 0.057683334
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 28.5,
-          "p95Microseconds": 95.208,
-          "p99Microseconds": 173.5,
-          "samples": 1000,
-          "totalSeconds": 0.048873737
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 6.5,
-          "p95Microseconds": 27.833,
-          "p99Microseconds": 65.167,
-          "samples": 1000,
-          "totalSeconds": 0.013173004
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.417,
-          "p95Microseconds": 10.458,
-          "p99Microseconds": 32.917,
-          "samples": 1000,
-          "totalSeconds": 0.00423712
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 90.292,
-          "p95Microseconds": 237.292,
-          "p99Microseconds": 1051.083,
-          "samples": 1000,
-          "totalSeconds": 0.144718051
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 4.208,
-          "p95Microseconds": 16.333,
-          "p99Microseconds": 32.208,
-          "samples": 1000,
-          "totalSeconds": 0.006328626
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 173.041,
-          "p95Microseconds": 393,
-          "p99Microseconds": 536.375,
-          "samples": 1000,
-          "totalSeconds": 0.21097617
-        }
-      ]
-    },
-    {
-      "round": 2,
-      "position": 2,
-      "revision": "v0.2",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 114.708,
-          "p95Microseconds": 259.75,
-          "p99Microseconds": 407.458,
-          "samples": 1000,
-          "totalSeconds": 0.143500634
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 190.375,
-          "p95Microseconds": 590.167,
-          "p99Microseconds": 2456.875,
-          "samples": 1000,
-          "totalSeconds": 0.29839108
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 11.042,
-          "p95Microseconds": 18.292,
-          "p99Microseconds": 46.208,
-          "samples": 3000,
-          "totalSeconds": 0.040398184
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 46.959,
-          "p95Microseconds": 97.875,
-          "p99Microseconds": 177.5,
-          "samples": 3000,
-          "totalSeconds": 0.170553993
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.833,
-          "p95Microseconds": 1.125,
-          "p99Microseconds": 2.791,
-          "samples": 10000,
-          "totalSeconds": 0.009059051
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 20384.333,
-          "p95Microseconds": 25871.583,
-          "p99Microseconds": 25871.583,
-          "samples": 15,
-          "totalSeconds": 0.318542708
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 734.417,
-          "p95Microseconds": 1003.959,
-          "p99Microseconds": 1003.959,
-          "samples": 10,
-          "totalSeconds": 0.00757625
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 90399.208,
-          "p95Microseconds": 90399.208,
-          "p99Microseconds": 90399.208,
-          "samples": 1,
-          "totalSeconds": 0.090399208
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 45.5,
-          "p95Microseconds": 100.959,
-          "p99Microseconds": 194.084,
-          "samples": 1000,
-          "totalSeconds": 0.054808507
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 5.625,
-          "p95Microseconds": 18.416,
-          "p99Microseconds": 30.792,
-          "samples": 1000,
-          "totalSeconds": 0.007240311
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.375,
-          "p95Microseconds": 7.125,
-          "p99Microseconds": 8.833,
-          "samples": 1000,
-          "totalSeconds": 0.003038454
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 85,
-          "p95Microseconds": 173.417,
-          "p99Microseconds": 285.792,
-          "samples": 1000,
-          "totalSeconds": 0.110807105
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.375,
-          "p95Microseconds": 12.25,
-          "p99Microseconds": 25.75,
-          "samples": 1000,
-          "totalSeconds": 0.004979418
-        }
-      ]
-    },
-    {
-      "round": 3,
-      "position": 0,
-      "revision": "v0.2",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 97.167,
-          "p95Microseconds": 182.208,
-          "p99Microseconds": 260.75,
-          "samples": 1000,
-          "totalSeconds": 0.109081728
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 137.708,
-          "p95Microseconds": 248.917,
-          "p99Microseconds": 361,
-          "samples": 1000,
-          "totalSeconds": 0.155456955
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 13.417,
-          "p95Microseconds": 36.667,
-          "p99Microseconds": 56.958,
-          "samples": 3000,
-          "totalSeconds": 0.055777573
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 45.292,
-          "p95Microseconds": 84.5,
-          "p99Microseconds": 140.959,
-          "samples": 3000,
-          "totalSeconds": 0.155297639
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.833,
-          "p95Microseconds": 1.042,
-          "p99Microseconds": 1.875,
-          "samples": 10000,
-          "totalSeconds": 0.010636078
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 16826.125,
-          "p95Microseconds": 20074.917,
-          "p99Microseconds": 20074.917,
-          "samples": 15,
-          "totalSeconds": 0.267506914
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 573.083,
-          "p95Microseconds": 2525.584,
-          "p99Microseconds": 2525.584,
-          "samples": 10,
-          "totalSeconds": 0.027771916
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 90382.958,
-          "p95Microseconds": 90382.958,
-          "p99Microseconds": 90382.958,
-          "samples": 1,
-          "totalSeconds": 0.090382958
+          "totalSeconds": 0.087530417
         },
         {
           "name": "instrumented-encode-lock-header",
           "p50Microseconds": 46.125,
-          "p95Microseconds": 104.208,
-          "p99Microseconds": 134.209,
+          "p95Microseconds": 111.833,
+          "p99Microseconds": 179.834,
           "samples": 1000,
-          "totalSeconds": 0.058744417
+          "totalSeconds": 0.06063628
         },
         {
           "name": "instrumented-payload-write",
-          "p50Microseconds": 6.125,
-          "p95Microseconds": 23.5,
-          "p99Microseconds": 37.083,
+          "p50Microseconds": 7.834,
+          "p95Microseconds": 30.834,
+          "p99Microseconds": 60.333,
           "samples": 1000,
-          "totalSeconds": 0.008482582
+          "totalSeconds": 0.011949892
         },
         {
           "name": "instrumented-trailer-write",
           "p50Microseconds": 2.417,
-          "p95Microseconds": 7.791,
-          "p99Microseconds": 15.958,
+          "p95Microseconds": 7.833,
+          "p99Microseconds": 16.958,
           "samples": 1000,
-          "totalSeconds": 0.003640669
+          "totalSeconds": 0.003733995
         },
         {
           "name": "instrumented-sync",
-          "p50Microseconds": 91.75,
-          "p95Microseconds": 182.041,
-          "p99Microseconds": 346.958,
+          "p50Microseconds": 105.833,
+          "p95Microseconds": 481.5,
+          "p99Microseconds": 1994.375,
           "samples": 1000,
-          "totalSeconds": 0.120297207
+          "totalSeconds": 0.193223945
         },
         {
           "name": "instrumented-publish",
           "p50Microseconds": 3.75,
-          "p95Microseconds": 14.542,
-          "p99Microseconds": 25.208,
+          "p95Microseconds": 18,
+          "p99Microseconds": 28.292,
           "samples": 1000,
-          "totalSeconds": 0.00632396
+          "totalSeconds": 0.006529727
         }
       ]
     },
     {
-      "round": 3,
+      "round": 0,
       "position": 1,
-      "revision": "candidate",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 102.209,
-          "p95Microseconds": 192.917,
-          "p99Microseconds": 372.167,
-          "samples": 1000,
-          "totalSeconds": 0.119711617
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 128.042,
-          "p95Microseconds": 272.916,
-          "p99Microseconds": 512.583,
-          "samples": 1000,
-          "totalSeconds": 0.157696872
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 7.792,
-          "p95Microseconds": 27,
-          "p99Microseconds": 41.208,
-          "samples": 3000,
-          "totalSeconds": 0.037601952
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 25.5,
-          "p95Microseconds": 71.459,
-          "p99Microseconds": 202.959,
-          "samples": 3000,
-          "totalSeconds": 0.136868262
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 1.042,
-          "p95Microseconds": 2.458,
-          "p99Microseconds": 3.292,
-          "samples": 10000,
-          "totalSeconds": 0.014017909
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 16383.458,
-          "p95Microseconds": 20092.25,
-          "p99Microseconds": 20092.25,
-          "samples": 15,
-          "totalSeconds": 0.248314415
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 1766.958,
-          "p95Microseconds": 2092.25,
-          "p99Microseconds": 2092.25,
-          "samples": 10,
-          "totalSeconds": 0.017804083
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 50477.5,
-          "p95Microseconds": 50477.5,
-          "p99Microseconds": 50477.5,
-          "samples": 1,
-          "totalSeconds": 0.0504775
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 28.667,
-          "p95Microseconds": 80.042,
-          "p99Microseconds": 123.541,
-          "samples": 1000,
-          "totalSeconds": 0.036254022
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 7.833,
-          "p95Microseconds": 29.292,
-          "p99Microseconds": 47.416,
-          "samples": 1000,
-          "totalSeconds": 0.010038388
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.416,
-          "p95Microseconds": 7.625,
-          "p99Microseconds": 15.416,
-          "samples": 1000,
-          "totalSeconds": 0.003310516
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 87.042,
-          "p95Microseconds": 182.458,
-          "p99Microseconds": 480.209,
-          "samples": 1000,
-          "totalSeconds": 0.104511616
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.5,
-          "p95Microseconds": 15.709,
-          "p99Microseconds": 25.083,
-          "samples": 1000,
-          "totalSeconds": 0.005437407
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 231.208,
-          "p95Microseconds": 1256,
-          "p99Microseconds": 4859.333,
-          "samples": 1000,
-          "totalSeconds": 0.496188005
-        }
-      ]
-    },
-    {
-      "round": 3,
-      "position": 2,
       "revision": "v0.4",
       "measurements": [
         {
           "name": "synchronized-write-batch-1",
-          "p50Microseconds": 162.833,
-          "p95Microseconds": 518.875,
-          "p99Microseconds": 1547.667,
+          "p50Microseconds": 107.5,
+          "p95Microseconds": 493.792,
+          "p99Microseconds": 2247.334,
           "samples": 1000,
-          "totalSeconds": 0.238678334
+          "totalSeconds": 0.219396121
         },
         {
           "name": "synchronized-write-batch-10",
-          "p50Microseconds": 171.708,
-          "p95Microseconds": 962.334,
-          "p99Microseconds": 1978.291,
+          "p50Microseconds": 143.542,
+          "p95Microseconds": 389.208,
+          "p99Microseconds": 1119.125,
           "samples": 1000,
-          "totalSeconds": 0.31439991
+          "totalSeconds": 0.210043157
         },
         {
           "name": "buffered-write-batch-1",
-          "p50Microseconds": 18.333,
-          "p95Microseconds": 65.416,
-          "p99Microseconds": 190.25,
+          "p50Microseconds": 9.542,
+          "p95Microseconds": 33.416,
+          "p99Microseconds": 85.25,
           "samples": 3000,
-          "totalSeconds": 0.095933706
+          "totalSeconds": 0.054916826
         },
         {
           "name": "buffered-write-batch-10",
-          "p50Microseconds": 27.334,
-          "p95Microseconds": 78.709,
-          "p99Microseconds": 360.75,
+          "p50Microseconds": 31.583,
+          "p95Microseconds": 104.083,
+          "p99Microseconds": 289.167,
           "samples": 3000,
-          "totalSeconds": 0.157908853
+          "totalSeconds": 0.173636441
         },
         {
           "name": "warm-read-256B",
-          "p50Microseconds": 2,
-          "p95Microseconds": 2.792,
-          "p99Microseconds": 8.666,
-          "samples": 10000,
-          "totalSeconds": 0.023138045
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.333,
+          "p99Microseconds": 3.708,
+          "samples": 100000,
+          "totalSeconds": 0.145586245
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.375,
+          "p99Microseconds": 4.334,
+          "samples": 100000,
+          "totalSeconds": 0.150504626
         },
         {
           "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 15593.083,
-          "p95Microseconds": 21394.792,
-          "p99Microseconds": 21394.792,
+          "p50Microseconds": 16880.5,
+          "p95Microseconds": 25243.084,
+          "p99Microseconds": 25243.084,
           "samples": 15,
-          "totalSeconds": 0.243665462
+          "totalSeconds": 0.267877293
         },
         {
           "name": "compact-1000-overwrites",
-          "p50Microseconds": 1752.167,
-          "p95Microseconds": 6910.875,
-          "p99Microseconds": 6910.875,
+          "p50Microseconds": 5794.667,
+          "p95Microseconds": 28346.542,
+          "p99Microseconds": 28346.542,
           "samples": 10,
-          "totalSeconds": 0.031753958
+          "totalSeconds": 0.130641417
         },
         {
           "name": "compact-10000-live-keys",
-          "p50Microseconds": 54521.208,
-          "p95Microseconds": 54521.208,
-          "p99Microseconds": 54521.208,
+          "p50Microseconds": 71407.875,
+          "p95Microseconds": 71407.875,
+          "p99Microseconds": 71407.875,
           "samples": 1,
-          "totalSeconds": 0.054521208
+          "totalSeconds": 0.071407875
         },
         {
           "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 27.875,
-          "p95Microseconds": 71.666,
-          "p99Microseconds": 113.167,
+          "p50Microseconds": 31.583,
+          "p95Microseconds": 113.292,
+          "p99Microseconds": 244.625,
           "samples": 1000,
-          "totalSeconds": 0.036764406
+          "totalSeconds": 0.050177539
         },
         {
           "name": "instrumented-payload-write",
-          "p50Microseconds": 5.666,
-          "p95Microseconds": 21.166,
-          "p99Microseconds": 33.25,
+          "p50Microseconds": 8.834,
+          "p95Microseconds": 32.292,
+          "p99Microseconds": 84.5,
           "samples": 1000,
-          "totalSeconds": 0.008079427
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.333,
-          "p95Microseconds": 7.459,
-          "p99Microseconds": 11.334,
-          "samples": 1000,
-          "totalSeconds": 0.003880118
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 91.708,
-          "p95Microseconds": 377.167,
-          "p99Microseconds": 3304.625,
-          "samples": 1000,
-          "totalSeconds": 0.19112142
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.25,
-          "p95Microseconds": 14.041,
-          "p99Microseconds": 25.375,
-          "samples": 1000,
-          "totalSeconds": 0.006071376
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 288.542,
-          "p95Microseconds": 501.333,
-          "p99Microseconds": 1256.958,
-          "samples": 1000,
-          "totalSeconds": 0.332513075
-        }
-      ]
-    },
-    {
-      "round": 4,
-      "position": 0,
-      "revision": "candidate",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 95.083,
-          "p95Microseconds": 193.208,
-          "p99Microseconds": 274.375,
-          "samples": 1000,
-          "totalSeconds": 0.112450596
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 120.416,
-          "p95Microseconds": 242,
-          "p99Microseconds": 330.917,
-          "samples": 1000,
-          "totalSeconds": 0.136654508
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 6.5,
-          "p95Microseconds": 9.916,
-          "p99Microseconds": 19.833,
-          "samples": 3000,
-          "totalSeconds": 0.022365031
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 23.958,
-          "p95Microseconds": 51.666,
-          "p99Microseconds": 71.625,
-          "samples": 3000,
-          "totalSeconds": 0.090300575
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.959,
-          "p95Microseconds": 1.416,
-          "p99Microseconds": 2.375,
-          "samples": 10000,
-          "totalSeconds": 0.010627237
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 15177.375,
-          "p95Microseconds": 21661.125,
-          "p99Microseconds": 21661.125,
-          "samples": 15,
-          "totalSeconds": 0.255773085
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 2189.541,
-          "p95Microseconds": 3134.584,
-          "p99Microseconds": 3134.584,
-          "samples": 10,
-          "totalSeconds": 0.036000958
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 56329.291,
-          "p95Microseconds": 56329.291,
-          "p99Microseconds": 56329.291,
-          "samples": 1,
-          "totalSeconds": 0.056329291
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 30.375,
-          "p95Microseconds": 83.5,
-          "p99Microseconds": 131.875,
-          "samples": 1000,
-          "totalSeconds": 0.038348424
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 7.083,
-          "p95Microseconds": 26.667,
-          "p99Microseconds": 64.125,
-          "samples": 1000,
-          "totalSeconds": 0.011810113
+          "totalSeconds": 0.018404706
         },
         {
           "name": "instrumented-trailer-write",
           "p50Microseconds": 2.375,
-          "p95Microseconds": 7.833,
-          "p99Microseconds": 18,
+          "p95Microseconds": 7.709,
+          "p99Microseconds": 18.125,
           "samples": 1000,
-          "totalSeconds": 0.003488056
+          "totalSeconds": 0.01012308
         },
         {
           "name": "instrumented-sync",
-          "p50Microseconds": 92.625,
-          "p95Microseconds": 205.166,
-          "p99Microseconds": 618.875,
+          "p50Microseconds": 121.375,
+          "p95Microseconds": 1010.292,
+          "p99Microseconds": 4269.375,
           "samples": 1000,
-          "totalSeconds": 0.151355448
+          "totalSeconds": 0.324089214
         },
         {
           "name": "instrumented-publish",
-          "p50Microseconds": 4.292,
-          "p95Microseconds": 14.5,
-          "p99Microseconds": 26.541,
+          "p50Microseconds": 4,
+          "p95Microseconds": 19.417,
+          "p99Microseconds": 41.125,
           "samples": 1000,
-          "totalSeconds": 0.006391838
+          "totalSeconds": 0.007445636
         },
         {
           "name": "grouped-10-requests",
-          "p50Microseconds": 180.958,
-          "p95Microseconds": 1897.583,
-          "p99Microseconds": 12631,
+          "p50Microseconds": 381.541,
+          "p95Microseconds": 1421.75,
+          "p99Microseconds": 3186.292,
           "samples": 1000,
-          "totalSeconds": 0.714665366
+          "totalSeconds": 0.544999259
         }
       ]
     },
     {
-      "round": 4,
-      "position": 1,
-      "revision": "v0.2",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 121.042,
-          "p95Microseconds": 556.417,
-          "p99Microseconds": 3189.458,
-          "samples": 1000,
-          "totalSeconds": 0.230127782
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 155.458,
-          "p95Microseconds": 326.125,
-          "p99Microseconds": 660.5,
-          "samples": 1000,
-          "totalSeconds": 0.201711244
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 11.666,
-          "p95Microseconds": 37.291,
-          "p99Microseconds": 63.708,
-          "samples": 3000,
-          "totalSeconds": 0.052624583
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 48.417,
-          "p95Microseconds": 109.792,
-          "p99Microseconds": 201.083,
-          "samples": 3000,
-          "totalSeconds": 0.188319255
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.916,
-          "p95Microseconds": 2.083,
-          "p99Microseconds": 2.459,
-          "samples": 10000,
-          "totalSeconds": 0.011457519
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 21686.042,
-          "p95Microseconds": 27358.417,
-          "p99Microseconds": 27358.417,
-          "samples": 15,
-          "totalSeconds": 0.33115979
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 497.792,
-          "p95Microseconds": 646.542,
-          "p99Microseconds": 646.542,
-          "samples": 10,
-          "totalSeconds": 0.005448127
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 78796.792,
-          "p95Microseconds": 78796.792,
-          "p99Microseconds": 78796.792,
-          "samples": 1,
-          "totalSeconds": 0.078796792
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 44.958,
-          "p95Microseconds": 84.208,
-          "p99Microseconds": 161.625,
-          "samples": 1000,
-          "totalSeconds": 0.05299408
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 5.541,
-          "p95Microseconds": 19.833,
-          "p99Microseconds": 27.625,
-          "samples": 1000,
-          "totalSeconds": 0.007184829
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.333,
-          "p95Microseconds": 6.917,
-          "p99Microseconds": 8.792,
-          "samples": 1000,
-          "totalSeconds": 0.002975674
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 84.959,
-          "p95Microseconds": 176.959,
-          "p99Microseconds": 454.458,
-          "samples": 1000,
-          "totalSeconds": 0.102982638
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.125,
-          "p95Microseconds": 9.625,
-          "p99Microseconds": 20.583,
-          "samples": 1000,
-          "totalSeconds": 0.004999281
-        }
-      ]
-    },
-    {
-      "round": 4,
-      "position": 2,
-      "revision": "v0.4",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 91.875,
-          "p95Microseconds": 182.833,
-          "p99Microseconds": 513.083,
-          "samples": 1000,
-          "totalSeconds": 0.110348914
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 123.166,
-          "p95Microseconds": 259.333,
-          "p99Microseconds": 747.625,
-          "samples": 1000,
-          "totalSeconds": 0.159282986
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 9.125,
-          "p95Microseconds": 27.708,
-          "p99Microseconds": 36.084,
-          "samples": 3000,
-          "totalSeconds": 0.036187562
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 26.833,
-          "p95Microseconds": 69.458,
-          "p99Microseconds": 197.25,
-          "samples": 3000,
-          "totalSeconds": 0.12031907
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.792,
-          "p95Microseconds": 1.041,
-          "p99Microseconds": 1.292,
-          "samples": 10000,
-          "totalSeconds": 0.00834988
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 13496.084,
-          "p95Microseconds": 18018.75,
-          "p99Microseconds": 18018.75,
-          "samples": 15,
-          "totalSeconds": 0.22206846
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 2378.583,
-          "p95Microseconds": 7658.5,
-          "p99Microseconds": 7658.5,
-          "samples": 10,
-          "totalSeconds": 0.034781124
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 49768.208,
-          "p95Microseconds": 49768.208,
-          "p99Microseconds": 49768.208,
-          "samples": 1,
-          "totalSeconds": 0.049768208
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 30.834,
-          "p95Microseconds": 83.083,
-          "p99Microseconds": 232.833,
-          "samples": 1000,
-          "totalSeconds": 0.04290388
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 7.625,
-          "p95Microseconds": 26.125,
-          "p99Microseconds": 56.333,
-          "samples": 1000,
-          "totalSeconds": 0.01058416
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.333,
-          "p95Microseconds": 8.542,
-          "p99Microseconds": 16.459,
-          "samples": 1000,
-          "totalSeconds": 0.003442411
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 94.709,
-          "p95Microseconds": 255.084,
-          "p99Microseconds": 814,
-          "samples": 1000,
-          "totalSeconds": 0.136344888
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.666,
-          "p95Microseconds": 11,
-          "p99Microseconds": 27,
-          "samples": 1000,
-          "totalSeconds": 0.006842315
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 219.75,
-          "p95Microseconds": 434.625,
-          "p99Microseconds": 997.542,
-          "samples": 1000,
-          "totalSeconds": 0.264978622
-        }
-      ]
-    },
-    {
-      "round": 5,
-      "position": 0,
-      "revision": "v0.4",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 103.917,
-          "p95Microseconds": 195.042,
-          "p99Microseconds": 276,
-          "samples": 1000,
-          "totalSeconds": 0.118995117
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 122.625,
-          "p95Microseconds": 242.541,
-          "p99Microseconds": 323.167,
-          "samples": 1000,
-          "totalSeconds": 0.142595639
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 9.375,
-          "p95Microseconds": 27.458,
-          "p99Microseconds": 35.416,
-          "samples": 3000,
-          "totalSeconds": 0.037255739
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 29.083,
-          "p95Microseconds": 73.125,
-          "p99Microseconds": 116.458,
-          "samples": 3000,
-          "totalSeconds": 0.127794122
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.833,
-          "p95Microseconds": 1.042,
-          "p99Microseconds": 1.167,
-          "samples": 10000,
-          "totalSeconds": 0.00852291
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 12114.625,
-          "p95Microseconds": 13755.416,
-          "p99Microseconds": 13755.416,
-          "samples": 15,
-          "totalSeconds": 0.178689164
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 1533.334,
-          "p95Microseconds": 1952.709,
-          "p99Microseconds": 1952.709,
-          "samples": 10,
-          "totalSeconds": 0.01578825
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 80162.167,
-          "p95Microseconds": 80162.167,
-          "p99Microseconds": 80162.167,
-          "samples": 1,
-          "totalSeconds": 0.080162167
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 27.417,
-          "p95Microseconds": 56,
-          "p99Microseconds": 94.917,
-          "samples": 1000,
-          "totalSeconds": 0.031073418
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 5.583,
-          "p95Microseconds": 16.125,
-          "p99Microseconds": 29.667,
-          "samples": 1000,
-          "totalSeconds": 0.006915836
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.291,
-          "p95Microseconds": 6.292,
-          "p99Microseconds": 8.583,
-          "samples": 1000,
-          "totalSeconds": 0.002693646
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 78.792,
-          "p95Microseconds": 158.583,
-          "p99Microseconds": 294.083,
-          "samples": 1000,
-          "totalSeconds": 0.092133974
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.208,
-          "p95Microseconds": 9.208,
-          "p99Microseconds": 18.083,
-          "samples": 1000,
-          "totalSeconds": 0.004371538
-        },
-        {
-          "name": "grouped-10-requests",
-          "p50Microseconds": 212.583,
-          "p95Microseconds": 381.958,
-          "p99Microseconds": 1176.541,
-          "samples": 1000,
-          "totalSeconds": 0.314809255
-        }
-      ]
-    },
-    {
-      "round": 5,
-      "position": 1,
-      "revision": "v0.2",
-      "measurements": [
-        {
-          "name": "synchronized-write-batch-1",
-          "p50Microseconds": 98.333,
-          "p95Microseconds": 149.541,
-          "p99Microseconds": 256.209,
-          "samples": 1000,
-          "totalSeconds": 0.108210986
-        },
-        {
-          "name": "synchronized-write-batch-10",
-          "p50Microseconds": 139.833,
-          "p95Microseconds": 250.75,
-          "p99Microseconds": 435.833,
-          "samples": 1000,
-          "totalSeconds": 0.164640921
-        },
-        {
-          "name": "buffered-write-batch-1",
-          "p50Microseconds": 11.291,
-          "p95Microseconds": 31.666,
-          "p99Microseconds": 40.875,
-          "samples": 3000,
-          "totalSeconds": 0.044854164
-        },
-        {
-          "name": "buffered-write-batch-10",
-          "p50Microseconds": 44.375,
-          "p95Microseconds": 86.375,
-          "p99Microseconds": 110.542,
-          "samples": 3000,
-          "totalSeconds": 0.150953605
-        },
-        {
-          "name": "warm-read-256B",
-          "p50Microseconds": 0.792,
-          "p95Microseconds": 1.042,
-          "p99Microseconds": 1.167,
-          "samples": 10000,
-          "totalSeconds": 0.00829041
-        },
-        {
-          "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 20579.291,
-          "p95Microseconds": 24716.791,
-          "p99Microseconds": 24716.791,
-          "samples": 15,
-          "totalSeconds": 0.318388332
-        },
-        {
-          "name": "compact-1000-overwrites",
-          "p50Microseconds": 1003.25,
-          "p95Microseconds": 1580.625,
-          "p99Microseconds": 1580.625,
-          "samples": 10,
-          "totalSeconds": 0.011216789
-        },
-        {
-          "name": "compact-10000-live-keys",
-          "p50Microseconds": 75956.458,
-          "p95Microseconds": 75956.458,
-          "p99Microseconds": 75956.458,
-          "samples": 1,
-          "totalSeconds": 0.075956458
-        },
-        {
-          "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 44.333,
-          "p95Microseconds": 57.542,
-          "p99Microseconds": 113.041,
-          "samples": 1000,
-          "totalSeconds": 0.047111124
-        },
-        {
-          "name": "instrumented-payload-write",
-          "p50Microseconds": 5.25,
-          "p95Microseconds": 14.25,
-          "p99Microseconds": 21.417,
-          "samples": 1000,
-          "totalSeconds": 0.006286512
-        },
-        {
-          "name": "instrumented-trailer-write",
-          "p50Microseconds": 2.25,
-          "p95Microseconds": 3.708,
-          "p99Microseconds": 7.625,
-          "samples": 1000,
-          "totalSeconds": 0.002449
-        },
-        {
-          "name": "instrumented-sync",
-          "p50Microseconds": 79.208,
-          "p95Microseconds": 140.334,
-          "p99Microseconds": 301.5,
-          "samples": 1000,
-          "totalSeconds": 0.093012707
-        },
-        {
-          "name": "instrumented-publish",
-          "p50Microseconds": 3.125,
-          "p95Microseconds": 6.25,
-          "p99Microseconds": 17.125,
-          "samples": 1000,
-          "totalSeconds": 0.0039773
-        }
-      ]
-    },
-    {
-      "round": 5,
+      "round": 0,
       "position": 2,
       "revision": "candidate",
       "measurements": [
         {
           "name": "synchronized-write-batch-1",
-          "p50Microseconds": 100.375,
-          "p95Microseconds": 244.875,
-          "p99Microseconds": 954.625,
+          "p50Microseconds": 186.667,
+          "p95Microseconds": 883.375,
+          "p99Microseconds": 1904.916,
           "samples": 1000,
-          "totalSeconds": 0.228808952
+          "totalSeconds": 0.309676082
         },
         {
           "name": "synchronized-write-batch-10",
-          "p50Microseconds": 127.042,
-          "p95Microseconds": 267.209,
-          "p99Microseconds": 340,
+          "p50Microseconds": 250.833,
+          "p95Microseconds": 1690.5,
+          "p99Microseconds": 4494.541,
           "samples": 1000,
-          "totalSeconds": 0.159215647
+          "totalSeconds": 0.511978637
         },
         {
           "name": "buffered-write-batch-1",
-          "p50Microseconds": 6.625,
-          "p95Microseconds": 22.625,
-          "p99Microseconds": 43.625,
+          "p50Microseconds": 8.209,
+          "p95Microseconds": 34.292,
+          "p99Microseconds": 159.25,
           "samples": 3000,
-          "totalSeconds": 0.032251599
+          "totalSeconds": 0.050694889
         },
         {
           "name": "buffered-write-batch-10",
-          "p50Microseconds": 25.667,
-          "p95Microseconds": 63.667,
-          "p99Microseconds": 94.125,
+          "p50Microseconds": 28.291,
+          "p95Microseconds": 105.792,
+          "p99Microseconds": 379.75,
           "samples": 3000,
-          "totalSeconds": 0.111110821
+          "totalSeconds": 0.184795943
         },
         {
           "name": "warm-read-256B",
           "p50Microseconds": 1.041,
           "p95Microseconds": 2.333,
-          "p99Microseconds": 3.542,
-          "samples": 10000,
-          "totalSeconds": 0.013505915
+          "p99Microseconds": 4.292,
+          "samples": 100000,
+          "totalSeconds": 0.163262143
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1.042,
+          "p95Microseconds": 2.333,
+          "p99Microseconds": 3.625,
+          "samples": 100000,
+          "totalSeconds": 0.147931338
         },
         {
           "name": "warm-reopen-3000-frames",
-          "p50Microseconds": 14128.5,
-          "p95Microseconds": 17240,
-          "p99Microseconds": 17240,
+          "p50Microseconds": 16935.458,
+          "p95Microseconds": 23542.959,
+          "p99Microseconds": 23542.959,
           "samples": 15,
-          "totalSeconds": 0.212866584
+          "totalSeconds": 0.259076918
         },
         {
           "name": "compact-1000-overwrites",
-          "p50Microseconds": 1645.042,
-          "p95Microseconds": 2723.291,
-          "p99Microseconds": 2723.291,
+          "p50Microseconds": 7490.292,
+          "p95Microseconds": 11232.042,
+          "p99Microseconds": 11232.042,
           "samples": 10,
-          "totalSeconds": 0.019404084
+          "totalSeconds": 0.081623042
         },
         {
           "name": "compact-10000-live-keys",
-          "p50Microseconds": 103167.375,
-          "p95Microseconds": 103167.375,
-          "p99Microseconds": 103167.375,
+          "p50Microseconds": 75609.708,
+          "p95Microseconds": 75609.708,
+          "p99Microseconds": 75609.708,
           "samples": 1,
-          "totalSeconds": 0.103167375
+          "totalSeconds": 0.075609708
         },
         {
           "name": "instrumented-encode-lock-header",
-          "p50Microseconds": 28.083,
-          "p95Microseconds": 68.166,
-          "p99Microseconds": 98.25,
+          "p50Microseconds": 35.25,
+          "p95Microseconds": 124.292,
+          "p99Microseconds": 311.458,
           "samples": 1000,
-          "totalSeconds": 0.035522201
+          "totalSeconds": 0.058291856
         },
         {
           "name": "instrumented-payload-write",
-          "p50Microseconds": 5.667,
-          "p95Microseconds": 19.667,
+          "p50Microseconds": 8.584,
+          "p95Microseconds": 36.083,
+          "p99Microseconds": 86.209,
+          "samples": 1000,
+          "totalSeconds": 0.014809163
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 3.042,
+          "p95Microseconds": 9.958,
           "p99Microseconds": 32.958,
           "samples": 1000,
-          "totalSeconds": 0.007916922
+          "totalSeconds": 0.006056518
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 145.584,
+          "p95Microseconds": 1107.375,
+          "p99Microseconds": 2857.292,
+          "samples": 1000,
+          "totalSeconds": 0.293372743
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 5.833,
+          "p95Microseconds": 22.792,
+          "p99Microseconds": 38.208,
+          "samples": 1000,
+          "totalSeconds": 0.009936569
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 310.625,
+          "p95Microseconds": 1319.959,
+          "p99Microseconds": 3328.5,
+          "samples": 1000,
+          "totalSeconds": 0.501735384
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "position": 0,
+      "revision": "candidate",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 134.75,
+          "p95Microseconds": 938.291,
+          "p99Microseconds": 2641,
+          "samples": 1000,
+          "totalSeconds": 0.278725059
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 330.167,
+          "p95Microseconds": 1929.834,
+          "p99Microseconds": 3655.375,
+          "samples": 1000,
+          "totalSeconds": 0.581239298
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 9.5,
+          "p95Microseconds": 33.542,
+          "p99Microseconds": 165.667,
+          "samples": 3000,
+          "totalSeconds": 0.105419784
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 28.917,
+          "p95Microseconds": 150.208,
+          "p99Microseconds": 584.917,
+          "samples": 3000,
+          "totalSeconds": 0.201606882
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1.042,
+          "p95Microseconds": 2.375,
+          "p99Microseconds": 6.208,
+          "samples": 100000,
+          "totalSeconds": 0.162091826
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1.083,
+          "p95Microseconds": 2.584,
+          "p99Microseconds": 6.709,
+          "samples": 100000,
+          "totalSeconds": 0.18374189
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 20024.667,
+          "p95Microseconds": 22004.333,
+          "p99Microseconds": 22004.333,
+          "samples": 15,
+          "totalSeconds": 0.284558502
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 2962,
+          "p95Microseconds": 10129.583,
+          "p99Microseconds": 10129.583,
+          "samples": 10,
+          "totalSeconds": 0.051019581
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 69524.667,
+          "p95Microseconds": 69524.667,
+          "p99Microseconds": 69524.667,
+          "samples": 1,
+          "totalSeconds": 0.069524667
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 27.375,
+          "p95Microseconds": 82.666,
+          "p99Microseconds": 157,
+          "samples": 1000,
+          "totalSeconds": 0.035756408
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 5.291,
+          "p95Microseconds": 17.542,
+          "p99Microseconds": 33.958,
+          "samples": 1000,
+          "totalSeconds": 0.007376177
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.125,
+          "p95Microseconds": 6.541,
+          "p99Microseconds": 11.125,
+          "samples": 1000,
+          "totalSeconds": 0.002877868
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 95.375,
+          "p95Microseconds": 204.458,
+          "p99Microseconds": 377.541,
+          "samples": 1000,
+          "totalSeconds": 0.112084361
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 3.459,
+          "p95Microseconds": 12.458,
+          "p99Microseconds": 31.75,
+          "samples": 1000,
+          "totalSeconds": 0.005585859
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 296.709,
+          "p95Microseconds": 1352.75,
+          "p99Microseconds": 3331.709,
+          "samples": 1000,
+          "totalSeconds": 0.497805527
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "position": 1,
+      "revision": "v0.4",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 144.166,
+          "p95Microseconds": 873.25,
+          "p99Microseconds": 3472.417,
+          "samples": 1000,
+          "totalSeconds": 0.307343668
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 236.708,
+          "p95Microseconds": 2837.75,
+          "p99Microseconds": 13241.792,
+          "samples": 1000,
+          "totalSeconds": 0.804553638
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 9.5,
+          "p95Microseconds": 35.833,
+          "p99Microseconds": 98.917,
+          "samples": 3000,
+          "totalSeconds": 0.045868051
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 30.208,
+          "p95Microseconds": 104,
+          "p99Microseconds": 247.583,
+          "samples": 3000,
+          "totalSeconds": 0.155972114
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1.083,
+          "p95Microseconds": 2.375,
+          "p99Microseconds": 4.416,
+          "samples": 100000,
+          "totalSeconds": 0.177104181
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.333,
+          "p99Microseconds": 3.917,
+          "samples": 100000,
+          "totalSeconds": 0.155950683
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 17556.833,
+          "p95Microseconds": 32687.375,
+          "p99Microseconds": 32687.375,
+          "samples": 15,
+          "totalSeconds": 0.336843373
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 2565.334,
+          "p95Microseconds": 4138.334,
+          "p99Microseconds": 4138.334,
+          "samples": 10,
+          "totalSeconds": 0.030598919
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 86458.25,
+          "p95Microseconds": 86458.25,
+          "p99Microseconds": 86458.25,
+          "samples": 1,
+          "totalSeconds": 0.08645825
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 35.709,
+          "p95Microseconds": 111.875,
+          "p99Microseconds": 224.583,
+          "samples": 1000,
+          "totalSeconds": 0.055386703
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 8.291,
+          "p95Microseconds": 33.666,
+          "p99Microseconds": 59.292,
+          "samples": 1000,
+          "totalSeconds": 0.014695111
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.917,
+          "p95Microseconds": 10.25,
+          "p99Microseconds": 23.25,
+          "samples": 1000,
+          "totalSeconds": 0.004706745
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 134.5,
+          "p95Microseconds": 760.834,
+          "p99Microseconds": 2949.542,
+          "samples": 1000,
+          "totalSeconds": 0.245060546
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 5.5,
+          "p95Microseconds": 21,
+          "p99Microseconds": 79.542,
+          "samples": 1000,
+          "totalSeconds": 0.011000017
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 349.042,
+          "p95Microseconds": 888.667,
+          "p99Microseconds": 2485.917,
+          "samples": 1000,
+          "totalSeconds": 0.447993896
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "position": 2,
+      "revision": "v0.2",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 117.709,
+          "p95Microseconds": 299.209,
+          "p99Microseconds": 1574.417,
+          "samples": 1000,
+          "totalSeconds": 0.195581339
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 209.5,
+          "p95Microseconds": 672.791,
+          "p99Microseconds": 1896.792,
+          "samples": 1000,
+          "totalSeconds": 0.300922866
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 12.292,
+          "p95Microseconds": 31.75,
+          "p99Microseconds": 77.916,
+          "samples": 3000,
+          "totalSeconds": 0.054454074
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 49.083,
+          "p95Microseconds": 104.292,
+          "p99Microseconds": 230.125,
+          "samples": 3000,
+          "totalSeconds": 0.18367575
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.917,
+          "p95Microseconds": 2,
+          "p99Microseconds": 2.458,
+          "samples": 100000,
+          "totalSeconds": 0.123870099
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 21219.833,
+          "p95Microseconds": 24951.667,
+          "p99Microseconds": 24951.667,
+          "samples": 15,
+          "totalSeconds": 0.316874459
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 633.042,
+          "p95Microseconds": 1040.708,
+          "p99Microseconds": 1040.708,
+          "samples": 10,
+          "totalSeconds": 0.007297082
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 106850.792,
+          "p95Microseconds": 106850.792,
+          "p99Microseconds": 106850.792,
+          "samples": 1,
+          "totalSeconds": 0.106850792
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 45.75,
+          "p95Microseconds": 109.5,
+          "p99Microseconds": 157.541,
+          "samples": 1000,
+          "totalSeconds": 0.057554392
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 5.792,
+          "p95Microseconds": 21.125,
+          "p99Microseconds": 29.5,
+          "samples": 1000,
+          "totalSeconds": 0.007846657
         },
         {
           "name": "instrumented-trailer-write",
           "p50Microseconds": 2.375,
-          "p95Microseconds": 7.208,
-          "p99Microseconds": 11.5,
+          "p95Microseconds": 7.042,
+          "p99Microseconds": 8.375,
           "samples": 1000,
-          "totalSeconds": 0.003246448
+          "totalSeconds": 0.003328466
         },
         {
           "name": "instrumented-sync",
-          "p50Microseconds": 92.625,
-          "p95Microseconds": 352.75,
-          "p99Microseconds": 3370.333,
+          "p50Microseconds": 108.375,
+          "p95Microseconds": 257.958,
+          "p99Microseconds": 930.291,
           "samples": 1000,
-          "totalSeconds": 0.203145491
+          "totalSeconds": 0.143407485
         },
         {
           "name": "instrumented-publish",
-          "p50Microseconds": 3.584,
-          "p95Microseconds": 17.875,
-          "p99Microseconds": 32.125,
+          "p50Microseconds": 3.333,
+          "p95Microseconds": 17.084,
+          "p99Microseconds": 26.542,
           "samples": 1000,
-          "totalSeconds": 0.007780944
+          "totalSeconds": 0.00641543
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "position": 0,
+      "revision": "v0.4",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 133.959,
+          "p95Microseconds": 391.958,
+          "p99Microseconds": 1543.542,
+          "samples": 1000,
+          "totalSeconds": 0.204106139
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 157.625,
+          "p95Microseconds": 431.625,
+          "p99Microseconds": 1171,
+          "samples": 1000,
+          "totalSeconds": 0.225225539
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 10.833,
+          "p95Microseconds": 17.292,
+          "p99Microseconds": 41.083,
+          "samples": 3000,
+          "totalSeconds": 0.035266538
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 30.166,
+          "p95Microseconds": 82.5,
+          "p99Microseconds": 161.167,
+          "samples": 3000,
+          "totalSeconds": 0.135067975
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.25,
+          "p99Microseconds": 2.667,
+          "samples": 100000,
+          "totalSeconds": 0.158927443
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.25,
+          "p99Microseconds": 2.667,
+          "samples": 100000,
+          "totalSeconds": 0.138938764
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 14286.75,
+          "p95Microseconds": 18916.75,
+          "p99Microseconds": 18916.75,
+          "samples": 15,
+          "totalSeconds": 0.227521291
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 1574.708,
+          "p95Microseconds": 7170.75,
+          "p99Microseconds": 7170.75,
+          "samples": 10,
+          "totalSeconds": 0.044419623
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 53158.834,
+          "p95Microseconds": 53158.834,
+          "p99Microseconds": 53158.834,
+          "samples": 1,
+          "totalSeconds": 0.053158834
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 28.208,
+          "p95Microseconds": 79.208,
+          "p99Microseconds": 161.708,
+          "samples": 1000,
+          "totalSeconds": 0.049126037
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 6.083,
+          "p95Microseconds": 20.167,
+          "p99Microseconds": 46.542,
+          "samples": 1000,
+          "totalSeconds": 0.008256818
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.333,
+          "p95Microseconds": 7.583,
+          "p99Microseconds": 15.125,
+          "samples": 1000,
+          "totalSeconds": 0.020749369
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 100.666,
+          "p95Microseconds": 336.084,
+          "p99Microseconds": 1212.875,
+          "samples": 1000,
+          "totalSeconds": 0.160298354
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 3.875,
+          "p95Microseconds": 15.958,
+          "p99Microseconds": 29.459,
+          "samples": 1000,
+          "totalSeconds": 0.007718357
         },
         {
           "name": "grouped-10-requests",
-          "p50Microseconds": 154.541,
-          "p95Microseconds": 231.041,
-          "p99Microseconds": 357.584,
+          "p50Microseconds": 270.042,
+          "p95Microseconds": 798.917,
+          "p99Microseconds": 2140.083,
           "samples": 1000,
-          "totalSeconds": 0.165625889
+          "totalSeconds": 0.390148254
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "position": 1,
+      "revision": "candidate",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 106.917,
+          "p95Microseconds": 293,
+          "p99Microseconds": 621,
+          "samples": 1000,
+          "totalSeconds": 0.138560215
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 134.709,
+          "p95Microseconds": 372,
+          "p99Microseconds": 760.625,
+          "samples": 1000,
+          "totalSeconds": 0.181218659
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 7.792,
+          "p95Microseconds": 20.667,
+          "p99Microseconds": 36.583,
+          "samples": 3000,
+          "totalSeconds": 0.031785436
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 28.209,
+          "p95Microseconds": 66.416,
+          "p99Microseconds": 197.916,
+          "samples": 3000,
+          "totalSeconds": 0.119191654
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.958,
+          "p95Microseconds": 2.042,
+          "p99Microseconds": 2.791,
+          "samples": 100000,
+          "totalSeconds": 0.111852677
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 0.958,
+          "p95Microseconds": 1.959,
+          "p99Microseconds": 4.584,
+          "samples": 100000,
+          "totalSeconds": 0.121724371
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 16638.125,
+          "p95Microseconds": 25236.459,
+          "p99Microseconds": 25236.459,
+          "samples": 15,
+          "totalSeconds": 0.278144461
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 2874.083,
+          "p95Microseconds": 4434,
+          "p99Microseconds": 4434,
+          "samples": 10,
+          "totalSeconds": 0.029887502
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 62868.917,
+          "p95Microseconds": 62868.917,
+          "p99Microseconds": 62868.917,
+          "samples": 1,
+          "totalSeconds": 0.062868917
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 32.416,
+          "p95Microseconds": 95.292,
+          "p99Microseconds": 167.042,
+          "samples": 1000,
+          "totalSeconds": 0.045836034
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 7.875,
+          "p95Microseconds": 27.917,
+          "p99Microseconds": 61.375,
+          "samples": 1000,
+          "totalSeconds": 0.011462248
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.625,
+          "p95Microseconds": 8.25,
+          "p99Microseconds": 17.125,
+          "samples": 1000,
+          "totalSeconds": 0.00430129
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 137.458,
+          "p95Microseconds": 538.333,
+          "p99Microseconds": 1479.917,
+          "samples": 1000,
+          "totalSeconds": 0.226155379
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 5.083,
+          "p95Microseconds": 20.209,
+          "p99Microseconds": 43.625,
+          "samples": 1000,
+          "totalSeconds": 0.009168241
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 317.542,
+          "p95Microseconds": 2011.459,
+          "p99Microseconds": 5716.208,
+          "samples": 1000,
+          "totalSeconds": 0.650456327
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "position": 2,
+      "revision": "v0.2",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 199.583,
+          "p95Microseconds": 2234.458,
+          "p99Microseconds": 8001.709,
+          "samples": 1000,
+          "totalSeconds": 0.575271298
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 248.958,
+          "p95Microseconds": 1954.916,
+          "p99Microseconds": 4501.333,
+          "samples": 1000,
+          "totalSeconds": 0.551764445
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 11.291,
+          "p95Microseconds": 39.791,
+          "p99Microseconds": 205.208,
+          "samples": 3000,
+          "totalSeconds": 0.065911991
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 50.375,
+          "p95Microseconds": 211.708,
+          "p99Microseconds": 546.959,
+          "samples": 3000,
+          "totalSeconds": 0.258134105
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.917,
+          "p95Microseconds": 2.042,
+          "p99Microseconds": 3.416,
+          "samples": 100000,
+          "totalSeconds": 0.146522589
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 22305.709,
+          "p95Microseconds": 36630.959,
+          "p99Microseconds": 36630.959,
+          "samples": 15,
+          "totalSeconds": 0.54184617
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 1912.833,
+          "p95Microseconds": 3657.916,
+          "p99Microseconds": 3657.916,
+          "samples": 10,
+          "totalSeconds": 0.020797748
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 119002.958,
+          "p95Microseconds": 119002.958,
+          "p99Microseconds": 119002.958,
+          "samples": 1,
+          "totalSeconds": 0.119002958
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 56.875,
+          "p95Microseconds": 161,
+          "p99Microseconds": 302.5,
+          "samples": 1000,
+          "totalSeconds": 0.077772007
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 12.083,
+          "p95Microseconds": 41,
+          "p99Microseconds": 91.75,
+          "samples": 1000,
+          "totalSeconds": 0.015449453
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.75,
+          "p95Microseconds": 10.667,
+          "p99Microseconds": 50.208,
+          "samples": 1000,
+          "totalSeconds": 0.007635356
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 140.458,
+          "p95Microseconds": 527.875,
+          "p99Microseconds": 1245.417,
+          "samples": 1000,
+          "totalSeconds": 0.217983037
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 4.5,
+          "p95Microseconds": 21.334,
+          "p99Microseconds": 76.792,
+          "samples": 1000,
+          "totalSeconds": 0.009340154
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "position": 0,
+      "revision": "v0.2",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 148.458,
+          "p95Microseconds": 633.708,
+          "p99Microseconds": 1486.25,
+          "samples": 1000,
+          "totalSeconds": 0.231022002
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 165.167,
+          "p95Microseconds": 562.833,
+          "p99Microseconds": 1247.416,
+          "samples": 1000,
+          "totalSeconds": 0.240456156
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 13.417,
+          "p95Microseconds": 33.667,
+          "p99Microseconds": 58.834,
+          "samples": 3000,
+          "totalSeconds": 0.053236293
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 50.125,
+          "p95Microseconds": 94.875,
+          "p99Microseconds": 196.583,
+          "samples": 3000,
+          "totalSeconds": 0.173846264
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.875,
+          "p95Microseconds": 1.917,
+          "p99Microseconds": 2.583,
+          "samples": 100000,
+          "totalSeconds": 0.113125186
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 19552.042,
+          "p95Microseconds": 25208.542,
+          "p99Microseconds": 25208.542,
+          "samples": 15,
+          "totalSeconds": 0.310216333
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 1021.459,
+          "p95Microseconds": 1472.333,
+          "p99Microseconds": 1472.333,
+          "samples": 10,
+          "totalSeconds": 0.010238084
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 220408.625,
+          "p95Microseconds": 220408.625,
+          "p99Microseconds": 220408.625,
+          "samples": 1,
+          "totalSeconds": 0.220408625
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 58.959,
+          "p95Microseconds": 152.792,
+          "p99Microseconds": 240.458,
+          "samples": 1000,
+          "totalSeconds": 0.078569217
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 12.083,
+          "p95Microseconds": 49.833,
+          "p99Microseconds": 100.25,
+          "samples": 1000,
+          "totalSeconds": 0.018545916
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 3.708,
+          "p95Microseconds": 12.125,
+          "p99Microseconds": 30.459,
+          "samples": 1000,
+          "totalSeconds": 0.005848229
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 162.5,
+          "p95Microseconds": 439.459,
+          "p99Microseconds": 1015.542,
+          "samples": 1000,
+          "totalSeconds": 0.208147065
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 5.75,
+          "p95Microseconds": 20.958,
+          "p99Microseconds": 66.792,
+          "samples": 1000,
+          "totalSeconds": 0.012394868
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "position": 1,
+      "revision": "candidate",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 143.958,
+          "p95Microseconds": 393.458,
+          "p99Microseconds": 602.583,
+          "samples": 1000,
+          "totalSeconds": 0.179076536
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 149.167,
+          "p95Microseconds": 544.583,
+          "p99Microseconds": 1423.542,
+          "samples": 1000,
+          "totalSeconds": 0.227083059
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 17.666,
+          "p95Microseconds": 48.208,
+          "p99Microseconds": 115.416,
+          "samples": 3000,
+          "totalSeconds": 0.063952116
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 32.458,
+          "p95Microseconds": 96.708,
+          "p99Microseconds": 205.625,
+          "samples": 3000,
+          "totalSeconds": 0.153777955
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1.042,
+          "p95Microseconds": 2.458,
+          "p99Microseconds": 6.25,
+          "samples": 100000,
+          "totalSeconds": 0.154503238
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1.083,
+          "p95Microseconds": 2.625,
+          "p99Microseconds": 7.833,
+          "samples": 100000,
+          "totalSeconds": 0.174078679
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 17910.083,
+          "p95Microseconds": 26644.25,
+          "p99Microseconds": 26644.25,
+          "samples": 15,
+          "totalSeconds": 0.282226581
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 1830.5,
+          "p95Microseconds": 2844.291,
+          "p99Microseconds": 2844.291,
+          "samples": 10,
+          "totalSeconds": 0.021164042
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 64665.25,
+          "p95Microseconds": 64665.25,
+          "p99Microseconds": 64665.25,
+          "samples": 1,
+          "totalSeconds": 0.06466525
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 29.334,
+          "p95Microseconds": 89.708,
+          "p99Microseconds": 121.417,
+          "samples": 1000,
+          "totalSeconds": 0.04149726
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 7.791,
+          "p95Microseconds": 29.792,
+          "p99Microseconds": 69.5,
+          "samples": 1000,
+          "totalSeconds": 0.01144638
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.583,
+          "p95Microseconds": 8.125,
+          "p99Microseconds": 16.875,
+          "samples": 1000,
+          "totalSeconds": 0.004217114
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 108.083,
+          "p95Microseconds": 266.5,
+          "p99Microseconds": 424.791,
+          "samples": 1000,
+          "totalSeconds": 0.129012364
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 4.25,
+          "p95Microseconds": 19.5,
+          "p99Microseconds": 33.75,
+          "samples": 1000,
+          "totalSeconds": 0.007189113
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 193.75,
+          "p95Microseconds": 451.708,
+          "p99Microseconds": 691.875,
+          "samples": 1000,
+          "totalSeconds": 0.23674348
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "position": 2,
+      "revision": "v0.4",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 126.458,
+          "p95Microseconds": 396.667,
+          "p99Microseconds": 2290.75,
+          "samples": 1000,
+          "totalSeconds": 0.218562041
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 158.833,
+          "p95Microseconds": 461.958,
+          "p99Microseconds": 1238.791,
+          "samples": 1000,
+          "totalSeconds": 0.226260154
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 9.459,
+          "p95Microseconds": 18.875,
+          "p99Microseconds": 87.041,
+          "samples": 3000,
+          "totalSeconds": 0.037181266
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 27.583,
+          "p95Microseconds": 42.917,
+          "p99Microseconds": 111.917,
+          "samples": 3000,
+          "totalSeconds": 0.100817915
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1.041,
+          "p95Microseconds": 2.333,
+          "p99Microseconds": 3.25,
+          "samples": 100000,
+          "totalSeconds": 0.138207
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1.125,
+          "p95Microseconds": 2.5,
+          "p99Microseconds": 5.583,
+          "samples": 100000,
+          "totalSeconds": 0.187630164
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 19685.167,
+          "p95Microseconds": 46106.958,
+          "p99Microseconds": 46106.958,
+          "samples": 15,
+          "totalSeconds": 0.343636544
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 5903.959,
+          "p95Microseconds": 19789.833,
+          "p99Microseconds": 19789.833,
+          "samples": 10,
+          "totalSeconds": 0.101942668
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 55326.75,
+          "p95Microseconds": 55326.75,
+          "p99Microseconds": 55326.75,
+          "samples": 1,
+          "totalSeconds": 0.05532675
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 28.167,
+          "p95Microseconds": 87.625,
+          "p99Microseconds": 126.417,
+          "samples": 1000,
+          "totalSeconds": 0.045429083
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 6.541,
+          "p95Microseconds": 21.833,
+          "p99Microseconds": 33.083,
+          "samples": 1000,
+          "totalSeconds": 0.009786439
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.458,
+          "p95Microseconds": 7.417,
+          "p99Microseconds": 8.917,
+          "samples": 1000,
+          "totalSeconds": 0.005672698
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 100.375,
+          "p95Microseconds": 202.583,
+          "p99Microseconds": 367.667,
+          "samples": 1000,
+          "totalSeconds": 0.144284756
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 3.458,
+          "p95Microseconds": 15.625,
+          "p99Microseconds": 22.375,
+          "samples": 1000,
+          "totalSeconds": 0.006199125
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 325.791,
+          "p95Microseconds": 850.5,
+          "p99Microseconds": 1877.542,
+          "samples": 1000,
+          "totalSeconds": 0.411983706
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "position": 0,
+      "revision": "candidate",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 100.625,
+          "p95Microseconds": 205.708,
+          "p99Microseconds": 267.125,
+          "samples": 1000,
+          "totalSeconds": 0.116525508
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 171,
+          "p95Microseconds": 430.708,
+          "p99Microseconds": 768,
+          "samples": 1000,
+          "totalSeconds": 0.210633284
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 8.708,
+          "p95Microseconds": 27.792,
+          "p99Microseconds": 66.625,
+          "samples": 3000,
+          "totalSeconds": 0.040575343
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 30.75,
+          "p95Microseconds": 78.666,
+          "p99Microseconds": 175.917,
+          "samples": 3000,
+          "totalSeconds": 0.135454558
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1.25,
+          "p95Microseconds": 2.375,
+          "p99Microseconds": 4.959,
+          "samples": 100000,
+          "totalSeconds": 0.168982362
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1.208,
+          "p95Microseconds": 2.416,
+          "p99Microseconds": 6.917,
+          "samples": 100000,
+          "totalSeconds": 0.168728995
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 17583.208,
+          "p95Microseconds": 26105.375,
+          "p99Microseconds": 26105.375,
+          "samples": 15,
+          "totalSeconds": 0.273781332
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 2857.417,
+          "p95Microseconds": 4948.958,
+          "p99Microseconds": 4948.958,
+          "samples": 10,
+          "totalSeconds": 0.034053876
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 109096.834,
+          "p95Microseconds": 109096.834,
+          "p99Microseconds": 109096.834,
+          "samples": 1,
+          "totalSeconds": 0.109096834
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 31,
+          "p95Microseconds": 90.208,
+          "p99Microseconds": 130.167,
+          "samples": 1000,
+          "totalSeconds": 0.041549123
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 7.625,
+          "p95Microseconds": 23.958,
+          "p99Microseconds": 41.666,
+          "samples": 1000,
+          "totalSeconds": 0.010960129
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.875,
+          "p95Microseconds": 8.084,
+          "p99Microseconds": 13.125,
+          "samples": 1000,
+          "totalSeconds": 0.00404403
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 114.292,
+          "p95Microseconds": 285.791,
+          "p99Microseconds": 1467.75,
+          "samples": 1000,
+          "totalSeconds": 0.173335634
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 4.5,
+          "p95Microseconds": 20.375,
+          "p99Microseconds": 57.375,
+          "samples": 1000,
+          "totalSeconds": 0.010270314
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 195.125,
+          "p95Microseconds": 415.416,
+          "p99Microseconds": 715.958,
+          "samples": 1000,
+          "totalSeconds": 0.240654607
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "position": 1,
+      "revision": "v0.2",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 103.125,
+          "p95Microseconds": 222.792,
+          "p99Microseconds": 452.916,
+          "samples": 1000,
+          "totalSeconds": 0.125230957
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 172.584,
+          "p95Microseconds": 452.333,
+          "p99Microseconds": 1156.917,
+          "samples": 1000,
+          "totalSeconds": 0.224315113
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 11.084,
+          "p95Microseconds": 17.458,
+          "p99Microseconds": 41.25,
+          "samples": 3000,
+          "totalSeconds": 0.038975857
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 47.916,
+          "p95Microseconds": 111.125,
+          "p99Microseconds": 203.875,
+          "samples": 3000,
+          "totalSeconds": 0.189912186
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.916,
+          "p95Microseconds": 2,
+          "p99Microseconds": 4.125,
+          "samples": 100000,
+          "totalSeconds": 0.118192101
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 21639.084,
+          "p95Microseconds": 27750.791,
+          "p99Microseconds": 27750.791,
+          "samples": 15,
+          "totalSeconds": 0.338406416
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 794.458,
+          "p95Microseconds": 1170.958,
+          "p99Microseconds": 1170.958,
+          "samples": 10,
+          "totalSeconds": 0.008408665
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 86235.791,
+          "p95Microseconds": 86235.791,
+          "p99Microseconds": 86235.791,
+          "samples": 1,
+          "totalSeconds": 0.086235791
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 48.125,
+          "p95Microseconds": 113.834,
+          "p99Microseconds": 149.916,
+          "samples": 1000,
+          "totalSeconds": 0.059312791
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 8.458,
+          "p95Microseconds": 29.625,
+          "p99Microseconds": 54.958,
+          "samples": 1000,
+          "totalSeconds": 0.010764917
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.5,
+          "p95Microseconds": 7.875,
+          "p99Microseconds": 24.792,
+          "samples": 1000,
+          "totalSeconds": 0.003792169
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 107.083,
+          "p95Microseconds": 212.625,
+          "p99Microseconds": 343.834,
+          "samples": 1000,
+          "totalSeconds": 0.125275326
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 4.125,
+          "p95Microseconds": 18.041,
+          "p99Microseconds": 24.292,
+          "samples": 1000,
+          "totalSeconds": 0.006234422
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "position": 2,
+      "revision": "v0.4",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 120.292,
+          "p95Microseconds": 375.417,
+          "p99Microseconds": 1301.667,
+          "samples": 1000,
+          "totalSeconds": 0.175495044
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 149.958,
+          "p95Microseconds": 389.541,
+          "p99Microseconds": 822.375,
+          "samples": 1000,
+          "totalSeconds": 0.195845549
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 9.166,
+          "p95Microseconds": 28.5,
+          "p99Microseconds": 46.042,
+          "samples": 3000,
+          "totalSeconds": 0.042772152
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 32.75,
+          "p95Microseconds": 93.583,
+          "p99Microseconds": 195.583,
+          "samples": 3000,
+          "totalSeconds": 0.153388394
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1.083,
+          "p95Microseconds": 2.334,
+          "p99Microseconds": 5.25,
+          "samples": 100000,
+          "totalSeconds": 0.150499646
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1.167,
+          "p95Microseconds": 2.417,
+          "p99Microseconds": 5.542,
+          "samples": 100000,
+          "totalSeconds": 0.162965757
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 14813.167,
+          "p95Microseconds": 17922.583,
+          "p99Microseconds": 17922.583,
+          "samples": 15,
+          "totalSeconds": 0.233218459
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 1487.917,
+          "p95Microseconds": 2359.084,
+          "p99Microseconds": 2359.084,
+          "samples": 10,
+          "totalSeconds": 0.018748835
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 58510.125,
+          "p95Microseconds": 58510.125,
+          "p99Microseconds": 58510.125,
+          "samples": 1,
+          "totalSeconds": 0.058510125
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 32.083,
+          "p95Microseconds": 80.208,
+          "p99Microseconds": 117.209,
+          "samples": 1000,
+          "totalSeconds": 0.038742876
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 8.333,
+          "p95Microseconds": 23.041,
+          "p99Microseconds": 51.791,
+          "samples": 1000,
+          "totalSeconds": 0.009781587
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.417,
+          "p95Microseconds": 7.959,
+          "p99Microseconds": 20.458,
+          "samples": 1000,
+          "totalSeconds": 0.003403881
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 95.166,
+          "p95Microseconds": 185.125,
+          "p99Microseconds": 308.583,
+          "samples": 1000,
+          "totalSeconds": 0.105955037
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 4.042,
+          "p95Microseconds": 13.083,
+          "p99Microseconds": 22.292,
+          "samples": 1000,
+          "totalSeconds": 0.005727125
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 469,
+          "p95Microseconds": 2219.917,
+          "p99Microseconds": 4168.209,
+          "samples": 1000,
+          "totalSeconds": 0.722787143
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "position": 0,
+      "revision": "v0.4",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 106,
+          "p95Microseconds": 254.459,
+          "p99Microseconds": 605.958,
+          "samples": 1000,
+          "totalSeconds": 0.13669151
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 136.292,
+          "p95Microseconds": 301.791,
+          "p99Microseconds": 589.166,
+          "samples": 1000,
+          "totalSeconds": 0.165777045
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 10.875,
+          "p95Microseconds": 42.541,
+          "p99Microseconds": 106.875,
+          "samples": 3000,
+          "totalSeconds": 0.052537785
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 29.916,
+          "p95Microseconds": 81.875,
+          "p99Microseconds": 144.459,
+          "samples": 3000,
+          "totalSeconds": 0.136077356
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.291,
+          "p99Microseconds": 2.708,
+          "samples": 100000,
+          "totalSeconds": 0.132322295
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 1,
+          "p95Microseconds": 2.292,
+          "p99Microseconds": 2.708,
+          "samples": 100000,
+          "totalSeconds": 0.13823173
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 17631.25,
+          "p95Microseconds": 20552,
+          "p99Microseconds": 20552,
+          "samples": 15,
+          "totalSeconds": 0.263421541
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 2096.417,
+          "p95Microseconds": 3264.666,
+          "p99Microseconds": 3264.666,
+          "samples": 10,
+          "totalSeconds": 0.025897252
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 57943.375,
+          "p95Microseconds": 57943.375,
+          "p99Microseconds": 57943.375,
+          "samples": 1,
+          "totalSeconds": 0.057943375
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 28.333,
+          "p95Microseconds": 87.375,
+          "p99Microseconds": 140.959,
+          "samples": 1000,
+          "totalSeconds": 0.040697525
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 6.25,
+          "p95Microseconds": 23.75,
+          "p99Microseconds": 39.791,
+          "samples": 1000,
+          "totalSeconds": 0.009053003
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.375,
+          "p95Microseconds": 7.667,
+          "p99Microseconds": 11.875,
+          "samples": 1000,
+          "totalSeconds": 0.003411829
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 99.958,
+          "p95Microseconds": 521.792,
+          "p99Microseconds": 2109.042,
+          "samples": 1000,
+          "totalSeconds": 0.193752664
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 3.625,
+          "p95Microseconds": 17.25,
+          "p99Microseconds": 34.542,
+          "samples": 1000,
+          "totalSeconds": 0.006248548
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 313.75,
+          "p95Microseconds": 575.917,
+          "p99Microseconds": 1292.917,
+          "samples": 1000,
+          "totalSeconds": 0.357903525
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "position": 1,
+      "revision": "v0.2",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 106.792,
+          "p95Microseconds": 243.625,
+          "p99Microseconds": 540.083,
+          "samples": 1000,
+          "totalSeconds": 0.130125029
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 169.917,
+          "p95Microseconds": 419.292,
+          "p99Microseconds": 860.875,
+          "samples": 1000,
+          "totalSeconds": 0.215236392
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 12.083,
+          "p95Microseconds": 30.667,
+          "p99Microseconds": 59.75,
+          "samples": 3000,
+          "totalSeconds": 0.04557658
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 47.125,
+          "p95Microseconds": 135.916,
+          "p99Microseconds": 535.542,
+          "samples": 3000,
+          "totalSeconds": 0.306767978
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.917,
+          "p95Microseconds": 2.125,
+          "p99Microseconds": 4.583,
+          "samples": 100000,
+          "totalSeconds": 0.145103256
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 21833.792,
+          "p95Microseconds": 23917.416,
+          "p99Microseconds": 23917.416,
+          "samples": 15,
+          "totalSeconds": 0.327953709
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 908.75,
+          "p95Microseconds": 1253.75,
+          "p99Microseconds": 1253.75,
+          "samples": 10,
+          "totalSeconds": 0.00871075
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 83695.083,
+          "p95Microseconds": 83695.083,
+          "p99Microseconds": 83695.083,
+          "samples": 1,
+          "totalSeconds": 0.083695083
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 48.167,
+          "p95Microseconds": 118.875,
+          "p99Microseconds": 163.25,
+          "samples": 1000,
+          "totalSeconds": 0.061298191
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 8.084,
+          "p95Microseconds": 28.084,
+          "p99Microseconds": 45.709,
+          "samples": 1000,
+          "totalSeconds": 0.010375471
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.375,
+          "p95Microseconds": 7.667,
+          "p99Microseconds": 12.459,
+          "samples": 1000,
+          "totalSeconds": 0.003559111
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 97.208,
+          "p95Microseconds": 364.75,
+          "p99Microseconds": 3205.25,
+          "samples": 1000,
+          "totalSeconds": 0.202787293
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 3.292,
+          "p95Microseconds": 16.916,
+          "p99Microseconds": 31.709,
+          "samples": 1000,
+          "totalSeconds": 0.006509665
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "position": 2,
+      "revision": "candidate",
+      "measurements": [
+        {
+          "name": "synchronized-write-batch-1",
+          "p50Microseconds": 113.875,
+          "p95Microseconds": 247.625,
+          "p99Microseconds": 329.958,
+          "samples": 1000,
+          "totalSeconds": 0.133133304
+        },
+        {
+          "name": "synchronized-write-batch-10",
+          "p50Microseconds": 137,
+          "p95Microseconds": 284.417,
+          "p99Microseconds": 391,
+          "samples": 1000,
+          "totalSeconds": 0.162459378
+        },
+        {
+          "name": "buffered-write-batch-1",
+          "p50Microseconds": 6.917,
+          "p95Microseconds": 32.667,
+          "p99Microseconds": 76.042,
+          "samples": 3000,
+          "totalSeconds": 0.039276448
+        },
+        {
+          "name": "buffered-write-batch-10",
+          "p50Microseconds": 26.584,
+          "p95Microseconds": 75.625,
+          "p99Microseconds": 134.459,
+          "samples": 3000,
+          "totalSeconds": 0.126711926
+        },
+        {
+          "name": "warm-read-256B",
+          "p50Microseconds": 0.875,
+          "p95Microseconds": 2.125,
+          "p99Microseconds": 2.75,
+          "samples": 100000,
+          "totalSeconds": 0.122269437
+        },
+        {
+          "name": "warm-entry-256B",
+          "p50Microseconds": 0.833,
+          "p95Microseconds": 2.042,
+          "p99Microseconds": 2.292,
+          "samples": 100000,
+          "totalSeconds": 0.100080391
+        },
+        {
+          "name": "warm-reopen-3000-frames",
+          "p50Microseconds": 14075.792,
+          "p95Microseconds": 16548.666,
+          "p99Microseconds": 16548.666,
+          "samples": 15,
+          "totalSeconds": 0.218954001
+        },
+        {
+          "name": "compact-1000-overwrites",
+          "p50Microseconds": 1362.417,
+          "p95Microseconds": 1423.375,
+          "p99Microseconds": 1423.375,
+          "samples": 10,
+          "totalSeconds": 0.015096208
+        },
+        {
+          "name": "compact-10000-live-keys",
+          "p50Microseconds": 58394.917,
+          "p95Microseconds": 58394.917,
+          "p99Microseconds": 58394.917,
+          "samples": 1,
+          "totalSeconds": 0.058394917
+        },
+        {
+          "name": "instrumented-encode-lock-header",
+          "p50Microseconds": 28.125,
+          "p95Microseconds": 75.291,
+          "p99Microseconds": 113.166,
+          "samples": 1000,
+          "totalSeconds": 0.035243495
+        },
+        {
+          "name": "instrumented-payload-write",
+          "p50Microseconds": 5.792,
+          "p95Microseconds": 21.75,
+          "p99Microseconds": 35.5,
+          "samples": 1000,
+          "totalSeconds": 0.008135425
+        },
+        {
+          "name": "instrumented-trailer-write",
+          "p50Microseconds": 2.375,
+          "p95Microseconds": 7.75,
+          "p99Microseconds": 18.625,
+          "samples": 1000,
+          "totalSeconds": 0.00341904
+        },
+        {
+          "name": "instrumented-sync",
+          "p50Microseconds": 92.334,
+          "p95Microseconds": 166.292,
+          "p99Microseconds": 218.041,
+          "samples": 1000,
+          "totalSeconds": 0.10119829
+        },
+        {
+          "name": "instrumented-publish",
+          "p50Microseconds": 3.375,
+          "p95Microseconds": 13.625,
+          "p99Microseconds": 20.083,
+          "samples": 1000,
+          "totalSeconds": 0.006098757
+        },
+        {
+          "name": "grouped-10-requests",
+          "p50Microseconds": 169.75,
+          "p95Microseconds": 370.625,
+          "p99Microseconds": 869.125,
+          "samples": 1000,
+          "totalSeconds": 0.238791392
         }
       ]
     }
@@ -2141,254 +2237,266 @@
   "summary": {
     "v0.2": {
       "synchronized-write-batch-1": {
-        "medianOfRoundP50": 110.604,
-        "medianOfRoundP99": 419.833,
-        "minRoundP50": 97.167,
-        "maxRoundP50": 140.917
+        "medianOfRoundP50": 133.08350000000002,
+        "medianOfRoundP99": 1530.3335,
+        "minRoundP50": 103.125,
+        "maxRoundP50": 199.583
       },
       "synchronized-write-batch-10": {
-        "medianOfRoundP50": 172.91649999999998,
-        "medianOfRoundP99": 1097.354,
-        "minRoundP50": 137.708,
-        "maxRoundP50": 241.25
+        "medianOfRoundP50": 191.042,
+        "medianOfRoundP99": 1572.1039999999998,
+        "minRoundP50": 165.167,
+        "maxRoundP50": 304.667
       },
       "buffered-write-batch-1": {
-        "medianOfRoundP50": 12.5415,
-        "medianOfRoundP99": 60.333,
-        "minRoundP50": 11.042,
-        "maxRoundP50": 15.292
+        "medianOfRoundP50": 12.1875,
+        "medianOfRoundP99": 68.833,
+        "minRoundP50": 11.084,
+        "maxRoundP50": 14.334
       },
       "buffered-write-batch-10": {
-        "medianOfRoundP50": 47.688,
-        "medianOfRoundP99": 176.0625,
-        "minRoundP50": 44.375,
-        "maxRoundP50": 58.916
+        "medianOfRoundP50": 49.604,
+        "medianOfRoundP99": 372.021,
+        "minRoundP50": 47.125,
+        "maxRoundP50": 57.458
       },
       "warm-read-256B": {
-        "medianOfRoundP50": 0.854,
-        "medianOfRoundP99": 2.4375,
-        "minRoundP50": 0.792,
+        "medianOfRoundP50": 0.917,
+        "medianOfRoundP99": 3.7705,
+        "minRoundP50": 0.875,
         "maxRoundP50": 0.917
       },
       "warm-reopen-3000-frames": {
-        "medianOfRoundP50": 21132.6665,
-        "medianOfRoundP99": 26615.0,
-        "minRoundP50": 16826.125,
-        "maxRoundP50": 24498.458
+        "medianOfRoundP50": 21736.438000000002,
+        "medianOfRoundP99": 26479.6665,
+        "minRoundP50": 19552.042,
+        "maxRoundP50": 22305.709
       },
       "compact-1000-overwrites": {
-        "medianOfRoundP50": 844.396,
-        "medianOfRoundP99": 1452.25,
-        "minRoundP50": 497.792,
-        "maxRoundP50": 1109.375
+        "medianOfRoundP50": 896.5,
+        "medianOfRoundP99": 1298.25,
+        "minRoundP50": 633.042,
+        "maxRoundP50": 1912.833
       },
       "compact-10000-live-keys": {
-        "medianOfRoundP50": 89564.4375,
-        "medianOfRoundP99": 89564.4375,
-        "minRoundP50": 75956.458,
-        "maxRoundP50": 103543.166
+        "medianOfRoundP50": 97190.6045,
+        "medianOfRoundP99": 97190.6045,
+        "minRoundP50": 83695.083,
+        "maxRoundP50": 220408.625
       },
       "instrumented-encode-lock-header": {
-        "medianOfRoundP50": 45.8125,
-        "medianOfRoundP99": 171.6875,
-        "minRoundP50": 44.333,
-        "maxRoundP50": 53.5
+        "medianOfRoundP50": 48.146,
+        "medianOfRoundP99": 171.542,
+        "minRoundP50": 45.75,
+        "maxRoundP50": 58.959
       },
       "instrumented-payload-write": {
-        "medianOfRoundP50": 5.875,
-        "medianOfRoundP99": 33.9375,
-        "minRoundP50": 5.25,
-        "maxRoundP50": 8.875
+        "medianOfRoundP50": 8.271,
+        "medianOfRoundP99": 57.6455,
+        "minRoundP50": 5.792,
+        "maxRoundP50": 12.083
       },
       "instrumented-trailer-write": {
-        "medianOfRoundP50": 2.396,
-        "medianOfRoundP99": 11.458,
-        "minRoundP50": 2.25,
-        "maxRoundP50": 2.708
+        "medianOfRoundP50": 2.4585,
+        "medianOfRoundP99": 20.875,
+        "minRoundP50": 2.375,
+        "maxRoundP50": 3.708
       },
       "instrumented-sync": {
-        "medianOfRoundP50": 88.375,
-        "medianOfRoundP99": 400.708,
-        "minRoundP50": 79.208,
-        "maxRoundP50": 109.083
+        "medianOfRoundP50": 107.729,
+        "medianOfRoundP99": 1130.4795,
+        "minRoundP50": 97.208,
+        "maxRoundP50": 162.5
       },
       "instrumented-publish": {
-        "medianOfRoundP50": 3.5625,
-        "medianOfRoundP99": 25.479,
-        "minRoundP50": 3.125,
-        "maxRoundP50": 4.583
+        "medianOfRoundP50": 3.9375,
+        "medianOfRoundP99": 30.000500000000002,
+        "minRoundP50": 3.292,
+        "maxRoundP50": 5.75
       }
     },
     "v0.4": {
       "synchronized-write-batch-1": {
-        "medianOfRoundP50": 114.6875,
-        "medianOfRoundP99": 2209.4790000000003,
-        "minRoundP50": 91.875,
-        "maxRoundP50": 162.833
+        "medianOfRoundP50": 123.375,
+        "medianOfRoundP99": 1895.4379999999999,
+        "minRoundP50": 106,
+        "maxRoundP50": 144.166
       },
       "synchronized-write-batch-10": {
-        "medianOfRoundP50": 143.89600000000002,
-        "medianOfRoundP99": 1362.958,
-        "minRoundP50": 122.625,
-        "maxRoundP50": 182.666
+        "medianOfRoundP50": 153.79149999999998,
+        "medianOfRoundP99": 1145.0625,
+        "minRoundP50": 136.292,
+        "maxRoundP50": 236.708
       },
       "buffered-write-batch-1": {
-        "medianOfRoundP50": 10.125,
-        "medianOfRoundP99": 85.3125,
-        "minRoundP50": 9.125,
-        "maxRoundP50": 18.333
+        "medianOfRoundP50": 9.521,
+        "medianOfRoundP99": 86.1455,
+        "minRoundP50": 9.166,
+        "maxRoundP50": 10.875
       },
       "buffered-write-batch-10": {
-        "medianOfRoundP50": 28.999499999999998,
-        "medianOfRoundP99": 255.5625,
-        "minRoundP50": 26.833,
-        "maxRoundP50": 30.709
+        "medianOfRoundP50": 30.186999999999998,
+        "medianOfRoundP99": 178.375,
+        "minRoundP50": 27.583,
+        "maxRoundP50": 32.75
       },
       "warm-read-256B": {
-        "medianOfRoundP50": 0.9375,
-        "medianOfRoundP99": 1.8545,
-        "minRoundP50": 0.792,
-        "maxRoundP50": 2
+        "medianOfRoundP50": 1.0205,
+        "medianOfRoundP99": 3.479,
+        "minRoundP50": 1,
+        "maxRoundP50": 1.083
+      },
+      "warm-entry-256B": {
+        "medianOfRoundP50": 1.0,
+        "medianOfRoundP99": 4.1255,
+        "minRoundP50": 1,
+        "maxRoundP50": 1.167
       },
       "warm-reopen-3000-frames": {
-        "medianOfRoundP50": 14878.1875,
-        "medianOfRoundP99": 21732.021,
-        "minRoundP50": 12114.625,
-        "maxRoundP50": 19137.166
+        "medianOfRoundP50": 17218.6665,
+        "medianOfRoundP99": 22897.542,
+        "minRoundP50": 14286.75,
+        "maxRoundP50": 19685.167
       },
       "compact-1000-overwrites": {
-        "medianOfRoundP50": 2104.6040000000003,
-        "medianOfRoundP99": 7284.6875,
-        "minRoundP50": 1533.334,
-        "maxRoundP50": 5134.583
+        "medianOfRoundP50": 2330.8755,
+        "medianOfRoundP99": 5654.5419999999995,
+        "minRoundP50": 1487.917,
+        "maxRoundP50": 5903.959
       },
       "compact-10000-live-keys": {
-        "medianOfRoundP50": 75266.292,
-        "medianOfRoundP99": 75266.292,
-        "minRoundP50": 49768.208,
-        "maxRoundP50": 101704
+        "medianOfRoundP50": 58226.75,
+        "medianOfRoundP99": 58226.75,
+        "minRoundP50": 53158.834,
+        "maxRoundP50": 86458.25
       },
       "instrumented-encode-lock-header": {
-        "medianOfRoundP50": 31.3335,
-        "medianOfRoundP99": 241.3125,
-        "minRoundP50": 27.417,
-        "maxRoundP50": 37.708
+        "medianOfRoundP50": 29.958,
+        "medianOfRoundP99": 151.33350000000002,
+        "minRoundP50": 28.167,
+        "maxRoundP50": 35.709
       },
       "instrumented-payload-write": {
-        "medianOfRoundP50": 7.854,
-        "medianOfRoundP99": 50.1455,
-        "minRoundP50": 5.583,
-        "maxRoundP50": 10.292
+        "medianOfRoundP50": 7.416,
+        "medianOfRoundP99": 49.1665,
+        "minRoundP50": 6.083,
+        "maxRoundP50": 8.834
       },
       "instrumented-trailer-write": {
-        "medianOfRoundP50": 2.479,
-        "medianOfRoundP99": 16.500500000000002,
-        "minRoundP50": 2.291,
-        "maxRoundP50": 2.875
+        "medianOfRoundP50": 2.396,
+        "medianOfRoundP99": 16.625,
+        "minRoundP50": 2.333,
+        "maxRoundP50": 2.917
       },
       "instrumented-sync": {
-        "medianOfRoundP50": 106.688,
-        "medianOfRoundP99": 3479.5205,
-        "minRoundP50": 78.792,
-        "maxRoundP50": 142
+        "medianOfRoundP50": 100.5205,
+        "medianOfRoundP99": 1660.9585,
+        "minRoundP50": 95.166,
+        "maxRoundP50": 134.5
       },
       "instrumented-publish": {
-        "medianOfRoundP50": 4.187,
-        "medianOfRoundP99": 33.375,
-        "minRoundP50": 3.208,
-        "maxRoundP50": 6.333
+        "medianOfRoundP50": 3.9375,
+        "medianOfRoundP99": 32.0005,
+        "minRoundP50": 3.458,
+        "maxRoundP50": 5.5
       },
       "grouped-10-requests": {
-        "medianOfRoundP50": 289.9165,
-        "medianOfRoundP99": 1876.7915,
-        "minRoundP50": 212.583,
-        "maxRoundP50": 396.375
+        "medianOfRoundP50": 337.4165,
+        "medianOfRoundP99": 2313.0,
+        "minRoundP50": 270.042,
+        "maxRoundP50": 469
       }
     },
     "candidate": {
       "synchronized-write-batch-1": {
-        "medianOfRoundP50": 101.292,
-        "medianOfRoundP99": 593.4995,
-        "minRoundP50": 95.083,
-        "maxRoundP50": 113.041
+        "medianOfRoundP50": 124.3125,
+        "medianOfRoundP99": 611.7915,
+        "minRoundP50": 100.625,
+        "maxRoundP50": 186.667
       },
       "synchronized-write-batch-10": {
-        "medianOfRoundP50": 127.542,
-        "medianOfRoundP99": 440.2915,
-        "minRoundP50": 120.416,
-        "maxRoundP50": 140.208
+        "medianOfRoundP50": 160.08350000000002,
+        "medianOfRoundP99": 1095.771,
+        "minRoundP50": 134.709,
+        "maxRoundP50": 330.167
       },
       "buffered-write-batch-1": {
-        "medianOfRoundP50": 6.75,
-        "medianOfRoundP99": 42.4165,
-        "minRoundP50": 6.5,
-        "maxRoundP50": 9.125
+        "medianOfRoundP50": 8.4585,
+        "medianOfRoundP99": 95.729,
+        "minRoundP50": 6.917,
+        "maxRoundP50": 17.666
       },
       "buffered-write-batch-10": {
-        "medianOfRoundP50": 25.604,
-        "medianOfRoundP99": 128.4785,
-        "minRoundP50": 23.958,
-        "maxRoundP50": 26.167
+        "medianOfRoundP50": 28.604,
+        "medianOfRoundP99": 201.7705,
+        "minRoundP50": 26.584,
+        "maxRoundP50": 32.458
       },
       "warm-read-256B": {
-        "medianOfRoundP50": 1.0205,
-        "medianOfRoundP99": 3.0,
-        "minRoundP50": 0.958,
-        "maxRoundP50": 1.167
+        "medianOfRoundP50": 1.0415,
+        "medianOfRoundP99": 4.6255,
+        "minRoundP50": 0.875,
+        "maxRoundP50": 1.25
+      },
+      "warm-entry-256B": {
+        "medianOfRoundP50": 1.0625,
+        "medianOfRoundP99": 5.6465,
+        "minRoundP50": 0.833,
+        "maxRoundP50": 1.208
       },
       "warm-reopen-3000-frames": {
-        "medianOfRoundP50": 14652.9375,
-        "medianOfRoundP99": 20962.0415,
-        "minRoundP50": 13985.875,
-        "maxRoundP50": 16383.458
+        "medianOfRoundP50": 17259.333,
+        "medianOfRoundP99": 24389.709,
+        "minRoundP50": 14075.792,
+        "maxRoundP50": 20024.667
       },
       "compact-1000-overwrites": {
-        "medianOfRoundP50": 2025.5625,
-        "medianOfRoundP99": 2822.458,
-        "minRoundP50": 1645.042,
-        "maxRoundP50": 2311.083
+        "medianOfRoundP50": 2865.75,
+        "medianOfRoundP99": 4691.478999999999,
+        "minRoundP50": 1362.417,
+        "maxRoundP50": 7490.292
       },
       "compact-10000-live-keys": {
-        "medianOfRoundP50": 57006.3125,
-        "medianOfRoundP99": 57006.3125,
-        "minRoundP50": 42553.709,
-        "maxRoundP50": 103167.375
+        "medianOfRoundP50": 67094.95850000001,
+        "medianOfRoundP99": 67094.95850000001,
+        "minRoundP50": 58394.917,
+        "maxRoundP50": 109096.834
       },
       "instrumented-encode-lock-header": {
-        "medianOfRoundP50": 28.625,
-        "medianOfRoundP99": 132.75,
-        "minRoundP50": 28.083,
-        "maxRoundP50": 34.958
+        "medianOfRoundP50": 30.167,
+        "medianOfRoundP99": 143.58350000000002,
+        "minRoundP50": 27.375,
+        "maxRoundP50": 35.25
       },
       "instrumented-payload-write": {
-        "medianOfRoundP50": 6.7915,
-        "medianOfRoundP99": 55.7705,
-        "minRoundP50": 5.667,
-        "maxRoundP50": 8.833
+        "medianOfRoundP50": 7.708,
+        "medianOfRoundP99": 51.5205,
+        "minRoundP50": 5.291,
+        "maxRoundP50": 8.584
       },
       "instrumented-trailer-write": {
-        "medianOfRoundP50": 2.4165,
-        "medianOfRoundP99": 16.708,
-        "minRoundP50": 2.375,
-        "maxRoundP50": 2.584
+        "medianOfRoundP50": 2.604,
+        "medianOfRoundP99": 17.0,
+        "minRoundP50": 2.125,
+        "maxRoundP50": 3.042
       },
       "instrumented-sync": {
-        "medianOfRoundP50": 92.625,
-        "medianOfRoundP99": 854.0,
-        "minRoundP50": 87.042,
-        "maxRoundP50": 121.167
+        "medianOfRoundP50": 111.1875,
+        "medianOfRoundP99": 946.2705,
+        "minRoundP50": 92.334,
+        "maxRoundP50": 145.584
       },
       "instrumented-publish": {
-        "medianOfRoundP50": 4.208,
-        "medianOfRoundP99": 32.1665,
-        "minRoundP50": 3.5,
-        "maxRoundP50": 4.958
+        "medianOfRoundP50": 4.375,
+        "medianOfRoundP99": 35.979,
+        "minRoundP50": 3.375,
+        "maxRoundP50": 5.833
       },
       "grouped-10-requests": {
-        "medianOfRoundP50": 176.9995,
-        "medianOfRoundP99": 1866.2714999999998,
-        "minRoundP50": 154.541,
-        "maxRoundP50": 254.708
+        "medianOfRoundP50": 245.917,
+        "medianOfRoundP99": 2098.8125,
+        "minRoundP50": 169.75,
+        "maxRoundP50": 317.542
       }
     }
   },
@@ -2398,6 +2506,6 @@
     "Stage instrumentation uses fault callbacks (three writes), separate from uninstrumented fast path.",
     "No power-loss claims or production latency guarantees."
   ],
-  "commit": "13d32d779e7884676c54a5efa9901929786a4e29",
-  "ci_url": "https://github.com/lllunimon-gy/strata-kv/actions/runs/38919451321"
+  "commit": "85a62085deeb18cb052586439d12c191c58a0119",
+  "ci_url": "https://github.com/lllunimon-gy/strata-kv/actions/runs/38920446300"
 }

@@ -91,23 +91,16 @@ public final class KVStore: @unchecked Sendable {
     func visible(_ location: Location, at time: TimeInterval) -> Bool {
         location.expiration.map { $0 > time } ?? true
     }
-    private func captureLocation(_ key: String) throws -> Location? {
-        try locked {
+    public func get(_ key: String) throws -> Data? { try entry(key)?.value }
+    public func entry(_ key: String) throws -> StoredValue? {
+        let captured: (Location, FileRef)? = try locked {
             let active = try openFile()
             let time = try timeLocked()
-            guard var location = state.index[key], visible(location, at: time) else { return nil }
-            // Location itself retains the source. No second file reference in a return tuple.
-            if location.source == nil { location.source = active }
-            return location
+            guard let location = state.index[key], visible(location, at: time) else { return nil }
+            return (location, location.source ?? active)
         }
-    }
-    public func get(_ key: String) throws -> Data? {
-        guard let location = try captureLocation(key) else { return nil }
-        return try location.source!.read(at: location.offset, count: location.length)
-    }
-    public func entry(_ key: String) throws -> StoredValue? {
-        guard let location = try captureLocation(key) else { return nil }
-        return StoredValue(value: try location.source!.read(at: location.offset, count: location.length), revision: location.revision,
+        guard let (location, source) = captured else { return nil }
+        return StoredValue(value: try source.read(at: location.offset, count: location.length), revision: location.revision,
                            expiresAt: location.expiration.map { Date(timeIntervalSince1970: $0) })
     }
     public func keys() throws -> [String] {

@@ -37,6 +37,7 @@ jobs:
       - name: Thread Sanitizer on engine concurrency
         run: swift test --scratch-path .build/tsan --sanitize=thread --filter EngineTests
       - name: Same-host interleaved performance comparison
+        if: github.event_name == 'workflow_dispatch'
         run: python3 Benchmarks/compare.py --workspace "$RUNNER_TEMP/strata-compare" --output comparison.json
       - uses: actions/upload-artifact@v4
         if: always()
