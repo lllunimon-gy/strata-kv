@@ -34,6 +34,38 @@ int32_t STRead(int32_t fd, void *bytes, size_t length, int64_t offset) {
     }
     return 0;
 }
+int32_t STWriteVectorsUsing(int32_t fd, struct iovec *vectors, int count, STVectorWriter writer, void *context) {
+    int first = 0;
+    while (first < count) {
+        while (first < count && vectors[first].iov_len == 0) ++first;
+        if (first == count) break;
+        ssize_t written = writer(fd, vectors + first, count - first, context);
+        if (written < 0 && errno == EINTR) continue;
+        if (written <= 0) return written < 0 ? errno : EIO;
+        size_t remaining = (size_t)written;
+        while (first < count && remaining >= vectors[first].iov_len) {
+            remaining -= vectors[first].iov_len;
+            ++first;
+        }
+        if (remaining) {
+            if (first == count) return EIO;
+            vectors[first].iov_base = (unsigned char *)vectors[first].iov_base + remaining;
+            vectors[first].iov_len -= remaining;
+        }
+    }
+    return 0;
+}
+static ssize_t systemVectorWriter(int fd, const struct iovec *vectors, int count, void *context) {
+    (void)context;
+    return writev(fd, vectors, count);
+}
+int32_t STWriteFrame(int32_t fd, const void *header, size_t headerLength,
+                     const void *payload, size_t payloadLength, const void *trailer, size_t trailerLength) {
+    struct iovec vectors[3] = {
+        { (void *)header, headerLength }, { (void *)payload, payloadLength }, { (void *)trailer, trailerLength }
+    };
+    return STWriteVectorsUsing(fd, vectors, 3, systemVectorWriter, NULL);
+}
 int32_t STSync(int32_t fd) { return fsync(fd) == 0 ? 0 : errno; }
 int32_t STFullSync(int32_t fd) { return fcntl(fd, F_FULLFSYNC) == 0 ? 0 : errno; }
 int32_t STSyncDirectory(const char *path) {

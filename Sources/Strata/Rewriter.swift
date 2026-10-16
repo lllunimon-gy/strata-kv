@@ -15,9 +15,7 @@ enum Rewriter {
                 next += 1
             }
             let frame = try JournalCodec.encode(batch, sequence: next)
-            try output.append(frame.header)
-            try output.append(frame.payload)
-            try output.append(frame.trailer)
+            try output.append(frame)
             batch.removeAll(keepingCapacity: true)
             size = 0
         }

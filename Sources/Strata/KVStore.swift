@@ -18,6 +18,8 @@ public final class KVStore: @unchecked Sendable {
     let segmentBytes: Int64
     var logBytes: Int64
     var syncCount = 0
+    // Reopened data may come from a previous buffered writer. Do not assume it was synced.
+    var needsSync = true
     let clock: () -> Date
     var lastTime: TimeInterval = -.infinity
 
@@ -46,7 +48,7 @@ public final class KVStore: @unchecked Sendable {
             try syncDirectory(root)
             syncs += 1
         }
-        let loaded = try JournalSet.load(root)
+        let loaded = try JournalSet.load(root, manifest: existing)
         guard loaded.state.format == 2 else { throw StoreError.legacyFormat }
         let file = try FileRef(loaded.files.last!.url, writable: true)
         if loaded.tail > 0 {
@@ -69,6 +71,7 @@ public final class KVStore: @unchecked Sendable {
         self.logBytes = loaded.bytes - loaded.tail
         self.segmentBytes = segmentBytes
         self.syncCount = syncs
+        self.needsSync = syncs == 0
         self.clock = now
     }
     func locked<T>(_ body: () throws -> T) rethrows -> T {
@@ -126,29 +129,35 @@ public final class KVStore: @unchecked Sendable {
     }
     // Caller owns writerLock. Readers keep seeing the previous committed index during I/O.
     func appendLocked(_ operations: [Mutation]) throws {
-        let sequence = try locked { () throws -> UInt64 in
-            _ = try openFile()
+        var (file, offset, sequence) = try locked { () throws -> (FileRef, Int64, UInt64) in
+            let active = try openFile()
             guard state.sequence < UInt64.max else { throw StoreError.invalidBatch }
-            return state.sequence + 1
+            return (active, state.validEnd, state.sequence + 1)
         }
         let frame = try JournalCodec.encode(operations, sequence: sequence)
         do {
-            if locked({ state.validEnd > 24 && state.validEnd + Int64(frame.count) > segmentBytes }) {
+            if offset > 24 && offset + Int64(frame.count) > segmentBytes {
                 try rotateLocked()
+                (file, offset) = try locked { (try openFile(), state.validEnd) }
             }
-            let (file, offset) = try locked { (try openFile(), state.validEnd) }
-            try file.append(frame.header)
-            try fault?(.afterHeader)
-            try file.append(frame.payload)
-            try fault?(.afterPayload)
-            try file.append(frame.trailer)
-            try fault?(.afterCommit)
+            if let fault {
+                // Preserve exact interruption boundaries for fault experiments.
+                try file.append(frame.header)
+                try fault(.afterHeader)
+                try file.append(frame.payload)
+                try fault(.afterPayload)
+                try file.append(frame.trailer)
+                try fault(.afterCommit)
+            } else {
+                try file.append(frame)
+            }
             if durability != .buffered {
                 try file.sync(durability)
-                locked { syncCount += 1 }
                 try fault?(.afterSync)
             }
             locked {
+                needsSync = durability == .buffered
+                if !needsSync { syncCount += 1 }
                 for change in frame.changes {
                     state.index[change.key] = change.offset.map {
                         Location(offset: offset + 28 + Int64($0), length: change.length,
@@ -164,7 +173,8 @@ public final class KVStore: @unchecked Sendable {
     }
     func rotateLocked() throws {
         let (old, sequence) = try locked { (try openFile(), state.sequence) }
-        try old.sync(durability == .fullSync ? .fullSync : .synchronized)
+        let syncOld = needsSync // writerLock owns this decision and all append/flush paths
+        if syncOld { try old.sync(durability == .fullSync ? .fullSync : .synchronized) }
         let name = "segment-\(UUID().uuidString).log"
         let next = try FileRef(directory.appendingPathComponent(name), writable: true)
         try next.append(JournalCodec.fileHeader(baseSequence: sequence))
@@ -181,7 +191,8 @@ public final class KVStore: @unchecked Sendable {
             files.append(next)
             state.validEnd = 24
             logBytes += 24
-            syncCount += 2
+            syncCount += syncOld ? 2 : 1
+            needsSync = false
         }
     }
     public func flush() throws {
@@ -189,7 +200,7 @@ public final class KVStore: @unchecked Sendable {
         let source = try locked { try openFile() }
         do {
             try source.sync(durability == .fullSync ? .fullSync : .synchronized)
-            locked { syncCount += 1 }
+            locked { syncCount += 1; needsSync = false }
         } catch { locked { poisoned = true }; throw error }
     }
     public func statistics() throws -> StoreStatistics {

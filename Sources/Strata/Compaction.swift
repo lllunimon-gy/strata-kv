@@ -73,11 +73,11 @@ extension KVStore {
                 _ = try locked { try openFile() }
                 try fault?(.compactionReady)
                 try checkCancellation()
-                let retired = Set(captured.3.map { $0.url.lastPathComponent })
-                let deltas = files.filter { !retired.contains($0.url.lastPathComponent) }
+                let retired = Set(captured.3.map { $0.name })
+                let deltas = files.filter { !retired.contains($0.name) }
                 guard !deltas.isEmpty, manifest.generation < UInt64.max else { throw StoreError.invalidManifest }
                 let replacement = Manifest(generation: manifest.generation + 1,
-                                           files: [name] + deltas.map { $0.url.lastPathComponent })
+                                           files: [name] + deltas.map { $0.name })
                 publishing = true
                 try replacement.publish(directory, durability: durability)
                 try fault?(.compactionReplaced)
@@ -86,7 +86,7 @@ extension KVStore {
                     // Replace only locations still pointing into the captured files. Concurrent
                     // updates and tombstones in delta logs win, including expired/reinserted keys.
                     for (key, location) in state.index {
-                        if let source = location.source, retired.contains(source.url.lastPathComponent) {
+                        if let source = location.source, retired.contains(source.name) {
                             state.index[key] = checkpoint.index[key]
                         }
                     }
@@ -99,7 +99,7 @@ extension KVStore {
                 var failures: [String] = []
                 for file in captured.3 {
                     do { try FileManager.default.removeItem(at: file.url) }
-                    catch { failures.append(file.url.lastPathComponent) }
+                    catch { failures.append(file.name) }
                 }
                 // Cleanup is best effort: the durable manifest already determines authority.
                 try? syncDirectory(directory)

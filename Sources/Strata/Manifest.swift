@@ -47,8 +47,8 @@ struct JournalSet {
     let state: Recovery
     let bytes: Int64
     let tail: Int64
-    static func load(_ root: URL, onFrame: ((FrameSummary) -> Void)? = nil) throws -> JournalSet {
-        let manifest = try Manifest.read(root)
+    static func load(_ root: URL, manifest knownManifest: Manifest? = nil, onFrame: ((FrameSummary) -> Void)? = nil) throws -> JournalSet {
+        let manifest = try knownManifest ?? Manifest.read(root)
         if manifest == nil {
             // A legacy single-file database cannot have generated segments. Treat a missing
             // manifest as lost metadata, not permission to reopen only the old first segment.

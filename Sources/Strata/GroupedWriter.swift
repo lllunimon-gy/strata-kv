@@ -47,7 +47,7 @@ public final class GroupedWriter: @unchecked Sendable {
     /// Invalid requests fail independently. Once admitted, cancellation does not retract a write.
     public func submit(_ operations: [Mutation], completion: @escaping (Result<Void, Error>) -> Void) {
         let bytes: Int
-        do { bytes = try JournalCodec.encode(operations, sequence: UInt64.max).payload.count }
+        do { bytes = try JournalCodec.validatedSize(operations, sequence: UInt64.max) }
         catch { completion(.failure(error)); return }
         admission.lock()
         guard !closed else { admission.unlock(); completion(.failure(StoreError.closed)); return }

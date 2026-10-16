@@ -15,7 +15,33 @@ enum JournalCodec {
     static let maximumValue = 8 * 1024 * 1024
     static let maximumOperations = 4096
     static func integer(_ value: UInt64, width: Int) -> Data {
-        Data((0..<width).map { UInt8(truncatingIfNeeded: value >> ($0 * 8)) })
+        var data = Data()
+        appendInteger(value, width: width, to: &data)
+        return data
+    }
+    static func appendInteger(_ value: UInt64, width: Int, to data: inout Data) {
+        var littleEndian = value.littleEndian
+        withUnsafeBytes(of: &littleEndian) { data.append(contentsOf: $0.prefix(width)) }
+    }
+    /// Validate without copying values, allocating payloads or computing CRCs. Queue admission
+    /// uses this exact validator; encoding revalidates revisions against the actual sequence.
+    static func validatedSize(_ operations: [Mutation], sequence: UInt64) throws -> Int {
+        guard sequence > 0, !operations.isEmpty, operations.count <= maximumOperations else { throw StoreError.invalidBatch }
+        var bytes = 0
+        for operation in operations {
+            let keyBytes = operation.key.utf8.count
+            guard keyBytes > 0, keyBytes <= 1024 else { throw StoreError.invalidKey }
+            let revision = operation.revision ?? sequence
+            guard revision > 0, revision <= sequence else { throw StoreError.invalidBatch }
+            if let expiration = operation.expiration {
+                guard expiration.isFinite, operation.value != nil else { throw StoreError.invalidExpiration }
+            }
+            let valueBytes = operation.value?.count ?? 0
+            guard valueBytes <= maximumValue else { throw StoreError.valueTooLarge }
+            bytes += 25 + keyBytes + valueBytes
+            guard bytes <= maximumPayload else { throw StoreError.invalidBatch }
+        }
+        return bytes
     }
     static func number(_ data: Data, at offset: Int, width: Int) -> UInt64 {
         (0..<width).reduce(UInt64(0)) { $0 | (UInt64(data[offset + $1]) << ($1 * 8)) }
@@ -30,26 +56,21 @@ enum JournalCodec {
         return base + integer(UInt64(checksum(checked)), width: 4) + flags
     }
     static func encode(_ operations: [Mutation], sequence: UInt64) throws -> EncodedFrame {
-        guard sequence > 0, !operations.isEmpty, operations.count <= maximumOperations else { throw StoreError.invalidBatch }
+        let size = try validatedSize(operations, sequence: sequence)
         var payload = Data()
+        payload.reserveCapacity(size)
         var changes: [(key: String, offset: Int?, length: Int, revision: UInt64, expiration: Double?)] = []
+        changes.reserveCapacity(operations.count)
         for operation in operations {
-            let key = Data(operation.key.utf8)
-            guard !key.isEmpty, key.count <= 1024 else { throw StoreError.invalidKey }
+            let key = operation.key.utf8
             let value = operation.value
             let revision = operation.revision ?? sequence
-            guard revision > 0, revision <= sequence else { throw StoreError.invalidBatch }
-            if let expiration = operation.expiration {
-                guard expiration.isFinite, value != nil else { throw StoreError.invalidExpiration }
-            }
-            guard (value?.count ?? 0) <= maximumValue else { throw StoreError.valueTooLarge }
-            guard payload.count + 25 + key.count + (value?.count ?? 0) <= maximumPayload else { throw StoreError.invalidBatch }
             payload.append(value == nil ? 2 : operation.expiration == nil ? 1 : 129)
-            payload.append(integer(UInt64(key.count), width: 4))
-            payload.append(integer(UInt64(value?.count ?? 0), width: 4))
-            payload.append(integer(revision, width: 8))
-            payload.append(integer(operation.expiration?.bitPattern ?? 0, width: 8))
-            payload.append(key)
+            appendInteger(UInt64(key.count), width: 4, to: &payload)
+            appendInteger(UInt64(value?.count ?? 0), width: 4, to: &payload)
+            appendInteger(revision, width: 8, to: &payload)
+            appendInteger(operation.expiration?.bitPattern ?? 0, width: 8, to: &payload)
+            payload.append(contentsOf: key)
             changes.append((operation.key, value == nil ? nil : payload.count, value?.count ?? 0, revision, operation.expiration))
             if let value { payload.append(value) }
         }
