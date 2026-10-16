@@ -1,0 +1,32 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+      - name: Unit and boundary tests
+        run: swift test --enable-code-coverage
+      - name: Build runnable example for iOS Simulator
+        run: >-
+          xcodebuild -project Examples/StrataExample.xcodeproj
+          -scheme StrataExample -sdk iphonesimulator
+          -destination 'generic/platform=iOS Simulator'
+          -derivedDataPath DerivedData CODE_SIGNING_ALLOWED=NO build
+      - name: Process termination recovery matrix
+        run: |
+          swift build --product strata-tool
+          python3 Scripts/crash_matrix.py
