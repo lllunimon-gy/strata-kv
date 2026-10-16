@@ -93,8 +93,10 @@ public final class KVStore {
             try Self.write(frame.header, fd: fd); try fault?(.afterHeader)
             try Self.write(frame.payload, fd: fd); try fault?(.afterPayload)
             try Self.write(frame.trailer, fd: fd); try fault?(.afterCommit)
-            if durability == .synchronized { try Self.check(STSync(fd)) }
-            try fault?(.afterSync)
+            if durability == .synchronized {
+                try Self.check(STSync(fd))
+                try fault?(.afterSync)
+            }
             for change in frame.changes {
                 state.index[change.key] = change.relativeOffset.map { Location(offset: Int64(state.validEnd + 24 + $0), length: change.length) }
             }

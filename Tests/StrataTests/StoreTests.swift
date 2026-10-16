@@ -107,4 +107,19 @@ final class StoreTests: XCTestCase {
         bytes.replaceSubrange(12..<16, with: [0xff,0xff,0xff,0xff])
         XCTAssertThrowsError(try JournalCodec.replay(bytes))
     }
+    func testConcurrentCallersProduceARecoverableLog() throws {
+        let store = try KVStore(directory: root, durability: .buffered)
+        let lock = NSLock()
+        var failures = 0
+        DispatchQueue.concurrentPerform(iterations: 100) { n in
+            do { try store.put("key-\(n)", value: Data("value-\(n)".utf8)) }
+            catch { lock.lock(); failures += 1; lock.unlock() }
+        }
+        XCTAssertEqual(failures, 0)
+        try store.flush(); store.close()
+        let reopened = try KVStore(directory: root)
+        defer { reopened.close() }
+        XCTAssertEqual(try reopened.keys().count, 100)
+        for n in 0..<100 { XCTAssertEqual(try reopened.get("key-\(n)"), Data("value-\(n)".utf8)) }
+    }
 }
