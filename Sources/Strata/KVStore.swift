@@ -12,9 +12,12 @@ public final class KVStore {
     let fault: ((WriteStage) throws -> Void)?
     let recovered: Int64
     var syncCount = 0
+    let clock: () -> Date
+    var lastTime: TimeInterval = -.infinity
 
     public init(directory: URL, durability: Durability = .synchronized,
                 recovery: RecoveryPolicy = .recoverIncompleteTail,
+                now: @escaping () -> Date = Date.init,
                 fault: ((WriteStage) throws -> Void)? = nil) throws {
         let root = directory.standardizedFileURL
         try ensureDirectory(root)
@@ -44,6 +47,7 @@ public final class KVStore {
         self.fault = fault
         self.recovered = recovered
         self.syncCount = syncCount
+        self.clock = now
     }
     func openFile() throws -> FileRef {
         guard let file else { throw StoreError.closed }
@@ -53,20 +57,44 @@ public final class KVStore {
     func readValue(_ location: Location) throws -> Data {
         try openFile().read(at: location.offset, count: location.length)
     }
-    public func get(_ key: String) throws -> Data? {
+    func timeLocked() throws -> TimeInterval {
+        let proposed = clock().timeIntervalSince1970
+        guard proposed.isFinite else { throw StoreError.invalidExpiration }
+        lastTime = max(lastTime, proposed)
+        return lastTime
+    }
+    func visible(_ location: Location, at time: TimeInterval) -> Bool {
+        location.expiration.map { $0 > time } ?? true
+    }
+    public func get(_ key: String) throws -> Data? { try entry(key)?.value }
+    public func entry(_ key: String) throws -> StoredValue? {
         mutex.lock()
         defer { mutex.unlock() }
         _ = try openFile()
-        guard let location = state.index[key] else { return nil }
-        return try readValue(location)
+        let time = try timeLocked()
+        guard let location = state.index[key], visible(location, at: time) else { return nil }
+        return StoredValue(value: try readValue(location), revision: location.revision,
+                           expiresAt: location.expiration.map { Date(timeIntervalSince1970: $0) })
     }
     public func keys() throws -> [String] {
         mutex.lock()
         defer { mutex.unlock() }
         _ = try openFile()
-        return state.index.keys.sorted()
+        let time = try timeLocked()
+        return state.index.filter { visible($0.value, at: time) }.keys.sorted()
     }
-    public func put(_ key: String, value: Data) throws { try writeBatch([.put(key, value)]) }
+    public func put(_ key: String, value: Data, ttl: TimeInterval? = nil) throws {
+        mutex.lock()
+        defer { mutex.unlock() }
+        var expires: Date?
+        if let ttl {
+            guard ttl.isFinite, ttl > 0 else { throw StoreError.invalidExpiration }
+            let deadline = try timeLocked() + ttl
+            guard deadline.isFinite else { throw StoreError.invalidExpiration }
+            expires = Date(timeIntervalSince1970: deadline)
+        }
+        try appendLocked([.put(key, value, expiresAt: expires)])
+    }
     public func delete(_ key: String) throws { try writeBatch([.delete(key)]) }
     public func writeBatch(_ operations: [Mutation]) throws {
         mutex.lock()
@@ -136,7 +164,9 @@ public final class KVStore {
         let temporary = directory.appendingPathComponent("compact-\(UUID().uuidString).tmp")
         let output = try FileRef(temporary, writable: true)
         do {
-            let replacement = try Rewriter.write(source: source, index: state.index, sequence: state.sequence, to: output)
+            let time = try timeLocked()
+            let live = state.index.filter { visible($0.value, at: time) }
+            let replacement = try Rewriter.write(source: source, index: live, sequence: state.sequence, to: output)
             syncCount += 1
             try fault?(.compactionReady)
             try replaceFile(temporary, directory.appendingPathComponent("store.log"))

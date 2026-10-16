@@ -4,7 +4,8 @@ public enum StoreError: Error, Equatable {
     case directoryInUse, unsafeDirectory, invalidHeader, legacyFormat
     case corruption(offset: Int64), incompleteTail(bytes: Int64)
     case invalidKey, invalidBatch, valueTooLarge, invalidExpiration
-    case io(Int32), closed, requiresReopen, destinationExists
+    case io(Int32), closed, requiresReopen, destinationExists, invalidCursor, invalidNamespace
+    case invalidEnvelope, futureSchema, missingMigration(Int), decodingFailed, migrationConflict
 }
 public enum Durability: String, Codable { case buffered, synchronized, fullSync }
 public enum RecoveryPolicy { case strict, recoverIncompleteTail }
@@ -17,7 +18,11 @@ public struct Mutation {
     public let value: Data?
     var revision: UInt64? = nil
     var expiration: Double? = nil
-    public static func put(_ key: String, _ value: Data) -> Mutation { Mutation(key: key, value: value) }
+    public static func put(_ key: String, _ value: Data, expiresAt: Date? = nil) -> Mutation {
+        var operation = Mutation(key: key, value: value)
+        operation.expiration = expiresAt?.timeIntervalSince1970
+        return operation
+    }
     public static func delete(_ key: String) -> Mutation { Mutation(key: key, value: nil) }
 }
 public struct FrameSummary: Codable {

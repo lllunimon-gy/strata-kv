@@ -1,0 +1,137 @@
+{
+  "note": "Release build. Shared CI host; reads/reopens use warm OS cache. Batch latency is per batch, not per key. Peak RSS is for the whole process.",
+  "operatingSystem": "Version 26.6.2 (Build 25G83)",
+  "processPeakResidentBytes": 8093696,
+  "processors": 3,
+  "samples": [
+    {
+      "batchSize": 1,
+      "calls": 200,
+      "durability": "synchronized",
+      "name": "single-sync-write",
+      "p50Microseconds": 117.62500000145337,
+      "p95Microseconds": 389.66666664919103,
+      "p99Microseconds": 559.3750000230102,
+      "statistics": {
+        "frameCount": 200,
+        "keys": 200,
+        "liveValueBytes": 51200,
+        "logBytes": 65714,
+        "recoveredTailBytes": 0,
+        "recoveryBufferBytes": 24,
+        "sequence": 200,
+        "syncCount": 201
+      },
+      "totalSeconds": 0.029052541666686693,
+      "valueBytes": 256
+    },
+    {
+      "batchSize": 10,
+      "calls": 200,
+      "durability": "synchronized",
+      "name": "batch-sync-write",
+      "p50Microseconds": 184.33333332268376,
+      "p95Microseconds": 353.0833333513783,
+      "p99Microseconds": 433.45833333319206,
+      "statistics": {
+        "frameCount": 200,
+        "keys": 2000,
+        "liveValueBytes": 512000,
+        "logBytes": 579714,
+        "recoveredTailBytes": 0,
+        "recoveryBufferBytes": 24,
+        "sequence": 200,
+        "syncCount": 201
+      },
+      "totalSeconds": 0.0407825416665446,
+      "valueBytes": 256
+    },
+    {
+      "batchSize": 1,
+      "calls": 2000,
+      "durability": "synchronized",
+      "name": "random-read-warm-cache",
+      "p50Microseconds": 0.8749999835799827,
+      "p95Microseconds": 1.9166666618275485,
+      "p99Microseconds": 2.5833333268110437,
+      "statistics": {
+        "frameCount": 200,
+        "keys": 2000,
+        "liveValueBytes": 512000,
+        "logBytes": 579714,
+        "recoveredTailBytes": 0,
+        "recoveryBufferBytes": 24,
+        "sequence": 200,
+        "syncCount": 201
+      },
+      "totalSeconds": 0.0020664999996142797,
+      "valueBytes": 256
+    },
+    {
+      "batchSize": 1,
+      "calls": 2000,
+      "durability": "buffered",
+      "name": "same-key-overwrite",
+      "p50Microseconds": 13.333333328091612,
+      "p95Microseconds": 38.12500000321961,
+      "p99Microseconds": 55.54166668275684,
+      "statistics": {
+        "frameCount": 2000,
+        "keys": 1,
+        "liveValueBytes": 256,
+        "logBytes": 656024,
+        "recoveredTailBytes": 0,
+        "recoveryBufferBytes": 24,
+        "sequence": 2000,
+        "syncCount": 1
+      },
+      "totalSeconds": 0.0382411249997574,
+      "valueBytes": 256
+    },
+    {
+      "batchSize": 1,
+      "calls": 10,
+      "durability": "synchronized",
+      "name": "reopen-warm-cache",
+      "p50Microseconds": 13260.374999987334,
+      "p95Microseconds": 18416.250000001353,
+      "p99Microseconds": 18416.250000001353,
+      "statistics": {
+        "frameCount": 2000,
+        "keys": 1,
+        "liveValueBytes": 256,
+        "logBytes": 656024,
+        "recoveredTailBytes": 0,
+        "recoveryBufferBytes": 284,
+        "sequence": 2000,
+        "syncCount": 0
+      },
+      "totalSeconds": 0.14459616666661645,
+      "valueBytes": 256
+    },
+    {
+      "batchSize": 1,
+      "calls": 1,
+      "durability": "synchronized",
+      "name": "compact-overwritten-log",
+      "p50Microseconds": 1092.1666666661167,
+      "p95Microseconds": 1092.1666666661167,
+      "p99Microseconds": 1092.1666666661167,
+      "statistics": {
+        "frameCount": 1,
+        "keys": 1,
+        "liveValueBytes": 256,
+        "logBytes": 352,
+        "recoveredTailBytes": 0,
+        "recoveryBufferBytes": 284,
+        "sequence": 2001,
+        "syncCount": 1
+      },
+      "totalSeconds": 0.0010921666666661167,
+      "valueBytes": 256
+    }
+  ],
+  "version": "0.2",
+  "commit": "ae680dcec12fe06c1e7bf006460da91b7cd4de32",
+  "ci_url": "https://github.com/lllunimon-gy/strata-kv/actions/runs/38911150922"
+}
