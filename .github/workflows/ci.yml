@@ -39,8 +39,10 @@ jobs:
       - name: Same-host interleaved performance comparison
         run: python3 Benchmarks/compare.py --workspace "$RUNNER_TEMP/strata-compare" --output comparison.json
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: benchmark-${{ github.sha }}
+          if-no-files-found: ignore
           path: |
             benchmark.json
             comparison.json

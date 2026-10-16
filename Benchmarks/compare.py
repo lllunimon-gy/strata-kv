@@ -70,6 +70,7 @@ for label, _ in revisions:
         }
 report = {'revisions': dict(revisions), 'probeSHA256': hashlib.sha256(probe).hexdigest(),
           'platform': platform.platform(), 'swift': output('swift', '--version'),
+          'hardware': output('sysctl', 'hw.model', 'hw.ncpu', 'hw.memsize'),
           'rounds': args.rounds, 'warmupRounds': 1, 'orders': orders, 'raw': rows, 'summary': summary,
           'notes': ['Same host/toolchain/probe; fresh directory for every revision and round.',
                     'Warm caches; compaction-live has one sample per round, so its P99 is not a tail estimate.',

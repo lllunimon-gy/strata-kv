@@ -11,7 +11,7 @@ struct Measurement: Codable {
     let p99Microseconds: Double
     let totalSeconds: Double
 }
-func clock() -> UInt64 { DispatchTime.now().uptimeNanoseconds }
+func monotonicNanos() -> UInt64 { DispatchTime.now().uptimeNanoseconds }
 func summarize(_ name: String, _ values: [UInt64]) -> Measurement {
     let sorted = values.sorted()
     func p(_ q: Double) -> Double { Double(sorted[Int(Double(sorted.count - 1) * q)]) / 1000 }
@@ -20,7 +20,7 @@ func summarize(_ name: String, _ values: [UInt64]) -> Measurement {
 }
 func measure(_ name: String, count: Int, _ body: (Int) throws -> Void) rethrows -> Measurement {
     var times: [UInt64] = []; times.reserveCapacity(count)
-    for n in 0..<count { let start = clock(); try body(n); times.append(clock() - start) }
+    for n in 0..<count { let start = monotonicNanos(); try body(n); times.append(monotonicNanos() - start) }
     return summarize(name, times)
 }
 func run(_ root: URL) throws -> [Measurement] {
@@ -61,7 +61,7 @@ func run(_ root: URL) throws -> [Measurement] {
         let store = try KVStore(directory: root.appendingPathComponent("compact-\(trial)"), durability: .buffered)
         for _ in 0..<1000 { try store.put("a", value: Data(repeating: 97, count: 256)) }
         try store.flush()
-        let start = clock(); try store.compact(); compactTimes.append(clock() - start)
+        let start = monotonicNanos(); try store.compact(); compactTimes.append(monotonicNanos() - start)
         guard try store.get("a")?.count == 256 else { throw StoreError.invalidBatch }
         store.close()
     }
@@ -80,12 +80,12 @@ func run(_ root: URL) throws -> [Measurement] {
     var marks: [UInt64] = []
     var phaseTimes = Array(repeating: [UInt64](), count: 5)
     let profile = try KVStore(directory: root.appendingPathComponent("phases"), fault: { stage in
-        if [.afterHeader, .afterPayload, .afterCommit, .afterSync].contains(stage) { marks.append(clock()) }
+        if [.afterHeader, .afterPayload, .afterCommit, .afterSync].contains(stage) { marks.append(monotonicNanos()) }
     })
     for n in 0..<1000 {
         let operations = (0..<10).map { Mutation.put("k\(n*10+$0)", Data(repeating: 97, count: 256)) }
         marks.removeAll(keepingCapacity: true)
-        let start = clock(); try profile.writeBatch(operations); let end = clock()
+        let start = monotonicNanos(); try profile.writeBatch(operations); let end = monotonicNanos()
         guard marks.count == 4 else { throw StoreError.invalidBatch }
         let points = [start] + marks + [end]
         for i in 0..<5 { phaseTimes[i].append(points[i+1] - points[i]) }
