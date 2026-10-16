@@ -105,4 +105,18 @@ final class PerformanceSafetyTests: XCTestCase {
         XCTAssertEqual(try reopened.statistics().syncCount, 3) // reopened old segment must be synced
         XCTAssertEqual(try reopened.keys(), ["a", "b", "c"])
     }
+    func testValueOnlyReadKeepsEntryExpirationAndClockRollbackSemantics() throws {
+        var now = Date(timeIntervalSince1970: 100)
+        let store = try KVStore(directory: root, now: { now })
+        try store.put("ttl", value: Data([1]), ttl: 10)
+        try store.put("plain", value: Data([2]))
+        XCTAssertEqual(try store.get("ttl"), try store.entry("ttl")?.value)
+        now = Date(timeIntervalSince1970: 111)
+        XCTAssertEqual(try store.get("plain"), Data([2])) // even a plain read advances the clock clamp
+        now = Date(timeIntervalSince1970: 101)
+        XCTAssertNil(try store.get("ttl")); XCTAssertNil(try store.entry("ttl"))
+        XCTAssertNil(try store.get("missing"))
+        store.close()
+        XCTAssertThrowsError(try store.get("plain"))
+    }
 }

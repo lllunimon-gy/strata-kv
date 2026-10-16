@@ -43,10 +43,15 @@ func run(_ root: URL) throws -> [Measurement] {
     for n in 0..<100 {
         try reads.writeBatch((0..<50).map { .put("k\(n*50+$0)", Data(repeating: 97, count: 256)) })
     }
-    let keys = (0..<10000).map { "k\(($0*7919)%5000)" }
+    let keys = (0..<100000).map { "k\(($0*7919)%5000)" }
     var consumed = 0
     results.append(try measure("warm-read-256B", count: keys.count) { consumed += try reads.get(keys[$0])?.count ?? 0 })
     guard consumed == keys.count * 256 else { throw StoreError.invalidBatch }
+#if STRATA_GROUPED
+    consumed = 0
+    results.append(try measure("warm-entry-256B", count: keys.count) { consumed += try reads.entry(keys[$0])?.value.count ?? 0 })
+    guard consumed == keys.count * 256 else { throw StoreError.invalidBatch }
+#endif
     reads.close()
 
     let reopenURL = root.appendingPathComponent("reopen")
