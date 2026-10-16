@@ -21,6 +21,7 @@ swift run -c release strata-tool benchmark /tmp/strata-benchmark-new > benchmark
 | SQLite 对照 | 分别 200 × 1、200 × 10 | 256 B | WAL + FULL，fullfsync=OFF |
 
 自动合批计时从该轮第一个请求提交开始，到该轮全部回调结束，包含验证、排队和提交；P50/P95/P99 是每轮延迟。
+基准参数是每组最多 10 个请求、最大等待窗口 10 ms，每轮立即提交满 10 条；尚未覆盖低流量下等待窗口对延迟的影响。库默认是最多 64 条、2 ms 窗口。
 手动 batch 同样按整个批次计时。不要把“200 个批次”和“200 个 key”当成相同工作量。
 
 SQLite 使用 Apple SDK 自带库、预编译 statement、WITHOUT ROWID 表，每批显式事务，关闭自动 WAL checkpoint。
@@ -40,3 +41,5 @@ v0.2 与 v0.4 使用不同次共享 CI 运行，不是受控同机 A/B。表中�
 压缩期间的并发正确性由确定性测试和线程检查器验证；真实业务下的读写尾延迟、空间峰值和能耗尚需真机负载记录。
 
 当前不提供“比 SQLite 快”的统一结论。先检查负载是否与你的业务相似，再在同一设备、相同版本与相同持久性设置下重复实验。
+
+[已记录的结果与对照表](results.md)。
