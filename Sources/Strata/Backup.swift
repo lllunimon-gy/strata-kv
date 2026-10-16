@@ -8,11 +8,10 @@ public struct BackupReport: Codable {
 extension KVStore {
     /// Blocks writes while copying; publishes a verified backup only after the copy completes.
     public func backup(to destination: URL) throws -> BackupReport {
-        mutex.lock()
-        defer { mutex.unlock() }
-        let source = try openFile()
-        try source.sync()
-        syncCount += 1
+        writerLock.lock(); defer { writerLock.unlock() }
+        let source = try locked { try openFile() }
+        try source.sync(durability == .fullSync ? .fullSync : .synchronized)
+        locked { syncCount += 1 }
         return try Self.copyVerified(sourceDirectory: directory, destination: destination)
     }
     /// Restore into a NEW directory. Never overwrites an existing database or its backups.
@@ -29,9 +28,14 @@ extension KVStore {
         let staging = parent.appendingPathComponent(".strata-backup-\(UUID().uuidString)")
         try fm.createDirectory(at: staging, withIntermediateDirectories: false)
         do {
-            try fm.copyItem(at: sourceDirectory.appendingPathComponent("store.log"), to: staging.appendingPathComponent("store.log"))
+            let manifest = try Manifest.read(sourceDirectory)
+            let names = (manifest?.files ?? ["store.log"]) + (manifest == nil ? [] : [Manifest.filename])
+            for name in names {
+                let output = staging.appendingPathComponent(name)
+                try fm.copyItem(at: sourceDirectory.appendingPathComponent(name), to: output)
+                try FileRef(output, writable: true).sync()
+            }
             let report = try verify(directory: staging)
-            try FileRef(staging.appendingPathComponent("store.log"), writable: true).sync()
             try syncDirectory(staging)
             // moveItem fails if destination already exists; no destructive replacement.
             try fm.moveItem(at: staging, to: destination)

@@ -23,9 +23,11 @@ enum JournalCodec {
     static func checksum(_ data: Data) -> UInt32 {
         data.withUnsafeBytes { STCRC32($0.baseAddress, $0.count) }
     }
-    static func fileHeader(baseSequence: UInt64 = 0) -> Data {
+    static func fileHeader(baseSequence: UInt64 = 0, checkpoint: Bool = false) -> Data {
         let base = Data("STRATA02".utf8) + integer(baseSequence, width: 8)
-        return base + integer(UInt64(checksum(base)), width: 4) + Data(repeating: 0, count: 4)
+        let flags = integer(checkpoint ? 1 : 0, width: 4)
+        let checked = checkpoint ? base + flags : base
+        return base + integer(UInt64(checksum(checked)), width: 4) + flags
     }
     static func encode(_ operations: [Mutation], sequence: UInt64) throws -> EncodedFrame {
         guard sequence > 0, !operations.isEmpty, operations.count <= maximumOperations else { throw StoreError.invalidBatch }
@@ -66,10 +68,15 @@ enum JournalCodec {
         if magic == Data("STRATA01".utf8) { return try LegacyReader.scan(file, onFrame: onFrame) }
         guard magic == Data("STRATA02".utf8), size >= 24 else { throw StoreError.invalidHeader }
         let fileHeader = try file.read(at: 0, count: 24)
-        guard checksum(fileHeader.subdata(in: 0..<16)) == UInt32(number(fileHeader, at: 16, width: 4)),
-              fileHeader.suffix(4) == Data(repeating: 0, count: 4) else { throw StoreError.invalidHeader }
+        let flags = number(fileHeader, at: 20, width: 4)
+        let checked = fileHeader.subdata(in: 0..<16) + (flags == 1 ? fileHeader.suffix(4) : Data())
+        guard flags <= 1, checksum(checked) == UInt32(number(fileHeader, at: 16, width: 4)) else {
+            throw StoreError.invalidHeader
+        }
         var recovery = Recovery()
         recovery.sequence = number(fileHeader, at: 8, width: 8)
+        recovery.baseSequence = recovery.sequence
+        recovery.checkpoint = flags == 1
         recovery.maximumRead = 24
         var cursor: Int64 = 24
         while cursor < size {
@@ -85,7 +92,8 @@ enum JournalCodec {
             let count = Int(number(header, at: 16, width: 4))
             let crc = UInt32(number(header, at: 20, width: 4))
             guard length <= maximumPayload, count > 0, count <= maximumOperations,
-                  recovery.sequence < UInt64.max, sequence == recovery.sequence + 1 else {
+                  sequence > 0, (recovery.checkpoint ? sequence == recovery.baseSequence :
+                    recovery.sequence < UInt64.max && sequence == recovery.sequence + 1) else {
                 throw StoreError.corruption(offset: cursor)
             }
             let end = cursor + 28 + Int64(length) + 16
@@ -118,12 +126,15 @@ enum JournalCodec {
                 }
                 local += keyLength
                 let location = type == 2 ? nil : Location(offset: cursor + 28 + Int64(local), length: valueLength,
-                                                          revision: revision, expiration: expiration)
+                                                          revision: revision, expiration: expiration, source: file)
                 changes.append((key, location))
                 local += valueLength
             }
             guard local == body.count else { throw StoreError.corruption(offset: cursor) }
-            for (key, location) in changes { recovery.index[key] = location }
+            for (key, location) in changes {
+                recovery.index[key] = location
+                if location == nil { recovery.deleted.insert(key) } else { recovery.deleted.remove(key) }
+            }
             onFrame?(FrameSummary(sequence: sequence, offset: cursor, payloadBytes: length, operations: count))
             recovery.sequence = sequence
             recovery.validEnd = end

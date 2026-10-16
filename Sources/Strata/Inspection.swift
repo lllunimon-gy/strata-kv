@@ -3,12 +3,11 @@ import Foundation
 extension KVStore {
     /// Read-only. No lock file creation, truncation, migration or directory cleanup.
     public static func inspect(directory: URL, includeFrames: Bool = false) throws -> InspectionReport {
-        let file = try FileRef(directory.appendingPathComponent("store.log"))
         var frames: [FrameSummary] = []
-        let state = try JournalCodec.scan(file, onFrame: includeFrames ? { frames.append($0) } : nil)
-        let size = try file.size
-        return InspectionReport(format: state.format, fileBytes: size, validBytes: state.validEnd,
-                                incompleteTailBytes: size - state.validEnd, keys: state.index.count,
+        let loaded = try JournalSet.load(directory, onFrame: includeFrames ? { frames.append($0) } : nil)
+        let state = loaded.state
+        return InspectionReport(format: state.format, fileBytes: loaded.bytes, validBytes: loaded.bytes - loaded.tail,
+                                incompleteTailBytes: loaded.tail, keys: state.index.count,
                                 sequence: state.sequence, frameCount: state.frameCount,
                                 maximumReadBytes: state.maximumRead, frames: frames)
     }
@@ -21,9 +20,10 @@ extension KVStore {
     public static func repairIncompleteTail(directory: URL) throws -> RepairReport {
         let lease = try DirectoryLease(directory)
         defer { withExtendedLifetime(lease) {} }
-        let url = directory.appendingPathComponent("store.log")
+        let loaded = try JournalSet.load(directory)
+        let url = loaded.files.last!.url
         let file = try FileRef(url, writable: true)
-        let state = try JournalCodec.scan(file)
+        let state = loaded.state
         guard state.format == 2 else { throw StoreError.legacyFormat }
         let tail = try file.size - state.validEnd
         guard tail > 0 else { return RepairReport(backup: nil, removedTailBytes: 0, retainedBytes: state.validEnd) }
@@ -39,6 +39,10 @@ extension KVStore {
     public static func migrateLegacy(directory: URL, fault: ((WriteStage) throws -> Void)? = nil) throws -> String {
         let lease = try DirectoryLease(directory)
         defer { withExtendedLifetime(lease) {} }
+        if try Manifest.read(directory) != nil {
+            _ = try verify(directory: directory)
+            return "already-v2"
+        }
         let url = directory.appendingPathComponent("store.log")
         let source = try FileRef(url)
         let original = try JournalCodec.scan(source)

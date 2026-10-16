@@ -30,7 +30,7 @@ public final class StoreSnapshot: @unchecked Sendable {
     }
     public func get(_ key: String) throws -> StoredValue? {
         guard let location = entries[key] else { return nil }
-        return StoredValue(value: try source.read(at: location.offset, count: location.length), revision: location.revision,
+        return StoredValue(value: try (location.source ?? source).read(at: location.offset, count: location.length), revision: location.revision,
                            expiresAt: location.expiration.map { Date(timeIntervalSince1970: $0) })
     }
     func scoped(prefix: String) -> StoreSnapshot {

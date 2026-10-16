@@ -2,6 +2,7 @@ import Foundation
 
 public enum StoreError: Error, Equatable {
     case directoryInUse, unsafeDirectory, invalidHeader, legacyFormat
+    case invalidManifest, invalidConfiguration, queueFull, compactionInProgress
     case corruption(offset: Int64), incompleteTail(bytes: Int64)
     case invalidKey, invalidBatch, valueTooLarge, invalidExpiration
     case io(Int32), closed, requiresReopen, destinationExists, invalidCursor, invalidNamespace
@@ -12,6 +13,7 @@ public enum RecoveryPolicy { case strict, recoverIncompleteTail }
 public enum WriteStage: String {
     case afterHeader, afterPayload, afterCommit, afterSync
     case compactionReady, compactionReplaced, migrationReady, migrationReplaced
+    case rotationReady, rotationPublished
 }
 public struct Mutation {
     public let key: String
@@ -40,6 +42,7 @@ public struct StoreStatistics: Codable {
     public let liveValueBytes: Int64
     public let syncCount: Int
     public let recoveryBufferBytes: Int
+    public let segments: Int
 }
 public struct InspectionReport: Codable {
     public let format: Int
@@ -62,6 +65,7 @@ struct Location {
     let length: Int
     let revision: UInt64
     let expiration: Double?
+    var source: FileRef? = nil
 }
 struct Recovery {
     var index: [String: Location] = [:]
@@ -70,4 +74,7 @@ struct Recovery {
     var frameCount = 0
     var maximumRead = 0
     var format = 2
+    var baseSequence: UInt64 = 0
+    var checkpoint = false
+    var deleted: Set<String> = []
 }

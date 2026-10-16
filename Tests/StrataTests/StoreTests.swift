@@ -102,7 +102,7 @@ final class StoreTests: XCTestCase {
         let before = try store.statistics()
         try store.compact()
         XCTAssertLessThan(try store.statistics().logBytes, before.logBytes)
-        XCTAssertGreaterThan(try store.statistics().sequence, before.sequence)
+        XCTAssertEqual(try store.statistics().sequence, before.sequence)
         XCTAssertEqual(try store.get("a"), Data([99])); XCTAssertNil(try store.get("deleted"))
     }
     func testCompactionInterruptionBeforeAndAfterRename() throws {

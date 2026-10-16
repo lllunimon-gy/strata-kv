@@ -77,7 +77,7 @@ func runBenchmarks(directory: URL) throws -> BenchmarkReport {
     recovered.close()
     var usage = rusage()
     _ = getrusage(RUSAGE_SELF, &usage)
-    return BenchmarkReport(version: "0.2", operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString,
+    return BenchmarkReport(version: "0.4", operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString,
                            processors: ProcessInfo.processInfo.processorCount, processPeakResidentBytes: Int64(usage.ru_maxrss),
                            note: "Release build. Shared CI host; reads/reopens use warm OS cache. Batch latency is per batch, not per key. Peak RSS is for the whole process.", samples: results)
 }

@@ -42,7 +42,7 @@ enum LegacyReader {
                 }
                 local += keyCount
                 result.index[key] = type == 1 ? Location(offset: cursor + 24 + Int64(local), length: valueCount,
-                                                        revision: sequence, expiration: nil) : nil
+                                                        revision: sequence, expiration: nil, source: file) : nil
                 local += valueCount
             }
             guard local == payload.count else { throw StoreError.corruption(offset: cursor) }
