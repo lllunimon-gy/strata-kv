@@ -245,4 +245,22 @@ final class EngineTests: XCTestCase {
         try bytes.write(to: url)
         XCTAssertThrowsError(try KVStore(directory: root))
     }
+    func testMissingManifestNeverSilentlyOpensAnOldOrEmptyDatabase() throws {
+        for compact in [false, true] {
+            let url = root.appendingPathComponent(compact ? "compacted" : "segmented")
+            let store = try KVStore(directory: url, segmentBytes: 128)
+            try store.put("a", value: Data([1])); try store.put("b", value: Data([2]))
+            if compact { try store.compact() }
+            store.close()
+            let manifest = url.appendingPathComponent(Manifest.filename)
+            let bytes = try Data(contentsOf: manifest)
+            try FileManager.default.removeItem(at: manifest)
+            let names = try FileManager.default.contentsOfDirectory(atPath: url.path).sorted()
+            XCTAssertThrowsError(try KVStore(directory: url))
+            XCTAssertThrowsError(try KVStore.verify(directory: url))
+            XCTAssertEqual(try FileManager.default.contentsOfDirectory(atPath: url.path).sorted(), names)
+            try bytes.write(to: manifest)
+            XCTAssertEqual(try KVStore(directory: url).get("b"), Data([2]))
+        }
+    }
 }

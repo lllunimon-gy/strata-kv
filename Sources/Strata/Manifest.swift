@@ -49,6 +49,14 @@ struct JournalSet {
     let tail: Int64
     static func load(_ root: URL, onFrame: ((FrameSummary) -> Void)? = nil) throws -> JournalSet {
         let manifest = try Manifest.read(root)
+        if manifest == nil {
+            // A legacy single-file database cannot have generated segments. Treat a missing
+            // manifest as lost metadata, not permission to reopen only the old first segment.
+            let names = try FileManager.default.contentsOfDirectory(atPath: root.path)
+            guard !names.contains(where: { $0 != "store.log" && Manifest.validName($0) }) else {
+                throw StoreError.invalidManifest
+            }
+        }
         let names = manifest?.files ?? ["store.log"]
         var files: [FileRef] = [], combined = Recovery(), bytes: Int64 = 0, tail: Int64 = 0
         for (position, name) in names.enumerated() {
@@ -74,6 +82,7 @@ struct JournalSet {
             tail = size - state.validEnd
             files.append(file)
         }
+        guard !combined.checkpoint else { throw StoreError.invalidManifest }
         return JournalSet(manifest: manifest, files: files, state: combined, bytes: bytes, tail: tail)
     }
 }

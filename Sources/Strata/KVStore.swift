@@ -31,6 +31,12 @@ public final class KVStore: @unchecked Sendable {
         try ensureDirectory(root)
         let lease = try DirectoryLease(root)
         let existing = try Manifest.read(root)
+        if existing == nil {
+            let names = try FileManager.default.contentsOfDirectory(atPath: root.path)
+            guard !names.contains(where: { $0 != "store.log" && Manifest.validName($0) }) else {
+                throw StoreError.invalidManifest
+            }
+        }
         let initial = root.appendingPathComponent("store.log")
         var syncs = 0
         if existing == nil, !FileManager.default.fileExists(atPath: initial.path) {
@@ -42,7 +48,6 @@ public final class KVStore: @unchecked Sendable {
         }
         let loaded = try JournalSet.load(root)
         guard loaded.state.format == 2 else { throw StoreError.legacyFormat }
-        guard !loaded.state.checkpoint else { throw StoreError.invalidManifest } // last segment must accept appends
         let file = try FileRef(loaded.files.last!.url, writable: true)
         if loaded.tail > 0 {
             guard recovery == .recoverIncompleteTail else { throw StoreError.incompleteTail(bytes: loaded.tail) }

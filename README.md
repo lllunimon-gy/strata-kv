@@ -58,6 +58,7 @@ store.close()
 同步 API 应放在后台队列或应用自己的存储 actor 中。`GroupedWriter` 可以把多个已接纳请求合并为一个日志批次：
 
 ```swift
+let store = try KVStore(directory: url)
 let writer = try GroupedWriter(store: store, maximumDelay: 0.002)
 try await withThrowingTaskGroup(of: Void.self) { group in
     for n in 0..<100 {
@@ -66,6 +67,7 @@ try await withThrowingTaskGroup(of: Void.self) { group in
     try await group.waitForAll()
 }
 try await writer.close() // 排空并同步；不会关闭 store
+store.close()
 ```
 
 ## 存储边界

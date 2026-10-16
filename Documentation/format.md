@@ -33,7 +33,8 @@ revision 大于 0 且不超过该帧 sequence。压缩保留 revision，CAS 比�
 `manifest.json` 是 `{payload: base64(JSON), crc: UInt32}`。payload 包含 `generation` 和有序 `files`。
 限制为 1 MiB、最多 8192 个不重复文件名。名称只允许 `store.log` 或 `segment-<UUID>.log`。
 下一普通段的 baseSequence 必须等于前一段的最终 sequence。删除标记跨段合并，不能只合并每段剩余的 put。
-目录内其他日志不参与恢复。`vacuumOrphans()` 只删除未被引用且名称符合规范的日志、manifest 临时文件；保留备份、未知文件和符号链接。
+目录内其他日志不参与恢复。若发现分段文件却缺少清单，会拒绝打开，不能退回旧 store.log 或创建空数据库。
+`vacuumOrphans()` 只删除未被引用且名称符合规范的日志、manifest 临时文件；保留备份、未知文件和符号链接。
 旧 checkpoint 名称虽以 segment 开头，格式类型由文件头判定。
 
 ## 尾部与迁移
